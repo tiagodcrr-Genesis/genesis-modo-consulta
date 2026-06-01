@@ -563,9 +563,10 @@ elif st.session_state.step == 5:
         </div>
         """, unsafe_allow_html=True)
 
-        import subprocess
-        if st.button("📂 Abrir pasta no Windows Explorer"):
-            subprocess.Popen(f'explorer "{pasta_cliente}"')
+        import platform, subprocess
+        if platform.system() == "Windows":
+            if st.button("📂 Abrir pasta no Windows Explorer"):
+                subprocess.Popen(f'explorer "{pasta_cliente}"')
 
         # ── ORIENTAÇÕES AO CLIENTE ────────────────────────────────────────────
         st.markdown("<br>", unsafe_allow_html=True)
