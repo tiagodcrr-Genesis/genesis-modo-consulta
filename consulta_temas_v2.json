@@ -24,6 +24,13 @@
         "Data de início do emprego (se houver)",
         "Data prevista de formatura (se universitário)"
       ],
+      "marcos_descricao": {
+        "Data da sentença/acordo original de alimentos": "Quando foi fixada a pensão? Ex: 10/03/2015. Buscar no processo original ou no contracheque.",
+        "Data de nascimento de cada filho": "Informar a data de nascimento de cada filho que recebe a pensão. Se forem vários, listar todos.",
+        "Data em que atingiu a maioridade (18 anos)": "Data em que o filho completou 18 anos. Se ainda não completou, coloque 'Ainda menor'. Se já completou, essa é a data-chave da prescrição.",
+        "Data de início do emprego (se houver)": "Se o filho trabalha formalmente, quando começou? Isso será confirmado via PREVJUD. Se não trabalha, coloque 'Não se aplica'.",
+        "Data prevista de formatura (se universitário)": "Se o filho é universitário, quando termina o curso? Isso define se há prazo para redução. Se não estuda, coloque 'Não se aplica'."
+      },
       "provas_essenciais": [
         "Íntegra do processo original (com a sentença que fixou os alimentos)",
         "Contracheque atualizado (últimos 3 meses) com o desconto identificado",
@@ -232,6 +239,12 @@
         "Data da reclamação junto à empresa (se houver)",
         "Data em que o cliente descobriu a negativação"
       ],
+      "marcos_descricao": {
+        "Data da negativação no Serasa/SPC": "Quando o nome foi inscrito no Serasa/SPC? Consta no relatório do app Serasa. Fundamental para calcular a prescrição de 3 anos.",
+        "Data do pagamento da dívida (se já paga)": "Se a dívida já estava paga antes da negativação, quando foi o pagamento? Ex: 05/01/2024. Essa é a prova mais forte. Se nunca pagou, coloque 'Não se aplica'.",
+        "Data da reclamação junto à empresa (se houver)": "Se o cliente já tentou resolver diretamente com a empresa, quando foi? Empresa que ignorou a reclamação agrava o dano moral. Se não reclamou, 'Não se aplica'.",
+        "Data em que o cliente descobriu a negativação": "Quando o cliente ficou sabendo que estava negativado? Ex: tentou fazer um financiamento e foi reprovado."
+      },
       "provas_essenciais": [
         "Comprovante de pagamento (boleto quitado, TED, recibo)",
         "Print da negativação no Serasa/SPC com data",
@@ -468,12 +481,19 @@
         {"id": 5, "pergunta": "Há testemunhas do relacionamento ou da convivência?", "motivo": "Testemunho corrobora a prova digital — importante quando não há DNA voluntário"}
       ],
       "marcos_temporais": [
-        "Período do relacionamento entre a mãe e o suposto pai",
-        "Data de nascimento do filho",
+        "Período do relacionamento entre a mãe e o suposto pai biológico",
+        "Data de nascimento de quem busca o reconhecimento",
         "Data do registro de nascimento (com ou sem nome do pai)",
         "Data em que o suposto pai soube da gravidez (se souber)",
         "Data da última tentativa de contato ou reconhecimento"
       ],
+      "marcos_descricao": {
+        "Período do relacionamento entre a mãe e o suposto pai biológico": "Quando a mãe se relacionou com o suposto pai? Ex: 'de março a julho de 2000'. Se foi um relacionamento eventual ou esporádico, descreva. Se não souber, coloque 'Mãe não soube informar'.",
+        "Data de nascimento de quem busca o reconhecimento": "É a data de nascimento do próprio cliente — seja ele(a) criança, adolescente ou adulto. Define quem assina a ação: se menor de 18, a mãe representa. Se adulto, ele mesmo entra. Se o pai já faleceu (post mortem), esta data ainda é necessária.",
+        "Data do registro de nascimento (com ou sem nome do pai)": "Quando a certidão de nascimento foi registrada no cartório. Se o nome do pai biológico consta, informe. Se consta só o pai registral (diferente do biológico), informe também — isso muda a estratégia.",
+        "Data em que o suposto pai soube da gravidez (se souber)": "Se o pai soube da gravidez e não reconheceu, isso fortalece a ação. Se já faleceu e nunca soube, coloque 'Pai faleceu — não se aplica'. Se a mãe nunca contou, coloque 'Mãe nunca informou'.",
+        "Data da última tentativa de contato ou reconhecimento": "Última vez que houve contato com o suposto pai ou com a família dele para tentar o reconhecimento. Se foi a tia que veio contar, informe quando. Se nunca houve tentativa, coloque 'Não houve tentativa anterior'."
+      },
       "provas_essenciais": [
         "Certidão de nascimento do filho (original)",
         "Documento de identidade da mãe e do filho",

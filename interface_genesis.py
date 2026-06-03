@@ -176,15 +176,16 @@ def detectar_tema(descricao, temas):
             melhor_pts, melhor = pts, t
     return melhor if melhor_pts >= 1 else None
 
-def calcular_prob(tema, provas_tem):
-    base = tema.get("probabilidade_base", 60)
-    essenciais = tema.get("provas_essenciais", [])
-    if not essenciais:
-        return base
-    tem = sum(1 for v in provas_tem.values() if v)
-    faltando = len(essenciais) - tem
-    prob = max(20, base - faltando * 8)
-    return prob
+def calcular_situacao_caso(provas_tem):
+    """Retorna a situação do caso baseada nos 3 status das provas."""
+    nao_tem = sum(1 for v in provas_tem.values() if "Não tem" in str(v))
+    buscar  = sum(1 for v in provas_tem.values() if "Vai buscar" in str(v))
+    if nao_tem == 0 and buscar == 0:
+        return "CASO BEM DOCUMENTADO", "#34D399", "#022C22"
+    elif nao_tem == 0:
+        return "AGUARDANDO DOCUMENTOS", "#FCD34D", "#1C1007"
+    else:
+        return "PROVAS INCOMPLETAS", "#F87171", "#1F0A0A"
 
 # ── Header ────────────────────────────────────────────────────────────────────
 _nome = "G" + chr(202) + "NESIS"
@@ -239,16 +240,45 @@ if st.session_state.step == 1:
 
     cep = st.text_input("CEP")
 
+    # ── POLO PASSIVO ──────────────────────────────────────────────────────────
+    st.markdown("<br>", unsafe_allow_html=True)
+    st.markdown('<div class="section-title">POLO PASSIVO — Contra quem vamos ajuizar</div>',
+                unsafe_allow_html=True)
+
+    col_r1, col_r2 = st.columns(2)
+    with col_r1:
+        reu_tipo = st.selectbox("Tipo", ["Pessoa Jurídica", "Pessoa Física"], key="reu1_tipo")
+        reu_nome = st.text_input("Nome / Razão Social *", key="reu1_nome")
+    with col_r2:
+        reu_doc  = st.text_input("CPF / CNPJ", key="reu1_doc")
+
+    segundo_reu = st.checkbox("Adicionar segundo réu")
+    reu2_nome, reu2_doc, reu2_tipo = "", "", "Pessoa Jurídica"
+    if segundo_reu:
+        col_r3, col_r4 = st.columns(2)
+        with col_r3:
+            reu2_tipo = st.selectbox("Tipo (2º réu)", ["Pessoa Jurídica", "Pessoa Física"], key="reu2_tipo")
+            reu2_nome = st.text_input("Nome / Razão Social (2º réu)", key="reu2_nome")
+        with col_r4:
+            reu2_doc = st.text_input("CPF / CNPJ (2º réu)", key="reu2_doc")
+
     st.markdown("<br>", unsafe_allow_html=True)
     if st.button("Avançar →"):
         if not nome or not telefone:
             st.error("Nome e telefone são obrigatórios.")
+        elif not reu_nome:
+            st.error("Informe o nome do réu (polo passivo).")
         else:
+            polo_passivo = [{"nome": reu_nome, "doc": reu_doc, "tipo": reu_tipo}]
+            if segundo_reu and reu2_nome:
+                polo_passivo.append({"nome": reu2_nome, "doc": reu2_doc, "tipo": reu2_tipo})
+
             st.session_state.dados["cliente"] = {
                 "nome": nome, "cpf": cpf, "rg": rg,
                 "nascimento": nascimento, "profissao": profissao,
                 "telefone": telefone, "email": email,
                 "endereco": endereco, "cep": cep,
+                "polo_passivo": polo_passivo,
                 "data_atendimento": datetime.now().strftime("%d/%m/%Y %H:%M")
             }
             st.session_state.step = 2
@@ -284,15 +314,23 @@ elif st.session_state.step == 2:
 
     tema_para_datas = tema_detectado or temas[0]
     marcos = tema_para_datas.get("marcos_temporais", [])
+    marcos_desc = tema_para_datas.get("marcos_descricao", {})
 
     datas = {}
-    col_dt = st.columns(min(len(marcos), 2)) if marcos else st.columns(1)
     for i, marco in enumerate(marcos):
-        with col_dt[i % 2]:
-            val = st.text_input(marco, placeholder="DD/MM/AAAA ou descrição",
-                                key=f"data_{tema_para_datas['id']}_{i}")
+        descricao_campo = marcos_desc.get(marco, "")
+        col_dt1, col_dt2 = st.columns([1, 1])
+        with (col_dt1 if i % 2 == 0 else col_dt2):
+            val = st.text_input(
+                marco,
+                placeholder="DD/MM/AAAA, descrição ou 'Não se aplica'",
+                key=f"data_{tema_para_datas['id']}_{i}"
+            )
+            if descricao_campo:
+                st.caption(f"ℹ️ {descricao_campo}")
             if val:
                 datas[marco] = val
+        st.markdown("")
 
     # Seleção manual de tema
     if not tema_detectado and descricao:
@@ -365,19 +403,40 @@ elif st.session_state.step == 3:
 # ═══════════════════════════════════════════════════════════════════════════════
 elif st.session_state.step == 4:
     tema = st.session_state.dados["tema"]
-    st.markdown(f'<div class="section-title">04 — GUIA PROBATÓRIO</div>', unsafe_allow_html=True)
+    st.markdown(f'<div class="section-title">04 — PROVAS DO CASO</div>', unsafe_allow_html=True)
 
-    st.markdown("**Provas essenciais — marque o que o cliente já tem:**")
-    provas_tem = {}
-    for prova in tema.get("provas_essenciais", []):
-        provas_tem[prova] = st.checkbox(prova, key=f"prova_{prova}")
-
+    st.markdown("**Para cada prova, informe a situação atual:**")
+    st.caption("✅ Já tem  ·  🔄 Vai buscar  ·  ⚠️ Não tem / Não existe")
     st.markdown("<br>", unsafe_allow_html=True)
-    st.markdown("**Como obter as provas que faltam:**")
-    for prova, como in tema.get("provas_como_obter", {}).items():
-        tem = provas_tem.get(prova, False)
-        if not tem:
-            st.markdown(f"📋 **{prova}**  \n→ {como}")
+
+    provas_tem = {}
+    opcoes = ["✅ Já tem", "🔄 Vai buscar", "⚠️ Não tem / Não existe"]
+
+    for prova in tema.get("provas_essenciais", []):
+        col_p1, col_p2 = st.columns([2, 1])
+        with col_p1:
+            st.markdown(f"<div style='color:#E2E8F0;font-size:0.9rem;padding-top:8px'>{prova}</div>",
+                        unsafe_allow_html=True)
+        with col_p2:
+            status = st.selectbox(
+                label=prova,
+                options=opcoes,
+                key=f"prova_{prova[:30]}",
+                label_visibility="collapsed"
+            )
+        provas_tem[prova] = status
+        st.markdown("<div style='margin-bottom:4px'></div>", unsafe_allow_html=True)
+
+    # Como obter — só mostra para quem vai buscar ou não tem
+    st.markdown("<br>", unsafe_allow_html=True)
+    pendentes = {p: s for p, s in provas_tem.items() if "Vai buscar" in s or "Não tem" in s}
+    if pendentes:
+        st.markdown("**Como obter as provas pendentes:**")
+        for prova, status in pendentes.items():
+            como = tema.get("provas_como_obter", {}).get(prova, "")
+            emoji = "🔄" if "Vai buscar" in status else "⚠️"
+            if como:
+                st.markdown(f"{emoji} **{prova}**  \n→ {como}")
 
     st.markdown("<br>", unsafe_allow_html=True)
     st.markdown("**Honorários:**")
@@ -422,13 +481,20 @@ elif st.session_state.step == 5:
     provas    = d["provas_tem"]
     honor     = d["honor"]
 
-    prob = calcular_prob(tema, provas)
-    tem_count = sum(1 for v in provas.values() if v)
+    # Classifica provas pelos 3 estados
+    provas_ja_tem  = [p for p, v in provas.items() if "Já tem" in str(v)]
+    provas_buscar  = [p for p, v in provas.items() if "Vai buscar" in str(v)]
+    provas_nao_tem = [p for p, v in provas.items() if "Não tem" in str(v)]
     total = len(provas)
+    tem_count = len(provas_ja_tem)
 
-    if prob >= 75:   cor_prob, bg_prob, txt_prob, emoji_prob = "#34D399", "#022C22", "PRONTO", "✅"
-    elif prob >= 55: cor_prob, bg_prob, txt_prob, emoji_prob = "#FCD34D", "#1C1007", "PARCIAL", "⚠️"
-    else:            cor_prob, bg_prob, txt_prob, emoji_prob = "#F87171", "#1F0A0A", "PREMATURO", "❌"
+    # Define situação geral do caso
+    if not provas_nao_tem and not provas_buscar:
+        cor_caso, bg_caso, txt_caso = "#34D399", "#022C22", "CASO BEM DOCUMENTADO"
+    elif not provas_nao_tem:
+        cor_caso, bg_caso, txt_caso = "#FCD34D", "#1C1007", "AGUARDANDO DOCUMENTOS"
+    else:
+        cor_caso, bg_caso, txt_caso = "#F87171", "#1F0A0A", "PROVAS INCOMPLETAS"
 
     # Gera documentos apenas uma vez — salva pasta no session_state
     if "pasta_cliente" not in st.session_state:
@@ -437,7 +503,8 @@ elif st.session_state.step == 5:
             ts_pasta = datetime.now().strftime("%Y%m%d_%H%M")
             pasta_cliente = CLIENTES_DIR / f"{slug}_{ts_pasta}"
             pasta_cliente.mkdir(exist_ok=True)
-            prob_dict = {"percentual": prob, "nivel": txt_prob, "tem": tem_count, "total": total}
+            prob_dict = {"nivel": txt_caso, "tem": tem_count, "total": total,
+                         "ja_tem": provas_ja_tem, "buscar": provas_buscar, "nao_tem": provas_nao_tem}
             try:
                 gerar_todos_documentos(pasta_cliente, cliente, tema, descricao,
                                        datas, respostas, provas, prob_dict, honor)
@@ -470,14 +537,13 @@ elif st.session_state.step == 5:
         c1, c2, c3 = st.columns(3)
         with c1:
             st.markdown(f"""
-            <div style="background:{bg_prob};border:2px solid {cor_prob};border-radius:16px;
+            <div style="background:{bg_caso};border:2px solid {cor_caso};border-radius:16px;
                         padding:24px;text-align:center">
                 <div style="font-size:0.7rem;letter-spacing:3px;color:#94A3B8;text-transform:uppercase;margin-bottom:8px">
-                    Prontidão para Protocolar
+                    Como o caso está
                 </div>
-                <div style="font-size:3.5rem;font-weight:900;color:{cor_prob};line-height:1">{prob}%</div>
-                <div style="font-size:1rem;font-weight:700;color:{cor_prob};margin-top:6px">
-                    {emoji_prob} {txt_prob}
+                <div style="font-size:1.3rem;font-weight:900;color:{cor_caso};line-height:1.3;margin:8px 0">
+                    {txt_caso}
                 </div>
             </div>
             """, unsafe_allow_html=True)
@@ -603,7 +669,7 @@ elif st.session_state.step == 5:
                            height=90, key="obs_advogado")
 
         # Gera mensagem de WhatsApp automaticamente
-        provas_faltam = [p for p, tem in provas.items() if not tem]
+        provas_faltam = [p for p, v in provas.items() if "Vai buscar" in str(v) or "Não tem" in str(v)]
         prazo_str     = prazo_provas.strftime("%d/%m/%Y") if prazo_provas else "___/___/______"
         contato_str   = proximo_contato.strftime("%d/%m/%Y") if proximo_contato else "___/___/______"
 
