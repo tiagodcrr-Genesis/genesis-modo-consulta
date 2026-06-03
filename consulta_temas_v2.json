@@ -308,10 +308,12 @@
       "provas_como_obter": {
         "BO online": "Delegacia Virtual PCDF: www.pcdf.df.gov.br — rápido e gratuito. Fazer HOJE",
         "Extrato histórico": "App ou internet banking — exportar em PDF os últimos 3-6 meses. Essencial para provar que as transações fraudulentas estavam fora do perfil",
-        "Protocolo Banco Central": "www.bcb.gov.br → Fale Conosco → Registrar Reclamação. O banco tem prazo para responder",
-        "Reclame Aqui": "reclameaqui.com.br — gera pressão pública e serve como prova da reclamação extrajudicial",
-        "Contrato empréstimo": "Solicitar ao banco via SAC — o banco é obrigado a fornecer cópia"
+        "NSU e logs técnicos": "Via ofício judicial ao banco — requerer NSU da transação, identificação do terminal POS, relatório do sistema antifraude e logs de autenticação. TJDFT: banco que não apresenta esses dados não cumpre o ônus do CDC art. 14 §3º",
+        "Contrato empréstimo indevido": "Solicitar ao banco via SAC — verificar se tem assinatura válida do cliente. Res. BACEN 4.549/2017: empréstimo não autorizado que foi convertido em rotativo/parcelamento compulsório = prova da cobrança indevida",
+        "Protocolo Banco Central": "www.bcb.gov.br → Fale Conosco → Registrar Reclamação. Banco tem prazo para responder. Descumprimento = sanção administrativa",
+        "Reclame Aqui": "reclameaqui.com.br — gera pressão pública e serve como prova da reclamação extrajudicial"
       },
+      "observacao_juridica": "Res. BACEN 4.549/2017: regula crédito rotativo do cartão. Quando banco cobra juros rotativos sobre valor fraudulento que o cliente contestou, isso serve como prova da cobrança indevida. ATENÇÃO: casos com cálculo de evolução de dívida envolvendo Res. 4.549 podem ser enviados à vara cível comum (não Juizado Especial) por exigir perícia técnica.",
       "orientacao_cliente": [
         "Fazer BO HOJE — pode ser online em 10 minutos (www.pcdf.df.gov.br). Descrever exatamente o que aconteceu",
         "NÃO apagar nenhuma mensagem do golpista — print de tudo (WhatsApp, SMS, e-mail)",
