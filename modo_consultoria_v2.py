@@ -1,4 +1,4 @@
-﻿# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 """
 modo_consultoria_v2.py — Gênesis | Modo Consultoria Completo
 =============================================================
@@ -31,7 +31,7 @@ if sys.stdout.encoding and sys.stdout.encoding.lower() != "utf-8":
 PASTA      = Path(__file__).parent
 TEMAS_JSON = PASTA / "consulta_temas_v2.json"
 CLIENTES   = PASTA / "clientes"
-TIMBRE     = Path(__file__).parent / "timbre.docx"
+TIMBRE     = Path(r"C:\Users\ADMIM\OneDrive\Área de Trabalho\02 - FROSA - Copia\00 - TIMBRE\2 - TIMBRE_FERNANDO ROSA.docx")
 CLIENTES.mkdir(exist_ok=True)
 
 ADV_NOME  = "Fernando Rosa da Silva"
@@ -259,7 +259,7 @@ Cliente: {nome}
 
     # ── 03 Card do caso ────────────────────────────────────────────────────────
     nivel = prob["nivel"] if isinstance(prob, dict) else str(prob)
-    pct   = prob["percentual"] if isinstance(prob, dict) else prob
+    pct   = prob.get("percentual", prob.get("tem", "?"))
     card  = f"""GÊNESIS | CARD DO CASO
 {'='*50}
 Cliente : {nome}
