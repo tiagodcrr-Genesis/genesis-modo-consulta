@@ -10,7 +10,7 @@ import json, shutil, sys
 from pathlib import Path
 from datetime import datetime, date
 
-# ── Configuração da página   ────────────────────────────────────────────────────
+# ── Configuração da página ────────────────────────────────────────────────────
 st.set_page_config(
     page_title="GENESIS | Consultoria Juridica",
     page_icon="⚖️",
@@ -726,21 +726,37 @@ elif st.session_state.step == 5:
                     st.markdown("<div style='margin-bottom:8px'></div>", unsafe_allow_html=True)
 
         # ── PASTA DO CLIENTE ──────────────────────────────────────────────────
-        st.markdown(f"""
-        <div style="background:#141F35;border:1px solid #1E3354;border-radius:12px;
-                    padding:16px 20px;margin:16px 0;display:flex;align-items:center;gap:12px">
-            <span style="font-size:1.5rem">📁</span>
-            <div>
-                <div style="font-weight:700;color:#E2E8F0;font-size:0.85rem">Pasta do cliente criada</div>
-                <div style="color:#94A3B8;font-size:0.78rem;font-family:monospace">{pasta_cliente}</div>
-            </div>
-        </div>
-        """, unsafe_allow_html=True)
-
         import platform, subprocess
         if platform.system() == "Windows":
-            if st.button("📂 Abrir pasta no Windows Explorer"):
+            # Na máquina local: mostra caminho clicável e abre o Explorer
+            st.markdown(f"""
+            <div style="background:#141F35;border:1px solid #1E3354;border-radius:12px;
+                        padding:16px 20px;margin:16px 0;display:flex;align-items:center;gap:12px">
+                <span style="font-size:1.5rem">📁</span>
+                <div>
+                    <div style="font-weight:700;color:#E2E8F0;font-size:0.85rem">Pasta do cliente criada</div>
+                    <div style="color:#94A3B8;font-size:0.78rem;font-family:monospace">{pasta_cliente}</div>
+                </div>
+            </div>
+            """, unsafe_allow_html=True)
+            if st.button("📂 Abrir pasta no Windows Explorer", use_container_width=True):
                 subprocess.Popen(f'explorer "{pasta_cliente}"')
+        else:
+            # Na versão online: só mostra o nome do cliente, sem caminho de servidor
+            st.markdown(f"""
+            <div style="background:#022C22;border:1px solid #065F46;border-radius:12px;
+                        padding:16px 20px;margin:16px 0;display:flex;align-items:center;gap:12px">
+                <span style="font-size:1.5rem">✅</span>
+                <div>
+                    <div style="font-weight:700;color:#34D399;font-size:0.9rem">
+                        Documentos gerados — use os botões ⬇️ para baixar
+                    </div>
+                    <div style="color:#6EE7B7;font-size:0.78rem">
+                        {cliente['nome']} · {datetime.now().strftime('%d/%m/%Y %H:%M')}
+                    </div>
+                </div>
+            </div>
+            """, unsafe_allow_html=True)
 
         # ── ORIENTAÇÕES AO CLIENTE ────────────────────────────────────────────
         st.markdown("<br>", unsafe_allow_html=True)
