@@ -10,7 +10,7 @@ import json, shutil, sys
 from pathlib import Path
 from datetime import datetime, date
 
-# ── Configuração da página ────────────────────────────────────────────────────
+# ── Configuração da página   ────────────────────────────────────────────────────
 st.set_page_config(
     page_title="GENESIS | Consultoria Juridica",
     page_icon="⚖️",
