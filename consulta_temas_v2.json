@@ -575,6 +575,117 @@
       "fatores_que_diminuem": ["Caso litigioso", "Bens não documentados", "Patrimônio escondido pelo outro cônjuge"],
       "valor_referencia": "Valor dos bens a partilhar. Honorários: tabela OAB sobre o valor da causa.",
       "formula_honorarios": "R$ *** fixo (consensual) ou % do patrimônio (litigioso)."
+    },
+
+    {
+      "id": "TC-BAGAGEM",
+      "subtema": "Extravio / Dano de Bagagem — Transporte Aéreo",
+      "keywords": ["bagagem", "extravio", "mala", "mala extraviada", "mala perdida", "bagagem danificada", "RIB", "relatório de irregularidade", "mala não chegou", "bagagem sumiu"],
+      "perguntas_consulta": [
+        {"id": 1, "pergunta": "A bagagem foi extraviada definitivamente ou devolvida com atraso? Se devolvida, em quantos dias?", "motivo": "Definitivo (>21 dias) = dano moral presumido pelo TJDFT. Temporário = dano moral configurado mas quantum menor (R$ 1.000 a R$ 3.000)"},
+        {"id": 2, "pergunta": "O cliente registrou o RIB (Relatório de Irregularidade de Bagagem) no aeroporto no momento do incidente?", "motivo": "O RIB é a prova-chave. O TJDFT exige para comprovar o incidente. Sem ele a ação enfraquece muito"},
+        {"id": 3, "pergunta": "O voo era nacional ou internacional? Qual companhia e qual trecho?", "motivo": "Internacional: Convenção de Montreal limita danos materiais (teto 1.000 DES) mas NÃO limita danos morais — estes seguem o CDC"},
+        {"id": 4, "pergunta": "O cliente teve gastos emergenciais por causa do extravio? (roupas, medicamentos, equipamentos)?", "motivo": "Gastos documentados com nota fiscal são ressarcíveis. Sem nota o juiz arbitra por equidade — vale registrar mesmo sem comprovante"},
+        {"id": 5, "pergunta": "A bagagem continha itens especiais — medicamentos de uso contínuo, equipamentos de trabalho, itens de bebê?", "motivo": "Itens essenciais agravam o dano moral significativamente no TJDFT. Medicamentos de uso contínuo foram fator determinante em acórdãos recentes"}
+      ],
+      "marcos_temporais": [
+        "Data e horário do voo",
+        "Data e horário do registro do RIB no aeroporto",
+        "Data de retorno da bagagem (se devolvida)",
+        "Data de qualquer reclamação formal à companhia"
+      ],
+      "marcos_descricao": {
+        "Data e horário do voo": "Data do voo em que a bagagem foi extraviada. Se houve conexão, informar qual trecho gerou o problema.",
+        "Data e horário do registro do RIB no aeroporto": "Quando o cliente registrou o Relatório de Irregularidade de Bagagem no balcão da companhia no aeroporto. Essa data é essencial.",
+        "Data de retorno da bagagem (se devolvida)": "Se a bagagem foi devolvida, em que data? Calcule quantos dias ficou sem ela. Menos de 7 dias = prazo ANAC. Mais de 21 dias = extravio definitivo.",
+        "Data de qualquer reclamação formal à companhia": "Data de e-mail, chat ou protocolo de reclamação à companhia. Guardar número de protocolo."
+      },
+      "provas_essenciais": [
+        "RIB (Relatório de Irregularidade de Bagagem) — registrado no aeroporto",
+        "Comprovante da passagem e cartão de embarque",
+        "Conversas de WhatsApp ou e-mail com a companhia sobre o extravio",
+        "Notas fiscais de gastos emergenciais (roupas, medicamentos, itens de necessidade)"
+      ],
+      "provas_desejaveis": [
+        "Fotos dos itens que estavam na mala (se tiver)",
+        "Protocolo de reclamação junto à ANAC (www.anac.gov.br)",
+        "Laudo ou avaliação dos itens danificados (se bagagem danificada)"
+      ],
+      "provas_como_obter": {
+        "RIB": "Solicitar cópia ao balcão da companhia no aeroporto imediatamente. Se não tiver cópia, pedir via SAC da companhia com o número do protocolo",
+        "Gastos emergenciais": "Notas fiscais de farmácias, lojas de roupa, etc. Se perdeu, solicitar segunda via. Juiz arbitra por equidade mesmo sem nota",
+        "Reclamação ANAC": "Site www.anac.gov.br → Canais de atendimento → Reclamação. Gera número de protocolo que fortalece a ação",
+        "Comprovante passagem": "E-mail de confirmação de compra — buscar na caixa de entrada pelo nome da companhia"
+      },
+      "orientacao_cliente": [
+        "URGENTE: registrar o RIB no balcão da companhia no aeroporto ANTES de sair — sem isso a ação enfraquece",
+        "Guardar TODAS as conversas com a companhia (WhatsApp, e-mail, chat) — não apagar nada",
+        "Guardar notas fiscais de qualquer gasto emergencial causado pelo extravio",
+        "Registrar reclamação na ANAC (www.anac.gov.br) — gera pressão e serve como prova",
+        "Se bagagem não chegar em 21 dias — extravio definitivo. Acionar imediatamente"
+      ],
+      "probabilidade_base": 85,
+      "fatores_que_aumentam": ["RIB registrado no aeroporto", "Extravio definitivo (>21 dias)", "Gastos emergenciais documentados", "Itens essenciais na mala (medicamentos, equipamentos)"],
+      "fatores_que_diminuem": ["Sem RIB", "Bagagem devolvida rápido (menos de 24h)", "Atraso por condições climáticas documentadas pela companhia"],
+      "valor_referencia": "Dano moral: R$ 1.000 (temporário/1-4 dias) a R$ 4.500 por pessoa (definitivo). Danos materiais: valor dos bens (com nota) ou arbitramento por equidade (sem nota)",
+      "formula_honorarios": "20% sobre condenação total. Juizados Especiais — sem entrada."
+    },
+
+    {
+      "id": "TC-IMOVEL",
+      "subtema": "Atraso na Entrega de Imóvel / Construtora",
+      "keywords": ["imóvel", "apartamento", "construtora", "atraso na entrega", "obra atrasada", "chaves", "entrega do imóvel", "prazo de entrega", "incorporadora", "habite-se"],
+      "perguntas_consulta": [
+        {"id": 1, "pergunta": "Qual era o prazo de entrega previsto no contrato ou no termo de reserva? O imóvel já foi entregue?", "motivo": "O TJDFT reconhece o termo de reserva como oferta vinculante (CDC art. 30). 180 dias de tolerância são aceitos — calcule se já extrapolou"},
+        {"id": 2, "pergunta": "A construtora alegou pandemia ou outro motivo de força maior para justificar o atraso?", "motivo": "O TJDFT entende que pandemia e escassez de insumos são fortuito INTERNO da construtora — não excluem responsabilidade. Isso favorece o cliente"},
+        {"id": 3, "pergunta": "O cliente está pagando juros de obra (juros de evolução de obra) desde quando?", "motivo": "Juros de obra cobrados após o prazo de entrega + 180 dias são indevidos e devem ser restituídos integralmente"},
+        {"id": 4, "pergunta": "O cliente estava pagando aluguel ou ficou com despesas extras por não ter recebido o imóvel no prazo?", "motivo": "Lucros cessantes: 0,5% ao mês sobre o valor do imóvel por mês de atraso — esse é o padrão do TJDFT"},
+        {"id": 5, "pergunta": "Há vícios de construção além do atraso? (infiltração, pintura, elétrica, hidráulica)?", "motivo": "Vícios construtivos são pedido adicional — aumentam o valor da causa e configuram dano moral autônomo"}
+      ],
+      "marcos_temporais": [
+        "Data de assinatura do contrato ou termo de reserva",
+        "Prazo de entrega previsto originalmente",
+        "Prazo de entrega com 180 dias de tolerância",
+        "Data efetiva de entrega das chaves (se entregue)",
+        "Data de início do pagamento dos juros de obra"
+      ],
+      "marcos_descricao": {
+        "Data de assinatura do contrato ou termo de reserva": "Quando foi assinado? O termo de reserva também vincula a construtora — vale tanto quanto o contrato formal.",
+        "Prazo de entrega previsto originalmente": "Data exata prevista no contrato ou termo de reserva para entrega das chaves.",
+        "Prazo de entrega com 180 dias de tolerância": "Some 180 dias ao prazo original — o TJDFT aceita essa tolerância. A partir daqui, tudo é atraso indenizável.",
+        "Data efetiva de entrega das chaves (se entregue)": "Quando as chaves foram entregues de fato? A diferença entre essa data e o prazo com tolerância é o período do dano.",
+        "Data de início do pagamento dos juros de obra": "Desde quando o cliente paga juros de obra? Os pagamentos após o prazo + 180 dias são restituíveis."
+      },
+      "provas_essenciais": [
+        "Contrato de compra e venda ou termo de reserva (com prazo de entrega)",
+        "Comprovantes de pagamento dos juros de obra (boletos pagos)",
+        "Comprovantes de aluguel pago no período do atraso (se aplicável)",
+        "Notificações ou comunicados da construtora sobre o atraso"
+      ],
+      "provas_desejaveis": [
+        "E-mails ou WhatsApp com a construtora sobre o atraso",
+        "Fotos de vícios construtivos (se houver)",
+        "Laudo de vistoria com vícios documentados",
+        "Declaração de IR com imóvel financiado"
+      ],
+      "provas_como_obter": {
+        "Contrato": "Solicitar cópia à construtora ou corretora — direito garantido pelo CDC",
+        "Boletos juros de obra": "Extratos bancários ou e-mails com boletos — guardar todos desde o início",
+        "Comprovantes aluguel": "Recibos de aluguel ou extratos bancários mostrando pagamentos ao locador",
+        "Comunicados da construtora": "E-mails, cartas e aplicativos da construtora — guardar todos"
+      },
+      "orientacao_cliente": [
+        "Guardar TODOS os boletos de juros de obra pagos — são restituíveis após o prazo de tolerância",
+        "Calcular quantos meses de atraso houve após o prazo + 180 dias — cada mês vale 0,5% do imóvel",
+        "Guardar recibos de aluguel do período — comprovam lucros cessantes",
+        "Fotografar vícios construtivos assim que receber as chaves — infiltração, pintura, elétrica",
+        "NÃO assinar nada que seja 'quitação geral' de eventuais danos antes de consultar o advogado"
+      ],
+      "probabilidade_base": 85,
+      "fatores_que_aumentam": ["Atraso superior a 180 dias documentado", "Construtora alegou Covid (não exclui responsabilidade no TJDFT)", "Juros de obra pagos durante o atraso", "Vícios construtivos documentados"],
+      "fatores_que_diminuem": ["Atraso inferior a 180 dias", "Cliente já assinou quitação geral", "Sem comprovante de pagamento dos juros de obra"],
+      "valor_referencia": "Lucros cessantes: 0,5% ao mês × valor do imóvel × meses de atraso. Juros de obra: valor total pago após prazo+tolerância. Dano moral: R$ 5.000 a R$ 15.000.",
+      "formula_honorarios": "20% sobre condenação total. Causa de valor alto — honorários podem ser tabelados pela OAB."
     }
   ]
 }
