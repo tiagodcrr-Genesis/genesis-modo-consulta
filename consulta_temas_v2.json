@@ -326,13 +326,13 @@
     {
       "id": "TC-PLANO",
       "subtema": "Plano de Saúde — Negativa de Cobertura",
-      "keywords": ["plano de saúde", "negativa", "cobertura", "cirurgia negada", "exame negado", "internação", "procedimento negado", "operadora", "convênio", "unimed", "amil", "sulamerica"],
+      "keywords": ["plano de saúde", "negativa", "cobertura", "cirurgia negada", "exame negado", "internação", "procedimento negado", "operadora", "convênio", "unimed", "amil", "sulamerica", "plano negou", "carência", "rol da ANS"],
       "perguntas_consulta": [
-        {"id": 1, "pergunta": "O procedimento negado é urgência ou eletivo?", "motivo": "Urgência: proibido negar após 12h (Lei 9.656)"},
-        {"id": 2, "pergunta": "O médico é credenciado pelo plano?", "motivo": "Médico fora da rede pode mudar a responsabilidade"},
-        {"id": 3, "pergunta": "Qual o fundamento da negativa?", "motivo": "Cláusulas abusivas são nulas (CDC art. 51)"},
-        {"id": 4, "pergunta": "Há quanto tempo é segurado e está adimplente?", "motivo": "Carência cumprida + adimplência = argumento forte"},
-        {"id": 5, "pergunta": "Já fez reclamação na ANS?", "motivo": "ANS pressiona a operadora e documenta a negativa"}
+        {"id": 1, "pergunta": "O que foi negado — cirurgia, internação, exame ou medicamento? É urgência/emergência ou eletivo?", "motivo": "TJDFT: carência NÃO se aplica em urgência/emergência. Negativa em AVC, infarto, etc. = dano moral in re ipsa. Eletivo exige análise do rol ANS"},
+        {"id": 2, "pergunta": "O plano alegou que o procedimento está fora do rol da ANS? Qual o fundamento da negativa por escrito?", "motivo": "Lei 14.454/2022: procedimentos fora do rol da ANS PODEM ser exigidos se: (1) sem alternativa terapêutica no rol + (2) respaldo técnico-científico + (3) prescrição médica. TJDFT vem deferindo liminares"},
+        {"id": 3, "pergunta": "O médico que prescreveu é credenciado pelo plano? A prescrição é formal e detalhada?", "motivo": "TJDFT reconhece que cabe ao médico — não à operadora — definir o tratamento adequado. Prescrição detalhada com justificativa clínica é essencial"},
+        {"id": 4, "pergunta": "Há quanto tempo o cliente é segurado? Está adimplente? Já cumpriu a carência?", "motivo": "Carência cumprida + adimplência comprovada = argumento forte. Urgência: carência não se aplica por lei (Lei 9.656, art. 12, V, c)"},
+        {"id": 5, "pergunta": "Já registrou reclamação na ANS? A negativa veio por escrito com fundamentação?", "motivo": "ANS pressiona a operadora em 5 dias úteis. Negativa sem fundamentação por escrito = ilegal. TJDFT concede tutela de urgência em 48h em casos graves"}
       ],
       "marcos_temporais": [
         "Data de início do plano",
@@ -371,6 +371,63 @@
       "fatores_que_diminuem": ["Carência não cumprida", "Doença preexistente não declarada", "Médico fora da rede sem necessidade"],
       "valor_referencia": "Tutela: obrigação de fazer (procedimento). Dano moral: R$ 5.000 a R$ 20.000",
       "formula_honorarios": "20% sobre dano moral + R$ 1.500-3.000 fixo se tutela urgente."
+    },
+
+    {
+      "id": "TC-MEDICAMENTO",
+      "subtema": "Medicamento de Alto Custo — Plano de Saúde ou Estado",
+      "keywords": ["medicamento", "remédio", "alto custo", "fora do rol", "ANS negou", "plano não cobre", "tratamento negado", "medicamento negado", "quimioterapia", "biológico", "oncológico", "uso domiciliar", "CONITEC", "RENAME"],
+      "perguntas_consulta": [
+        {"id": 1, "pergunta": "O medicamento foi negado pelo plano de saúde ou pelo Estado (SUS/Secretaria de Saúde)?", "motivo": "São ações completamente diferentes. Plano: ação no TJDFT contra operadora. Estado: ação contra DF/União no TJDFT ou Federal. Definir o réu é o primeiro passo"},
+        {"id": 2, "pergunta": "O medicamento tem registro na ANVISA? O médico prescreveu para a indicação aprovada ou uso off-label?", "motivo": "TJDFT 2026: medicamento com registro ANVISA para a indicação prescrita = cobertura mais fácil. Off-label = exige requisitos da Lei 14.454/2022 (sem alternativa + respaldo científico)"},
+        {"id": 3, "pergunta": "O medicamento está no rol da ANS (para plano) ou no RENAME/CONITEC (para SUS)? Qual a alternativa terapêutica disponível?", "motivo": "Se está no rol: cobertura obrigatória, ação simples. Se não está: precisa provar ausência de alternativa eficaz no rol. Laudo médico detalhado é essencial"},
+        {"id": 4, "pergunta": "Qual a patologia e qual o risco à vida ou à saúde se não receber o medicamento?", "motivo": "TJDFT defere tutelas de urgência em 48h quando há risco de óbito ou agravamento grave. Multa diária (astreintes) de até R$ 10.000/dia por descumprimento"},
+        {"id": 5, "pergunta": "Já tem laudo médico detalhado justificando o medicamento? Já tentou solução administrativa (ANS ou Secretaria)?", "motivo": "Laudo com justificativa clínica, nome do medicamento, dosagem e ausência de alternativa = prova central. ANS: reclamação acelera. Estado: Câmara de Resolução de Demandas de Saúde (CREDS) do DF"}
+      ],
+      "marcos_temporais": [
+        "Data do diagnóstico da doença",
+        "Data da prescrição do medicamento pelo médico",
+        "Data da negativa formal do plano ou do Estado",
+        "Data de reclamação na ANS ou na Secretaria de Saúde"
+      ],
+      "marcos_descricao": {
+        "Data do diagnóstico da doença": "Quando o cliente foi diagnosticado? Isso estabelece o histórico do caso e demonstra a necessidade do tratamento.",
+        "Data da prescrição do medicamento pelo médico": "Quando o médico prescreveu? A prescrição recente demonstra necessidade atual. Solicitar laudo atualizado.",
+        "Data da negativa formal do plano ou do Estado": "Quando foi negado? A negativa por escrito é essencial — o plano é obrigado a fornecer por lei.",
+        "Data de reclamação na ANS ou na Secretaria de Saúde": "Registro administrativo antes da ação — não é obrigatório mas acelera a resposta e serve como prova."
+      },
+      "provas_essenciais": [
+        "Prescrição médica detalhada (nome do medicamento, dosagem, indicação, justificativa clínica)",
+        "Laudo médico com diagnóstico e justificativa de que não há alternativa terapêutica equivalente no rol",
+        "Negativa formal do plano ou do Estado (por escrito, com fundamentação)",
+        "Comprovante de adimplência do plano (últimos 3 boletos pagos)",
+        "Registro da ANVISA para o medicamento (consultar em consultas.anvisa.gov.br)"
+      ],
+      "provas_desejaveis": [
+        "Estudos científicos ou diretrizes médicas que embasam o uso do medicamento",
+        "Protocolo clínico do hospital ou clínica",
+        "Reclamação registrada na ANS (para plano) ou na CREDS/Secretaria (para Estado)",
+        "Orçamento do medicamento mostrando o alto custo"
+      ],
+      "provas_como_obter": {
+        "Prescrição detalhada": "Solicitar ao médico especialista laudo com CID, nome do medicamento, dosagem, motivo da escolha e ausência de alternativa equivalente",
+        "Registro ANVISA": "Site: consultas.anvisa.gov.br — buscar pelo nome do medicamento — gratuito e imediato",
+        "Negativa por escrito": "Solicitar formalmente por e-mail ou carta — o plano tem prazo de 5 dias úteis para responder (ANS RN 566/2022)",
+        "Reclamação ANS": "www.ans.gov.br → Canais de atendimento. O plano deve responder em 5 dias úteis sob pena de sanção",
+        "CREDS DF": "Secretaria de Saúde do DF — câmara para resolver demandas de medicamentos do SUS antes do juiz"
+      },
+      "orientacao_cliente": [
+        "Pedir ao médico um laudo DETALHADO — com CID, nome do medicamento, por que não há alternativa no rol, e referência a estudos científicos",
+        "Solicitar a negativa POR ESCRITO ao plano — o plano é obrigado a fornecer com fundamentação",
+        "Registrar reclamação na ANS imediatamente (www.ans.gov.br) — acelera muito a resposta",
+        "URGENTE: se há risco de vida, podemos pedir tutela de urgência para o juiz — decisão em 48h com multa de R$ 10.000/dia",
+        "Guardar todos os recibos/notas do medicamento se estiver comprando do próprio bolso — base para ressarcimento"
+      ],
+      "probabilidade_base": 85,
+      "fatores_que_aumentam": ["Medicamento com registro ANVISA para a indicação", "Laudo médico detalhado com ausência de alternativa", "Risco de vida documentado", "Negativa formal por escrito do plano", "Adimplência comprovada"],
+      "fatores_que_diminuem": ["Uso off-label sem respaldo científico robusto", "Medicamento experimental sem registro ANVISA", "Alternativa terapêutica disponível no rol da ANS"],
+      "valor_referencia": "Tutela: fornecimento imediato do medicamento. Dano moral: R$ 5.000 a R$ 15.000. Ressarcimento de valores pagos do próprio bolso.",
+      "formula_honorarios": "R$ *** fixo + 20% sobre dano moral. Urgência: honorários na liminar podem ser antecipados."
     },
 
     {
