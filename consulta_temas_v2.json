@@ -1,753 +1,1472 @@
-{
-  "_meta": {
-    "versao": "2.0",
-    "criado_em": "30/05/2026",
-    "novidades": "Guia probatório, marcos temporais, orientação ao cliente, probabilidade de êxito"
-  },
-
-  "temas": [
-    {
-      "id": "TC-ALIMENTOS",
-      "subtema": "Exoneração de Alimentos — Maioridade",
-      "keywords": ["alimentos", "exoneração", "pensão", "filho maior", "maioridade", "pró-labore alimentar", "desconto folha", "FAB", "pensão alimentícia"],
-      "perguntas_consulta": [
-        {"id": 1, "pergunta": "Quando foi fixada a pensão originalmente? (mês/ano e número do processo)", "motivo": "Marco inicial da linha do tempo"},
-        {"id": 2, "pergunta": "Qual a idade atual do(s) filho(s) e qual a profissão ou situação acadêmica?", "motivo": "Define estratégia: exoneração total ou modificação com termo final"},
-        {"id": 3, "pergunta": "O desconto é em folha de pagamento? Qual a empresa/órgão?", "motivo": "Define o destinatário do ofício"},
-        {"id": 4, "pergunta": "O(s) filho(s) concordam com o pedido?", "motivo": "Consentimento transforma o processo em consensual — muito mais rápido"},
-        {"id": 5, "pergunta": "O alimentando está empregado ou estudando?", "motivo": "Empregado: PREVJUD confirma. Estudante sob 24 anos: pedir modificação com termo final"}
-      ],
-      "marcos_temporais": [
-        "Data da sentença/acordo original de alimentos",
-        "Data de nascimento de cada filho",
-        "Data em que atingiu a maioridade (18 anos)",
-        "Data de início do emprego (se houver)",
-        "Data prevista de formatura (se universitário)"
-      ],
-      "marcos_descricao": {
-        "Data da sentença/acordo original de alimentos": "Quando foi fixada a pensão? Ex: 10/03/2015. Buscar no processo original ou no contracheque.",
-        "Data de nascimento de cada filho": "Informar a data de nascimento de cada filho que recebe a pensão. Se forem vários, listar todos.",
-        "Data em que atingiu a maioridade (18 anos)": "Data em que o filho completou 18 anos. Se ainda não completou, coloque 'Ainda menor'. Se já completou, essa é a data-chave da prescrição.",
-        "Data de início do emprego (se houver)": "Se o filho trabalha formalmente, quando começou? Isso será confirmado via PREVJUD. Se não trabalha, coloque 'Não se aplica'.",
-        "Data prevista de formatura (se universitário)": "Se o filho é universitário, quando termina o curso? Isso define se há prazo para redução. Se não estuda, coloque 'Não se aplica'."
-      },
-      "provas_essenciais": [
-        "Íntegra do processo original (com a sentença que fixou os alimentos)",
-        "Contracheque atualizado (últimos 3 meses) com o desconto identificado",
-        "Documentos de identidade dos filhos (RG + CPF)",
-        "Declaração de anuência assinada pelo(s) filho(s)",
-        "Comprovante de endereço do alimentante"
-      ],
-      "provas_desejaveis": [
-        "Carteira de trabalho ou holerite do filho (prova de emprego)",
-        "Declaração de matrícula universitária (se for pedir termo final)",
-        "Comprovante de renda do filho"
-      ],
-      "provas_como_obter": {
-        "Íntegra do processo": "PJe do TJDFT com login do advogado ou balcão da vara",
-        "Contracheque": "Cliente solicita ao RH da empresa ou baixa no app do banco",
-        "Declaração de anuência": "Elaborar e enviar para o filho assinar — pode ser por WhatsApp",
-        "Matrícula universitária": "Portal da universidade ou secretaria acadêmica",
-        "Comprovante de emprego": "CTPS digitalizada ou holerite do mês atual"
-      },
-      "orientacao_cliente": [
-        "Solicitar a íntegra do processo no sistema PJe (informaremos o login)",
-        "Trazer os últimos 3 contracheques mostrando o desconto da pensão",
-        "Pedir para o(s) filho(s) assinarem a declaração que enviaremos por WhatsApp",
-        "Se o filho trabalha: pedir um holerite ou foto da CTPS",
-        "Se o filho estuda: pedir declaração de matrícula na secretaria da universidade"
-      ],
-      "probabilidade_base": 80,
-      "fatores_que_aumentam": ["Filho empregado formalmente", "Filho acima de 24 anos", "Consentimento expresso do filho"],
-      "fatores_que_diminuem": ["Filho universitário sem emprego e abaixo de 24 anos", "Processo adversarial (filho contesta)"],
-      "valor_referencia": "Desconto atual × 12 meses (dividido por número de filhos)",
-      "formula_honorarios": "R$ *** fixo + ***% êxito. Sugestão: R$ 2.000-5.000 fixo por filho"
-    },
-
-    {
-      "id": "TC-AEREO",
-      "subtema": "Overbooking / Atraso / Cancelamento de Voo",
-      "keywords": ["overbooking", "voo", "passagem", "aéreo", "latam", "azul", "gol", "embarque", "cancelamento", "atraso", "preterição", "companhia aérea", "bagagem"],
-      "perguntas_consulta": [
-        {"id": 1, "pergunta": "O que aconteceu exatamente? (overbooking, atraso, cancelamento, extravio de bagagem?)", "motivo": "Define qual artigo da ANAC se aplica"},
-        {"id": 2, "pergunta": "Qual a data e o horário do voo? Qual companhia?", "motivo": "Marco temporal principal"},
-        {"id": 3, "pergunta": "Qual foi o impacto? (perdeu conexão, ficou preso no aeroporto, perdeu evento/reunião?)", "motivo": "Determina o valor do dano moral"},
-        {"id": 4, "pergunta": "A companhia ofereceu algo? (reacomodação, voucher, reembolso?)", "motivo": "Oferta inadequada agrava a conduta da empresa"},
-        {"id": 5, "pergunta": "Tem cartão de embarque e comprovante da passagem?", "motivo": "Prova essencial — sem ela a ação enfraquece muito"}
-      ],
-      "marcos_temporais": [
-        "Data da compra da passagem",
-        "Data e horário do voo original",
-        "Data e horário de chegada efetiva ao destino",
-        "Data de qualquer reclamação feita à companhia",
-        "Data de eventuais gastos extras (hotel, alimentação, outro voo)"
-      ],
-      "provas_essenciais": [
-        "Cartão de embarque original (impresso ou print)",
-        "Comprovante de compra da passagem (e-mail de confirmação ou app)",
-        "Comprovante de check-in (confirma que estava presente)",
-        "Prints de eventuais mensagens da companhia aérea",
-        "Notas fiscais de gastos extras (hotel, alimentação, táxi)"
-      ],
-      "provas_desejaveis": [
-        "Fotos no aeroporto com data e hora visíveis",
-        "Comunicações com SAC da companhia (protocolo, e-mail)",
-        "Declaração de testemunhas (companheiros de viagem)",
-        "Contrato ou convite de evento perdido (reunião, casamento, formatura)"
-      ],
-      "provas_como_obter": {
-        "Cartão de embarque": "Print da tela do celular ou e-mail recebido da companhia",
-        "Comprovante de compra": "E-mail de confirmação — buscar na caixa de entrada",
-        "Gastos extras": "Notas fiscais do hotel e restaurante — solicitar duplicata se perdeu",
-        "Protocolo SAC": "Reclamação na plataforma da companhia — salvar número do protocolo",
-        "Fotos aeroporto": "Verificar galeria do celular — metadados confirmam data e local"
-      },
-      "orientacao_cliente": [
-        "Salvar TODOS os e-mails da companhia aérea (confirmação, alteração, notificação)",
-        "Print das mensagens no app da companhia",
-        "Guardar todas as notas fiscais de gastos extras (hotel, alimentação, transporte)",
-        "Registrar reclamação no site da companhia E no site da ANAC (www.anac.gov.br) — gera protocolo",
-        "Verificar se tem fotos no aeroporto com horário visível"
-      ],
-      "probabilidade_base": 85,
-      "fatores_que_aumentam": ["Cartão de embarque em mãos", "Gastos extras documentados", "Evento importante perdido", "Companhia não ofereceu nada"],
-      "fatores_que_diminuem": ["Sem cartão de embarque", "Atraso inferior a 4h sem cancelamento", "Companhia ofereceu reacomodação adequada"],
-      "valor_referencia": "Dano moral: R$ 3.000 a R$ 15.000 + reembolso de gastos + DES ANAC",
-      "formula_honorarios": "20% sobre condenação total. Sem entrada."
-    },
-
-    {
-      "id": "TC-TRANSITO",
-      "subtema": "Acidente de Trânsito",
-      "keywords": ["acidente", "colisão", "batida", "trânsito", "veículo", "carro", "moto", "BO", "boletim de ocorrência", "dano", "seguro"],
-      "perguntas_consulta": [
-        {"id": 1, "pergunta": "Quando e onde aconteceu o acidente?", "motivo": "Marco temporal + competência"},
-        {"id": 2, "pergunta": "O cliente foi o atingido ou o causador?", "motivo": "Define o polo processual"},
-        {"id": 3, "pergunta": "Houve lesão corporal ou só dano material?", "motivo": "Lesão corporal: ação penal paralela possível"},
-        {"id": 4, "pergunta": "Foi feito boletim de ocorrência?", "motivo": "Prova essencial — sem BO a ação enfraquece muito"},
-        {"id": 5, "pergunta": "O outro veículo tem seguro? O cliente tem seguro?", "motivo": "Pode acionar o seguro diretamente — mais rápido que ação judicial"}
-      ],
-      "marcos_temporais": [
-        "Data e horário do acidente",
-        "Data do boletim de ocorrência",
-        "Data de atendimento médico (se houver lesão)",
-        "Data do orçamento de reparo do veículo",
-        "Data de qualquer comunicação com o seguro"
-      ],
-      "provas_essenciais": [
-        "Boletim de Ocorrência (BO) — cópia completa",
-        "Fotos do local e dos veículos (com data e hora)",
-        "Documentos do veículo (CRLV, CNH)",
-        "Orçamento de reparo (mínimo 2 orçamentos)",
-        "Laudos médicos e atestados (se houver lesão)"
-      ],
-      "provas_desejaveis": [
-        "Câmeras de segurança do local (solicitar imediatamente — apagam em dias)",
-        "Testemunhas com nome e contato",
-        "Dados do seguro do outro veículo",
-        "Fotos das lesões corporais (se houver)",
-        "Nota fiscal do conserto ou perda total"
-      ],
-      "provas_como_obter": {
-        "Boletim de Ocorrência": "Delegacia mais próxima ou Delegacia Virtual (PCDF.DF.GOV.BR)",
-        "Câmeras de segurança": "Solicitar ao estabelecimento IMEDIATAMENTE — ligação + protocolo escrito",
-        "Laudos médicos": "UPA, Hospital ou médico particular — solicitar atestado detalhado",
-        "Orçamento": "Oficina autorizada da marca do veículo — pedir em papel timbrado",
-        "Dados do seguro": "Placa do veículo do outro → consulta no site do DETRAN"
-      },
-      "orientacao_cliente": [
-        "Não lavar ou reparar o veículo antes de fazer perícia ou fotos detalhadas",
-        "Solicitar câmeras de segurança do local HOJE MESMO — apagam em 72h",
-        "Fazer BO se ainda não fez — pode ser feito online",
-        "Anotar nome, placa e telefone de todas as testemunhas",
-        "Guardar todos os comprovantes médicos e de transporte alternativo"
-      ],
-      "probabilidade_base": 75,
-      "fatores_que_aumentam": ["BO lavrado", "Câmeras de segurança", "Testemunhas identificadas", "Lesão corporal documentada"],
-      "fatores_que_diminuem": ["Sem BO", "Sem fotos", "Cliente era o causador", "Sem testemunhas"],
-      "valor_referencia": "Danos materiais: custo real do reparo. Dano moral (se lesão): R$ 5.000 a R$ 30.000",
-      "formula_honorarios": "20% sobre condenação. Entrada opcional conforme caso."
-    },
-
-    {
-      "id": "TC-TRABALHISTA",
-      "subtema": "Reclamação Trabalhista",
-      "keywords": ["trabalhista", "clt", "empregado", "demissão", "rescisão", "férias", "13°", "fgts", "horas extras", "assédio", "jornada", "carteira", "registro", "pejotização"],
-      "perguntas_consulta": [
-        {"id": 1, "pergunta": "O contrato era formal (CLT) ou informal?", "motivo": "Informal: precisa provar o vínculo primeiro"},
-        {"id": 2, "pergunta": "Quando começou e quando terminou o vínculo?", "motivo": "Prescrição trabalhista: 2 anos após demissão"},
-        {"id": 3, "pergunta": "Por que foi demitido? (justa causa, sem justa causa, pediu demissão?)", "motivo": "Define as verbas rescisórias devidas"},
-        {"id": 4, "pergunta": "Recebeu as verbas rescisórias? Assinou algo?", "motivo": "Quitação assinada pode complicar — analisar o documento"},
-        {"id": 5, "pergunta": "Qual o principal problema: FGTS, horas extras, férias, assédio?", "motivo": "Determina o foco da ação e o valor estimado"}
-      ],
-      "marcos_temporais": [
-        "Data de admissão",
-        "Data de demissão",
-        "Data da assinatura da rescisão (se houver)",
-        "Data da homologação no sindicato (se houver)",
-        "Data de qualquer denúncia de assédio (se aplicável)"
-      ],
-      "provas_essenciais": [
-        "CTPS (Carteira de Trabalho) — digitalizada",
-        "Contrato de trabalho (se houver)",
-        "Holerites dos últimos 12 meses",
-        "Termo de rescisão (TRCT) assinado",
-        "Comprovante de saldo FGTS (app FGTS)"
-      ],
-      "provas_desejaveis": [
-        "Controle de ponto ou registros de horário",
-        "E-mails ou WhatsApp com superiores (prova de jornada ou assédio)",
-        "Testemunhas de colegas de trabalho",
-        "Comunicados internos da empresa",
-        "Fotos do ambiente de trabalho (se assédio/condições inadequadas)"
-      ],
-      "provas_como_obter": {
-        "Saldo FGTS": "App FGTS (disponível para iOS e Android) — extrato completo",
-        "CTPS digital": "App Carteira de Trabalho Digital (Gov.br)",
-        "Holerites": "Solicitar ao RH formalmente (por escrito/e-mail)",
-        "Controle de ponto": "Requerer ao empregador — ele é obrigado a fornecer",
-        "WhatsApp": "Print das conversas — não apagar nada"
-      },
-      "orientacao_cliente": [
-        "Não apagar NENHUMA mensagem de WhatsApp ou e-mail com a empresa",
-        "Baixar o extrato do FGTS pelo app agora — antes que mude algo",
-        "Fotografar a CTPS completa (todas as páginas com anotações)",
-        "Guardar todos os holerites — pedir cópias ao RH se não tiver",
-        "Anotar nome e contato de ex-colegas que possam ser testemunhas"
-      ],
-      "probabilidade_base": 70,
-      "fatores_que_aumentam": ["CTPS anotada", "Holerites completos", "Testemunhas disponíveis", "FGTS não depositado comprovado"],
-      "fatores_que_diminuem": ["Rescisão assinada com quitação", "Prazo de 2 anos vencido", "Contrato informal sem prova"],
-      "valor_referencia": "Varia: FGTS + multa 40% + férias + 13° + horas extras. Calcular com holerites.",
-      "formula_honorarios": "30% sobre condenação. Sem entrada (caso típico)."
-    },
-
-    {
-      "id": "TC-NEG",
-      "subtema": "Negativação Indevida",
-      "keywords": ["negativação", "serasa", "spc", "nome sujo", "protesto", "cobrança indevida", "dívida quitada", "não reconhece a dívida", "inscrito indevidamente", "crédito"],
-      "perguntas_consulta": [
-        {"id": 1, "pergunta": "Quando foi feita a negativação? (mês/ano)", "motivo": "Prescrição de 3 anos a partir da data"},
-        {"id": 2, "pergunta": "A dívida já estava paga antes da negativação?", "motivo": "Dívida quitada = dano moral mais forte"},
-        {"id": 3, "pergunta": "Tem comprovante de pagamento?", "motivo": "Prova documental essencial"},
-        {"id": 4, "pergunta": "Já entrou em contato com a empresa antes?", "motivo": "Reclamação ignorada agrava a conduta"},
-        {"id": 5, "pergunta": "Tem outras negativações ativas (de outros credores)?", "motivo": "Súm. 385 STJ: segunda negativação legítima pode afastar o dano moral"}
-      ],
-      "marcos_temporais": [
-        "Data da negativação no Serasa/SPC",
-        "Data do pagamento da dívida (se já paga)",
-        "Data da reclamação junto à empresa (se houver)",
-        "Data em que o cliente descobriu a negativação"
-      ],
-      "marcos_descricao": {
-        "Data da negativação no Serasa/SPC": "Quando o nome foi inscrito no Serasa/SPC? Consta no relatório do app Serasa. Fundamental para calcular a prescrição de 3 anos.",
-        "Data do pagamento da dívida (se já paga)": "Se a dívida já estava paga antes da negativação, quando foi o pagamento? Ex: 05/01/2024. Essa é a prova mais forte. Se nunca pagou, coloque 'Não se aplica'.",
-        "Data da reclamação junto à empresa (se houver)": "Se o cliente já tentou resolver diretamente com a empresa, quando foi? Empresa que ignorou a reclamação agrava o dano moral. Se não reclamou, 'Não se aplica'.",
-        "Data em que o cliente descobriu a negativação": "Quando o cliente ficou sabendo que estava negativado? Ex: tentou fazer um financiamento e foi reprovado."
-      },
-      "provas_essenciais": [
-        "Comprovante de pagamento (boleto quitado, TED, recibo)",
-        "Print da negativação no Serasa/SPC com data",
-        "Consulta completa ao Serasa (verificar outras negativações)",
-        "Protocolo de reclamação junto à empresa (se houver)"
-      ],
-      "provas_desejaveis": [
-        "E-mail ou WhatsApp de contato com a empresa",
-        "Extrato bancário confirmando o pagamento",
-        "Print do app do banco mostrando o débito"
-      ],
-      "provas_como_obter": {
-        "Consulta Serasa": "App Serasa (gratuito) ou site serasa.com.br — relatório completo",
-        "Comprovante pagamento": "Internet banking ou app do banco — selecionar o comprovante",
-        "Protocolo reclamação": "Site ou app da empresa — registrar e salvar o número"
-      },
-      "orientacao_cliente": [
-        "Baixar o relatório completo do Serasa agora (app gratuito) — ver TODAS as negativações",
-        "Salvar o comprovante de pagamento — se não tiver, solicitar segunda via no banco",
-        "Fazer reclamação formal na empresa pelo site ou SAC e guardar o número de protocolo",
-        "NÃO pagar a dívida novamente sem consultar o advogado"
-      ],
-      "probabilidade_base": 80,
-      "fatores_que_aumentam": ["Dívida quitada comprovada", "Única negativação no nome", "Empresa ignorou reclamação"],
-      "fatores_que_diminuem": ["Outras negativações legítimas (Súm. 385 STJ)", "Sem comprovante de pagamento", "Prescrição próxima"],
-      "valor_referencia": "R$ 3.000 a R$ 15.000 (Juizados Especiais)",
-      "formula_honorarios": "20% sobre condenação. Juizados: sem honorários sucumbenciais em 1ª instância."
-    },
-
-    {
-      "id": "TC-BANCO",
-      "subtema": "Fraude Bancária / Golpe / Cobrança Indevida",
-      "keywords": ["banco", "fraude", "golpe", "pix", "empréstimo indevido", "cartão clonado", "conta invadida", "débito não reconhecido", "estelionato", "golpe do pix", "falsa central", "portabilidade indevida", "consignado indevido", "boleto falso", "maquininha"],
-      "perguntas_consulta": [
-        {"id": 1, "pergunta": "O que aconteceu exatamente? O cliente colaborou de alguma forma (forneceu senha, seguiu instruções por telefone) ou a fraude ocorreu sem qualquer participação dele?", "motivo": "CRUCIAL no TJDFT 2026: fraude nos sistemas do banco = fortuito INTERNO (banco responde). Golpe por engenharia social onde cliente colaborou = pode ser fortuito EXTERNO (banco pode não responder). Essa distinção define o caso"},
-        {"id": 2, "pergunta": "As transações fraudulentas eram compatíveis com o perfil do cliente? (horário, valor, local, sequência)", "motivo": "TJDFT 2026: banco tem dever de monitoramento antifraude. Transações atípicas (alto valor de madrugada, fora do padrão) que o sistema não bloqueou = falha do serviço = banco responde. Pedir extrato do período para comparar"},
-        {"id": 3, "pergunta": "O cliente é idoso (acima de 60 anos) ou possui alguma vulnerabilidade especial?", "motivo": "TJDFT 2026: consumidor idoso = hipervulnerável. Banco tem dever QUALIFICADO de cautela. Empréstimo consignado atípico para idoso com benefício previdenciário que o banco não bloqueou = responsabilidade agravada"},
-        {"id": 4, "pergunta": "O banco negou a reclamação? Apresentou argumento de que o cliente forneceu os dados ou que o sistema é seguro?", "motivo": "TJDFT: banco que não apresenta prova técnica (logs, relatório antifraude, NSU da transação) não cumpre o ônus probatório do CDC art. 14 §3º. Negativa genérica 'o sistema é seguro' não basta"},
-        {"id": 5, "pergunta": "Se foi fraude via PIX: o banco abriu o MED (Mecanismo Especial de Devolução)? Quanto foi recuperado? Qual o valor total ainda não devolvido?", "motivo": "TJDFT: o banco PAGADOR tem obrigação de abrir o MED via DICT (Diretório de Identificadores de Contas Transacionais) imediatamente após a comunicação da fraude. Erro crítico: banco que classifica como 'falha operacional' em vez de 'fraude' no DICT trava o fluxo automático — isso é falha do banco e gera responsabilidade. Pedir via ofício: confirmação do MED, classificação usada, prazo de abertura e valores bloqueados/devolvidos"}
-      ],
-      "marcos_temporais": [
-        "Data em que ocorreu a fraude/golpe",
-        "Data em que o cliente percebeu",
-        "Data do boletim de ocorrência",
-        "Data da reclamação no banco",
-        "Data da resposta do banco (se houver)"
-      ],
-      "provas_essenciais": [
-        "Extrato bancário do período — antes, durante e depois da fraude (para mostrar perfil de consumo)",
-        "Boletim de Ocorrência (BO) — delegacia física ou online",
-        "Protocolo de reclamação no banco (SAC, agência ou app) com resposta formal",
-        "Print/captura de todas as comunicações com o banco (SAC, Ouvidoria, e-mail)"
-      ],
-      "provas_desejaveis": [
-        "Histórico de transações dos 3 meses anteriores (para demonstrar perfil de consumo normal)",
-        "Resposta formal do banco negando o estorno — quanto mais genérica, melhor para nós",
-        "Protocolo no Banco Central (www.bcb.gov.br) e no Reclame Aqui",
-        "Print das mensagens do golpista (WhatsApp, e-mail, SMS) — não apagar",
-        "Contrato do empréstimo (se empréstimo indevido) — verificar se tem assinatura válida"
-      ],
-      "provas_como_obter": {
-        "BO online": "Delegacia Virtual PCDF: www.pcdf.df.gov.br — rápido e gratuito. Fazer HOJE",
-        "Extrato histórico": "App ou internet banking — exportar em PDF os últimos 3-6 meses. Essencial para provar que as transações fraudulentas estavam fora do perfil",
-        "NSU e logs técnicos": "Via ofício judicial ao banco — requerer NSU da transação, identificação do terminal POS, relatório do sistema antifraude e logs de autenticação. TJDFT: banco que não apresenta esses dados não cumpre o ônus do CDC art. 14 §3º",
-        "Contrato empréstimo indevido": "Solicitar ao banco via SAC — verificar se tem assinatura válida do cliente. Res. BACEN 4.549/2017: empréstimo não autorizado que foi convertido em rotativo/parcelamento compulsório = prova da cobrança indevida",
-        "Protocolo Banco Central": "www.bcb.gov.br → Fale Conosco → Registrar Reclamação. Banco tem prazo para responder. Descumprimento = sanção administrativa",
-        "Reclame Aqui": "reclameaqui.com.br — gera pressão pública e serve como prova da reclamação extrajudicial"
-      },
-      "observacao_juridica": "Res. BACEN 4.549/2017: regula crédito rotativo do cartão. Quando banco cobra juros rotativos sobre valor fraudulento que o cliente contestou, isso serve como prova da cobrança indevida. ATENÇÃO: casos com cálculo de evolução de dívida envolvendo Res. 4.549 podem ser enviados à vara cível comum (não Juizado Especial) por exigir perícia técnica. | DICT e MED (PIX): O DICT — Diretório de Identificadores de Contas Transacionais — é o sistema do Banco Central que centraliza marcações de fraude PIX. O MED — Mecanismo Especial de Devolução — é acionado pelo banco pagador via DICT para recuperar valores. ERRO CRÍTICO: banco que classifica a fraude como 'falha operacional' em vez de 'fraude' no DICT trava o fluxo automático de devolução — isso é falha do banco pagador. Pedir via ofício judicial: (1) se o MED foi aberto; (2) a classificação usada; (3) o prazo de abertura; (4) o que foi recuperado. Res. BCB 103/2021 arts. 41-C e 41-D.",
-      "orientacao_cliente": [
-        "Fazer BO HOJE — pode ser online em 10 minutos (www.pcdf.df.gov.br). Descrever exatamente o que aconteceu",
-        "NÃO apagar nenhuma mensagem do golpista — print de tudo (WhatsApp, SMS, e-mail)",
-        "Guardar extrato bancário completo — quanto mais histórico, melhor para mostrar que as transações eram atípicas",
-        "Reclamar no Banco Central além do SAC — banco tem prazo para responder sob pena de sanção",
-        "Se cliente idoso: mencionar a idade sempre — o TJDFT reconhece hipervulnerabilidade e agrava a responsabilidade do banco"
-      ],
-      "probabilidade_base": 75,
-      "fatores_que_aumentam": ["Transações claramente fora do perfil do cliente", "Cliente idoso (hipervulnerável)", "Banco sem prova técnica (logs, relatório antifraude)", "BO registrado", "Banco negou formalmente sem justificativa técnica", "Portabilidade ou empréstimo sem assinatura válida"],
-      "fatores_que_diminuem": ["Cliente forneceu senha/dados voluntariamente (golpe da falsa central)", "Cliente seguiu instruções do golpista e colaborou ativamente", "Banco apresentou logs técnicos provando que transação foi autenticada"],
-      "valor_referencia": "Restituição integral do valor fraudado. Dano moral: NÃO é automático — precisa de agravante (hipervulnerável, negativa reiterada, valor alto). Quando configurado: R$ 3.000 a R$ 10.000.",
-      "formula_honorarios": "20% sobre condenação total (material + moral)."
-    },
-
-    {
-      "id": "TC-PLANO",
-      "subtema": "Plano de Saúde — Negativa de Cobertura",
-      "keywords": ["plano de saúde", "negativa", "cobertura", "cirurgia negada", "exame negado", "internação", "procedimento negado", "operadora", "convênio", "unimed", "amil", "sulamerica", "plano negou", "carência", "rol da ANS"],
-      "perguntas_consulta": [
-        {"id": 1, "pergunta": "O que foi negado — cirurgia, internação, exame ou medicamento? É urgência/emergência ou eletivo?", "motivo": "TJDFT: carência NÃO se aplica em urgência/emergência. Negativa em AVC, infarto, etc. = dano moral in re ipsa. Eletivo exige análise do rol ANS"},
-        {"id": 2, "pergunta": "O plano alegou que o procedimento está fora do rol da ANS? Qual o fundamento da negativa por escrito?", "motivo": "Lei 14.454/2022: procedimentos fora do rol da ANS PODEM ser exigidos se: (1) sem alternativa terapêutica no rol + (2) respaldo técnico-científico + (3) prescrição médica. TJDFT vem deferindo liminares"},
-        {"id": 3, "pergunta": "O médico que prescreveu é credenciado pelo plano? A prescrição é formal e detalhada?", "motivo": "TJDFT reconhece que cabe ao médico — não à operadora — definir o tratamento adequado. Prescrição detalhada com justificativa clínica é essencial"},
-        {"id": 4, "pergunta": "Há quanto tempo o cliente é segurado? Está adimplente? Já cumpriu a carência?", "motivo": "Carência cumprida + adimplência comprovada = argumento forte. Urgência: carência não se aplica por lei (Lei 9.656, art. 12, V, c)"},
-        {"id": 5, "pergunta": "Já registrou reclamação na ANS? A negativa veio por escrito com fundamentação?", "motivo": "ANS pressiona a operadora em 5 dias úteis. Negativa sem fundamentação por escrito = ilegal. TJDFT concede tutela de urgência em 48h em casos graves"}
-      ],
-      "marcos_temporais": [
-        "Data de início do plano",
-        "Data da solicitação do procedimento",
-        "Data da negativa formal",
-        "Data da reclamação na ANS (se houver)",
-        "Data prevista do procedimento (urgência)"
-      ],
-      "provas_essenciais": [
-        "Solicitação médica do procedimento (pedido do médico)",
-        "Carta de negativa da operadora (com o fundamento)",
-        "Apólice ou contrato do plano de saúde",
-        "Comprovante de pagamento das mensalidades (adimplência)",
-        "Prontuário médico / relatório de necessidade"
-      ],
-      "provas_desejaveis": [
-        "Protocolo de reclamação na ANS",
-        "Laudo médico detalhado com justificativa de urgência",
-        "Orçamento do procedimento negado"
-      ],
-      "provas_como_obter": {
-        "Carta de negativa": "Solicitar formalmente à operadora — por escrito ou e-mail",
-        "Reclamação ANS": "Site da ANS: www.ans.gov.br → Reclamações → registrar online",
-        "Contrato plano": "App ou site da operadora — área do beneficiário",
-        "Prontuário médico": "Solicitar na clínica ou hospital — direito garantido por lei"
-      },
-      "orientacao_cliente": [
-        "Solicitar a negativa POR ESCRITO à operadora — eles são obrigados a fornecer",
-        "Registrar reclamação na ANS IMEDIATAMENTE (www.ans.gov.br) — acelera a resposta",
-        "Guardar todos os boletos pagos dos últimos 12 meses",
-        "Pedir ao médico um relatório detalhado da necessidade do procedimento",
-        "Se for urgência: ir ao hospital — eles são obrigados a atender"
-      ],
-      "probabilidade_base": 85,
-      "fatores_que_aumentam": ["Urgência comprovada", "Adimplência comprovada", "Negativa por escrito", "ANS já notificada"],
-      "fatores_que_diminuem": ["Carência não cumprida", "Doença preexistente não declarada", "Médico fora da rede sem necessidade"],
-      "valor_referencia": "Tutela: obrigação de fazer (procedimento). Dano moral: R$ 5.000 a R$ 20.000",
-      "formula_honorarios": "20% sobre dano moral + R$ 1.500-3.000 fixo se tutela urgente."
-    },
-
-    {
-      "id": "TC-MEDICAMENTO",
-      "subtema": "Medicamento de Alto Custo — Plano de Saúde ou Estado",
-      "keywords": ["medicamento", "remédio", "alto custo", "fora do rol", "ANS negou", "plano não cobre", "tratamento negado", "medicamento negado", "quimioterapia", "biológico", "oncológico", "uso domiciliar", "CONITEC", "RENAME"],
-      "perguntas_consulta": [
-        {"id": 1, "pergunta": "O medicamento foi negado pelo plano de saúde ou pelo Estado (SUS/Secretaria de Saúde)?", "motivo": "São ações completamente diferentes. Plano: ação no TJDFT contra operadora. Estado: ação contra DF/União no TJDFT ou Federal. Definir o réu é o primeiro passo"},
-        {"id": 2, "pergunta": "O medicamento tem registro na ANVISA? O médico prescreveu para a indicação aprovada ou uso off-label?", "motivo": "TJDFT 2026: medicamento com registro ANVISA para a indicação prescrita = cobertura mais fácil. Off-label = exige requisitos da Lei 14.454/2022 (sem alternativa + respaldo científico)"},
-        {"id": 3, "pergunta": "O medicamento está no rol da ANS (para plano) ou no RENAME/CONITEC (para SUS)? Qual a alternativa terapêutica disponível?", "motivo": "Se está no rol: cobertura obrigatória, ação simples. Se não está: precisa provar ausência de alternativa eficaz no rol. Laudo médico detalhado é essencial"},
-        {"id": 4, "pergunta": "Qual a patologia e qual o risco à vida ou à saúde se não receber o medicamento?", "motivo": "TJDFT defere tutelas de urgência em 48h quando há risco de óbito ou agravamento grave. Multa diária (astreintes) de até R$ 10.000/dia por descumprimento"},
-        {"id": 5, "pergunta": "Já tem laudo médico detalhado justificando o medicamento? Já tentou solução administrativa (ANS ou Secretaria)?", "motivo": "Laudo com justificativa clínica, nome do medicamento, dosagem e ausência de alternativa = prova central. ANS: reclamação acelera. Estado: Câmara de Resolução de Demandas de Saúde (CREDS) do DF"}
-      ],
-      "marcos_temporais": [
-        "Data do diagnóstico da doença",
-        "Data da prescrição do medicamento pelo médico",
-        "Data da negativa formal do plano ou do Estado",
-        "Data de reclamação na ANS ou na Secretaria de Saúde"
-      ],
-      "marcos_descricao": {
-        "Data do diagnóstico da doença": "Quando o cliente foi diagnosticado? Isso estabelece o histórico do caso e demonstra a necessidade do tratamento.",
-        "Data da prescrição do medicamento pelo médico": "Quando o médico prescreveu? A prescrição recente demonstra necessidade atual. Solicitar laudo atualizado.",
-        "Data da negativa formal do plano ou do Estado": "Quando foi negado? A negativa por escrito é essencial — o plano é obrigado a fornecer por lei.",
-        "Data de reclamação na ANS ou na Secretaria de Saúde": "Registro administrativo antes da ação — não é obrigatório mas acelera a resposta e serve como prova."
-      },
-      "provas_essenciais": [
-        "Prescrição médica detalhada (nome do medicamento, dosagem, indicação, justificativa clínica)",
-        "Laudo médico com diagnóstico e justificativa de que não há alternativa terapêutica equivalente no rol",
-        "Negativa formal do plano ou do Estado (por escrito, com fundamentação)",
-        "Comprovante de adimplência do plano (últimos 3 boletos pagos)",
-        "Registro da ANVISA para o medicamento (consultar em consultas.anvisa.gov.br)"
-      ],
-      "provas_desejaveis": [
-        "Estudos científicos ou diretrizes médicas que embasam o uso do medicamento",
-        "Protocolo clínico do hospital ou clínica",
-        "Reclamação registrada na ANS (para plano) ou na CREDS/Secretaria (para Estado)",
-        "Orçamento do medicamento mostrando o alto custo"
-      ],
-      "provas_como_obter": {
-        "Prescrição detalhada": "Solicitar ao médico especialista laudo com CID, nome do medicamento, dosagem, motivo da escolha e ausência de alternativa equivalente",
-        "Registro ANVISA": "Site: consultas.anvisa.gov.br — buscar pelo nome do medicamento — gratuito e imediato",
-        "Negativa por escrito": "Solicitar formalmente por e-mail ou carta — o plano tem prazo de 5 dias úteis para responder (ANS RN 566/2022)",
-        "Reclamação ANS": "www.ans.gov.br → Canais de atendimento. O plano deve responder em 5 dias úteis sob pena de sanção",
-        "CREDS DF": "Secretaria de Saúde do DF — câmara para resolver demandas de medicamentos do SUS antes do juiz"
-      },
-      "orientacao_cliente": [
-        "Pedir ao médico um laudo DETALHADO — com CID, nome do medicamento, por que não há alternativa no rol, e referência a estudos científicos",
-        "Solicitar a negativa POR ESCRITO ao plano — o plano é obrigado a fornecer com fundamentação",
-        "Registrar reclamação na ANS imediatamente (www.ans.gov.br) — acelera muito a resposta",
-        "URGENTE: se há risco de vida, podemos pedir tutela de urgência para o juiz — decisão em 48h com multa de R$ 10.000/dia",
-        "Guardar todos os recibos/notas do medicamento se estiver comprando do próprio bolso — base para ressarcimento"
-      ],
-      "probabilidade_base": 85,
-      "fatores_que_aumentam": ["Medicamento com registro ANVISA para a indicação", "Laudo médico detalhado com ausência de alternativa", "Risco de vida documentado", "Negativa formal por escrito do plano", "Adimplência comprovada"],
-      "fatores_que_diminuem": ["Uso off-label sem respaldo científico robusto", "Medicamento experimental sem registro ANVISA", "Alternativa terapêutica disponível no rol da ANS"],
-      "valor_referencia": "Tutela: fornecimento imediato do medicamento. Dano moral: R$ 5.000 a R$ 15.000. Ressarcimento de valores pagos do próprio bolso.",
-      "formula_honorarios": "R$ *** fixo + 20% sobre dano moral. Urgência: honorários na liminar podem ser antecipados."
-    },
-
-    {
-      "id": "TC-CONSUMIDOR",
-      "subtema": "Dano Moral — Relação de Consumo (Geral)",
-      "keywords": ["consumidor", "produto com defeito", "serviço mal prestado", "empresa", "loja", "fornecedor", "cdc", "dano", "prejuízo", "atendimento", "propaganda enganosa", "imóvel", "apartamento", "publicidade enganosa"],
-      "perguntas_consulta": [
-        {"id": 1, "pergunta": "O que aconteceu e quando?", "motivo": "Prescrição de 3 a 5 anos conforme fundamento"},
-        {"id": 2, "pergunta": "É produto com defeito ou serviço mal prestado?", "motivo": "Define o artigo do CDC aplicável"},
-        {"id": 3, "pergunta": "Fez reclamação para a empresa? Qual foi a resposta?", "motivo": "Reclamação ignorada agrava o dano moral"},
-        {"id": 4, "pergunta": "Tem nota fiscal ou comprovante de compra?", "motivo": "Prova da relação de consumo"},
-        {"id": 5, "pergunta": "O problema já foi resolvido ou ainda está ativo?", "motivo": "Dano continuado amplia o valor"}
-      ],
-      "marcos_temporais": [
-        "Data da compra ou contratação",
-        "Data em que o problema apareceu",
-        "Data da reclamação à empresa",
-        "Data da resposta (se houver)"
-      ],
-      "provas_essenciais": [
-        "Nota fiscal / contrato / comprovante de compra",
-        "Fotos ou vídeos do defeito/problema",
-        "Registro de reclamação (protocolo SAC, Procon, Reclame Aqui)"
-      ],
-      "provas_desejaveis": [
-        "Resposta da empresa por escrito (e-mail ou WhatsApp)",
-        "Orçamento de reparo ou substituição",
-        "Testemunhas"
-      ],
-      "provas_como_obter": {
-        "Nota fiscal": "App do estabelecimento ou e-mail de compra",
-        "Protocolo reclamação": "Site da empresa + Procon-DF (www.procon.df.gov.br)",
-        "Reclame aqui": "Registrar em reclameaqui.com.br — gera pressão e é prova"
-      },
-      "orientacao_cliente": [
-        "Guardar a nota fiscal ou comprovante — sem ela a ação enfraquece",
-        "Fotografar ou filmar o problema agora",
-        "Registrar reclamação formal na empresa e salvar o número de protocolo",
-        "Registrar no Reclame Aqui — é gratuito e serve como prova"
-      ],
-      "probabilidade_base": 65,
-      "fatores_que_aumentam": ["Nota fiscal em mãos", "Empresa ignorou reclamação", "Dano continuado", "Empresa de grande porte"],
-      "fatores_que_diminuem": ["Sem nota fiscal", "Mero aborrecimento sem impacto real", "Problema já resolvido"],
-      "valor_referencia": "R$ 2.000 a R$ 10.000 (Juizados Especiais)",
-      "formula_honorarios": "20% sobre condenação."
-    },
-
-    {
-      "id": "TC-S01",
-      "subtema": "Sócio de Fachada / Desconsideração da Personalidade Jurídica",
-      "keywords": ["sócia", "sócio", "quadro societário", "fachada", "cnpj", "execução fiscal", "desconsideração", "empregada virou sócia", "pró-labore", "empresa quebrou", "dívidas da empresa"],
-      "perguntas_consulta": [
-        {"id": 1, "pergunta": "Quando foi incluído no quadro societário? (mês e ano)", "motivo": "Define prescrição e estratégia trabalhista"},
-        {"id": 2, "pergunta": "Ainda consta como sócio no CNPJ hoje?", "motivo": "Se sim, prazo trabalhista NÃO começou a correr"},
-        {"id": 3, "pergunta": "A execução fiscal — de quando é a dívida? Já era sócio nessa época?", "motivo": "CTN art. 135: exige poderes de gestão"},
-        {"id": 4, "pergunta": "Tem provas de que continuou subordinado (holerites, e-mails com ordens)?", "motivo": "Prova de simulação — essencial para a ação declaratória"},
-        {"id": 5, "pergunta": "Tem WhatsApp ou e-mail com ordens do chefe após virar sócio?", "motivo": "Prova digital é o divisor de águas no TJDFT"}
-      ],
-      "marcos_temporais": [
-        "Data de admissão como empregado",
-        "Data da demissão formal",
-        "Data de inclusão no quadro societário",
-        "Data de início das dívidas da empresa",
-        "Data de saída do quadro societário (se houver)"
-      ],
-      "provas_essenciais": [
-        "CTPS — verificar anotações do período como empregado",
-        "Contrato social / alteração que incluiu o cliente como sócio",
-        "Holerites do período como empregado E como sócio",
-        "Consulta ao CNPJ na Receita Federal (composição atual)",
-        "WhatsApp ou e-mails com ordens do superior após inclusão"
-      ],
-      "provas_desejaveis": [
-        "Contracheques de pró-labore (valor fixo = salário disfarçado)",
-        "Extratos bancários mostrando depósitos de pró-labore",
-        "Prints de ausência de participação em reuniões/atas",
-        "Declaração de outros ex-funcionários"
-      ],
-      "provas_como_obter": {
-        "Consulta CNPJ": "Receita Federal: www.cnpj.receita.fazenda.gov.br — gratuito",
-        "CTPS digital": "App Carteira de Trabalho Digital (Gov.br)",
-        "WhatsApp": "Print das conversas — solicitar exportação do histórico ao cliente",
-        "Contrato social": "Junta Comercial do DF: www.jucis.df.gov.br — consulta pública"
-      },
-      "orientacao_cliente": [
-        "URGENTE: fazer backup de todos os WhatsApp e e-mails antes que contas sejam desativadas",
-        "Consultar CNPJ agora para confirmar se ainda está no quadro societário",
-        "Reunir CTPS, rescisão e holerites do período como empregado",
-        "Não apagar nenhuma mensagem — prints de tudo",
-        "Verificar se tem atas de reunião assinadas (se nunca assinou, é prova de simulação)"
-      ],
-      "probabilidade_base": 65,
-      "fatores_que_aumentam": ["WhatsApp com ordens após inclusão", "Holerites contínuos", "Pró-labore fixo igual ao salário anterior", "Sem participação em atas"],
-      "fatores_que_diminuem": ["Assinou atas como sócio", "Prazo de 2 anos vencido para verbas", "Sem prova de subordinação"],
-      "valor_referencia": "Risco que o cliente corre: valor das execuções em curso",
-      "formula_honorarios": "R$ *** fixo por frente (civil/fiscal/trabalhista) + êxito."
-    },
-
-    {
-      "id": "TC-PATERNIDADE",
-      "subtema": "Investigação / Reconhecimento de Paternidade",
-      "keywords": ["paternidade", "pai", "reconhecimento", "filho", "investigação de paternidade", "DNA", "registro", "certidão", "nome do pai", "genitor desconhecido", "pai biológico", "post mortem", "pai faleceu", "pai morreu", "paternidade socioafetiva", "pai registral"],
-      "perguntas_consulta": [
-        {"id": 1, "pergunta": "O suposto pai está vivo ou já faleceu? Se faleceu, quando?", "motivo": "Define a estratégia: vivo = DNA direto. Falecido (post mortem) = DNA com parente ou prova testemunhal + documental. O TJDFT reconhece ambas as vias."},
-        {"id": 2, "pergunta": "É paternidade biológica ou socioafetiva? Há relacionamento documentado entre a mãe e o suposto pai?", "motivo": "Biológica: DNA é a prova central. Socioafetiva: exige 'posse do estado de filho' — tratamento público, nome e fama. O TJDFT nega casos com apenas afeto sem prova robusta."},
-        {"id": 3, "pergunta": "Os herdeiros ou parentes do suposto pai sabem do caso? Vão cooperar com o DNA?", "motivo": "Crucial no post mortem: se os herdeiros negarem o DNA, o TJDFT aplica presunção de paternidade (Súmula 301 STJ + Lei 8.560/92). A recusa vira prova contra eles."},
-        {"id": 4, "pergunta": "Há testemunhas do relacionamento — familiares, amigos, vizinhos que viram o casal juntos?", "motivo": "O TJDFT exige corroboração testemunhal + documental quando o DNA não é possível. Testemunhas que viram o relacionamento no período da concepção são essenciais."},
-        {"id": 5, "pergunta": "O cliente quer só o reconhecimento ou também quer alimentos e herança?", "motivo": "Define o escopo da ação: reconhecimento puro (imprescritível) ou cumulado com alimentos/herança (prazos diferentes). No post mortem, a herança é automática com o reconhecimento."}
-      ],
-      "marcos_temporais": [
-        "Período do relacionamento entre a mãe e o suposto pai biológico",
-        "Data de nascimento de quem busca o reconhecimento",
-        "Data do registro de nascimento (com ou sem nome do pai)",
-        "Data em que o suposto pai soube da gravidez (se souber)",
-        "Data da última tentativa de contato ou reconhecimento"
-      ],
-      "marcos_descricao": {
-        "Período do relacionamento entre a mãe e o suposto pai biológico": "Quando a mãe se relacionou com o suposto pai? Ex: 'de março a julho de 2000'. Se foi um relacionamento eventual ou esporádico, descreva. Se não souber, coloque 'Mãe não soube informar'.",
-        "Data de nascimento de quem busca o reconhecimento": "É a data de nascimento do próprio cliente — seja ele(a) criança, adolescente ou adulto. Define quem assina a ação: se menor de 18, a mãe representa. Se adulto, ele mesmo entra. Se o pai já faleceu (post mortem), esta data ainda é necessária.",
-        "Data do registro de nascimento (com ou sem nome do pai)": "Quando a certidão de nascimento foi registrada no cartório. Se o nome do pai biológico consta, informe. Se consta só o pai registral (diferente do biológico), informe também — isso muda a estratégia.",
-        "Data em que o suposto pai soube da gravidez (se souber)": "Se o pai soube da gravidez e não reconheceu, isso fortalece a ação. Se já faleceu e nunca soube, coloque 'Pai faleceu — não se aplica'. Se a mãe nunca contou, coloque 'Mãe nunca informou'.",
-        "Data da última tentativa de contato ou reconhecimento": "Última vez que houve contato com o suposto pai ou com a família dele para tentar o reconhecimento. Se foi a tia que veio contar, informe quando. Se nunca houve tentativa, coloque 'Não houve tentativa anterior'."
-      },
-      "provas_essenciais": [
-        "Certidão de nascimento de quem busca o reconhecimento (original)",
-        "Documento de identidade do cliente e da mãe (se menor)",
-        "Certidão de óbito do suposto pai (se post mortem)",
-        "Qualquer prova do relacionamento entre a mãe e o suposto pai no período da concepção",
-        "Nomes e contatos de testemunhas que viram o relacionamento"
-      ],
-      "provas_desejaveis": [
-        "Resultado de DNA já realizado (laboratório particular ou judicial)",
-        "Fotos do casal juntos com data visível",
-        "WhatsApp, e-mails ou mensagens do suposto pai reconhecendo o filho (mesmo indiretamente)",
-        "Certidão de casamento ou de óbito para localizar herdeiros (no post mortem)",
-        "Documentos que provem dependência financeira ou pagamento de despesas pelo pai"
-      ],
-      "provas_como_obter": {
-        "DNA post mortem": "Com parente direto do falecido (filho, irmão, pai) — solicitar ao juiz se herdeiros recusarem. ATENÇÃO: recusa gera presunção de paternidade (Súmula 301 STJ)",
-        "WhatsApp": "Exportar histórico: Abrir conversa → três pontinhos → Exportar conversa → Sem mídia. Salvar e enviar ao advogado",
-        "Fotos com data": "Galeria do celular mostra data nas propriedades. Verificar desde o período do relacionamento",
-        "Testemunhas": "Familiares, amigos em comum, vizinhos, colegas de trabalho — anotar nome completo, telefone e o que presenciaram",
-        "Certidão de óbito": "Cartório do local do falecimento ou app e-Cartório — necessária para identificar herdeiros"
-      },
-      "orientacao_cliente": [
-        "Guardar TUDO que comprove o relacionamento da mãe com o suposto pai — fotos, mensagens, cartas, declarações",
-        "Se o pai faleceu: levantar quem são os herdeiros e se há inventário aberto — isso define quem serão os réus",
-        "Anotar nome e contato de todas as pessoas que sabiam do relacionamento e possam ser testemunhas",
-        "Se os herdeiros se recusarem ao DNA, isso é BOM para nós — o TJDFT aplica presunção de paternidade",
-        "Verificar se há fotos, cartas ou documentos antigos em posse de familiares que comprovem o relacionamento"
-      ],
-      "probabilidade_base": 80,
-      "fatores_que_aumentam": ["DNA positivo já realizado", "Herdeiros se recusam ao DNA (gera presunção)", "Mensagens reconhecendo o filho", "Testemunhas do relacionamento", "Fotos do casal no período da concepção"],
-      "fatores_que_diminuem": ["Sem nenhuma prova do relacionamento", "Sem testemunhas identificadas", "Caso socioafetivo sem 'posse do estado de filho' documentada"],
-      "valor_referencia": "Reconhecimento: direito personalíssimo — imprescritível. Alimentos: 15-30% da renda. Herança (post mortem): participação no espólio.",
-      "formula_honorarios": "R$ *** fixo + ***% sobre alimentos fixados (se aplicável). Post mortem com herança: negociar % sobre quinhão."
-    },
-
-    {
-      "id": "TC-FAMILIA",
-      "subtema": "Divórcio / Partilha / Guarda",
-      "keywords": ["divórcio", "separação", "partilha", "guarda", "pensão", "alimentos", "família", "casamento", "união estável", "regime de bens"],
-      "perguntas_consulta": [
-        {"id": 1, "pergunta": "Qual o pedido principal? (divórcio, partilha, guarda, alimentos?)", "motivo": "Define qual ação ou se é cumulação"},
-        {"id": 2, "pergunta": "Existe acordo entre as partes ou é litigioso?", "motivo": "Consensual: mais rápido e barato. Litigioso: mais complexo"},
-        {"id": 3, "pergunta": "Qual o regime de bens do casamento?", "motivo": "Determina o que entra na partilha"},
-        {"id": 4, "pergunta": "Há filhos menores? Quem está com eles?", "motivo": "Guarda e alimentos são pontos críticos"},
-        {"id": 5, "pergunta": "Há bens a partilhar? (imóvel, empresa, veículo, investimentos?)", "motivo": "Define a complexidade e o valor da causa"}
-      ],
-      "marcos_temporais": [
-        "Data do casamento ou início da união estável",
-        "Data da separação de fato",
-        "Data de nascimento dos filhos (se houver)",
-        "Data de aquisição dos principais bens"
-      ],
-      "provas_essenciais": [
-        "Certidão de casamento atualizada",
-        "Documentos dos bens (escritura do imóvel, CRLV do carro, extratos de investimentos)",
-        "Certidão de nascimento dos filhos (se houver)",
-        "Pacto antenupcial (se houver)"
-      ],
-      "provas_desejaveis": [
-        "Extratos bancários dos últimos 12 meses",
-        "Declaração de Imposto de Renda do casal",
-        "Documentos de dívidas em comum",
-        "Laudos de avaliação de imóveis"
-      ],
-      "provas_como_obter": {
-        "Certidão de casamento": "Cartório onde foi celebrado ou app e-Cartório",
-        "Escritura imóvel": "Cartório de Registro de Imóveis do DF",
-        "Extratos bancários": "App do banco — período dos últimos 12 meses",
-        "IRPF": "Site da Receita Federal — área do contribuinte"
-      },
-      "orientacao_cliente": [
-        "Levantar todos os bens do casal com documentação (não esquecer investimentos e previdência)",
-        "Verificar se há dívidas em nome do casal",
-        "Se houver filhos: definir com quem estão e a rotina atual",
-        "Não movimentar bens do casal sem orientação do advogado"
-      ],
-      "probabilidade_base": 90,
-      "fatores_que_aumentam": ["Caso consensual", "Documentação completa", "Partes cooperativas"],
-      "fatores_que_diminuem": ["Caso litigioso", "Bens não documentados", "Patrimônio escondido pelo outro cônjuge"],
-      "valor_referencia": "Valor dos bens a partilhar. Honorários: tabela OAB sobre o valor da causa.",
-      "formula_honorarios": "R$ *** fixo (consensual) ou % do patrimônio (litigioso)."
-    },
-
-    {
-      "id": "TC-BAGAGEM",
-      "subtema": "Extravio / Dano de Bagagem — Transporte Aéreo",
-      "keywords": ["bagagem", "extravio", "mala", "mala extraviada", "mala perdida", "bagagem danificada", "RIB", "relatório de irregularidade", "mala não chegou", "bagagem sumiu"],
-      "perguntas_consulta": [
-        {"id": 1, "pergunta": "A bagagem foi extraviada definitivamente ou devolvida com atraso? Se devolvida, em quantos dias?", "motivo": "Definitivo (>21 dias) = dano moral presumido pelo TJDFT. Temporário = dano moral configurado mas quantum menor (R$ 1.000 a R$ 3.000)"},
-        {"id": 2, "pergunta": "O cliente registrou o RIB (Relatório de Irregularidade de Bagagem) no aeroporto no momento do incidente?", "motivo": "O RIB é a prova-chave. O TJDFT exige para comprovar o incidente. Sem ele a ação enfraquece muito"},
-        {"id": 3, "pergunta": "O voo era nacional ou internacional? Qual companhia e qual trecho?", "motivo": "Internacional: Convenção de Montreal limita danos materiais (teto 1.000 DES) mas NÃO limita danos morais — estes seguem o CDC"},
-        {"id": 4, "pergunta": "O cliente teve gastos emergenciais por causa do extravio? (roupas, medicamentos, equipamentos)?", "motivo": "Gastos documentados com nota fiscal são ressarcíveis. Sem nota o juiz arbitra por equidade — vale registrar mesmo sem comprovante"},
-        {"id": 5, "pergunta": "A bagagem continha itens especiais — medicamentos de uso contínuo, equipamentos de trabalho, itens de bebê?", "motivo": "Itens essenciais agravam o dano moral significativamente no TJDFT. Medicamentos de uso contínuo foram fator determinante em acórdãos recentes"}
-      ],
-      "marcos_temporais": [
-        "Data e horário do voo",
-        "Data e horário do registro do RIB no aeroporto",
-        "Data de retorno da bagagem (se devolvida)",
-        "Data de qualquer reclamação formal à companhia"
-      ],
-      "marcos_descricao": {
-        "Data e horário do voo": "Data do voo em que a bagagem foi extraviada. Se houve conexão, informar qual trecho gerou o problema.",
-        "Data e horário do registro do RIB no aeroporto": "Quando o cliente registrou o Relatório de Irregularidade de Bagagem no balcão da companhia no aeroporto. Essa data é essencial.",
-        "Data de retorno da bagagem (se devolvida)": "Se a bagagem foi devolvida, em que data? Calcule quantos dias ficou sem ela. Menos de 7 dias = prazo ANAC. Mais de 21 dias = extravio definitivo.",
-        "Data de qualquer reclamação formal à companhia": "Data de e-mail, chat ou protocolo de reclamação à companhia. Guardar número de protocolo."
-      },
-      "provas_essenciais": [
-        "RIB (Relatório de Irregularidade de Bagagem) — registrado no aeroporto",
-        "Comprovante da passagem e cartão de embarque",
-        "Conversas de WhatsApp ou e-mail com a companhia sobre o extravio",
-        "Notas fiscais de gastos emergenciais (roupas, medicamentos, itens de necessidade)"
-      ],
-      "provas_desejaveis": [
-        "Fotos dos itens que estavam na mala (se tiver)",
-        "Protocolo de reclamação junto à ANAC (www.anac.gov.br)",
-        "Laudo ou avaliação dos itens danificados (se bagagem danificada)"
-      ],
-      "provas_como_obter": {
-        "RIB": "Solicitar cópia ao balcão da companhia no aeroporto imediatamente. Se não tiver cópia, pedir via SAC da companhia com o número do protocolo",
-        "Gastos emergenciais": "Notas fiscais de farmácias, lojas de roupa, etc. Se perdeu, solicitar segunda via. Juiz arbitra por equidade mesmo sem nota",
-        "Reclamação ANAC": "Site www.anac.gov.br → Canais de atendimento → Reclamação. Gera número de protocolo que fortalece a ação",
-        "Comprovante passagem": "E-mail de confirmação de compra — buscar na caixa de entrada pelo nome da companhia"
-      },
-      "orientacao_cliente": [
-        "URGENTE: registrar o RIB no balcão da companhia no aeroporto ANTES de sair — sem isso a ação enfraquece",
-        "Guardar TODAS as conversas com a companhia (WhatsApp, e-mail, chat) — não apagar nada",
-        "Guardar notas fiscais de qualquer gasto emergencial causado pelo extravio",
-        "Registrar reclamação na ANAC (www.anac.gov.br) — gera pressão e serve como prova",
-        "Se bagagem não chegar em 21 dias — extravio definitivo. Acionar imediatamente"
-      ],
-      "probabilidade_base": 85,
-      "fatores_que_aumentam": ["RIB registrado no aeroporto", "Extravio definitivo (>21 dias)", "Gastos emergenciais documentados", "Itens essenciais na mala (medicamentos, equipamentos)"],
-      "fatores_que_diminuem": ["Sem RIB", "Bagagem devolvida rápido (menos de 24h)", "Atraso por condições climáticas documentadas pela companhia"],
-      "valor_referencia": "Dano moral: R$ 1.000 (temporário/1-4 dias) a R$ 4.500 por pessoa (definitivo). Danos materiais: valor dos bens (com nota) ou arbitramento por equidade (sem nota)",
-      "formula_honorarios": "20% sobre condenação total. Juizados Especiais — sem entrada."
-    },
-
-    {
-      "id": "TC-IMOVEL",
-      "subtema": "Atraso na Entrega de Imóvel / Construtora",
-      "keywords": ["imóvel", "apartamento", "construtora", "atraso na entrega", "obra atrasada", "chaves", "entrega do imóvel", "prazo de entrega", "incorporadora", "habite-se"],
-      "perguntas_consulta": [
-        {"id": 1, "pergunta": "Qual era o prazo de entrega previsto no contrato ou no termo de reserva? O imóvel já foi entregue?", "motivo": "O TJDFT reconhece o termo de reserva como oferta vinculante (CDC art. 30). 180 dias de tolerância são aceitos — calcule se já extrapolou"},
-        {"id": 2, "pergunta": "A construtora alegou pandemia ou outro motivo de força maior para justificar o atraso?", "motivo": "O TJDFT entende que pandemia e escassez de insumos são fortuito INTERNO da construtora — não excluem responsabilidade. Isso favorece o cliente"},
-        {"id": 3, "pergunta": "O cliente está pagando juros de obra (juros de evolução de obra) desde quando?", "motivo": "Juros de obra cobrados após o prazo de entrega + 180 dias são indevidos e devem ser restituídos integralmente"},
-        {"id": 4, "pergunta": "O cliente estava pagando aluguel ou ficou com despesas extras por não ter recebido o imóvel no prazo?", "motivo": "Lucros cessantes: 0,5% ao mês sobre o valor do imóvel por mês de atraso — esse é o padrão do TJDFT"},
-        {"id": 5, "pergunta": "Há vícios de construção além do atraso? (infiltração, pintura, elétrica, hidráulica)?", "motivo": "Vícios construtivos são pedido adicional — aumentam o valor da causa e configuram dano moral autônomo"}
-      ],
-      "marcos_temporais": [
-        "Data de assinatura do contrato ou termo de reserva",
-        "Prazo de entrega previsto originalmente",
-        "Prazo de entrega com 180 dias de tolerância",
-        "Data efetiva de entrega das chaves (se entregue)",
-        "Data de início do pagamento dos juros de obra"
-      ],
-      "marcos_descricao": {
-        "Data de assinatura do contrato ou termo de reserva": "Quando foi assinado? O termo de reserva também vincula a construtora — vale tanto quanto o contrato formal.",
-        "Prazo de entrega previsto originalmente": "Data exata prevista no contrato ou termo de reserva para entrega das chaves.",
-        "Prazo de entrega com 180 dias de tolerância": "Some 180 dias ao prazo original — o TJDFT aceita essa tolerância. A partir daqui, tudo é atraso indenizável.",
-        "Data efetiva de entrega das chaves (se entregue)": "Quando as chaves foram entregues de fato? A diferença entre essa data e o prazo com tolerância é o período do dano.",
-        "Data de início do pagamento dos juros de obra": "Desde quando o cliente paga juros de obra? Os pagamentos após o prazo + 180 dias são restituíveis."
-      },
-      "provas_essenciais": [
-        "Contrato de compra e venda ou termo de reserva (com prazo de entrega)",
-        "Comprovantes de pagamento dos juros de obra (boletos pagos)",
-        "Comprovantes de aluguel pago no período do atraso (se aplicável)",
-        "Notificações ou comunicados da construtora sobre o atraso"
-      ],
-      "provas_desejaveis": [
-        "E-mails ou WhatsApp com a construtora sobre o atraso",
-        "Fotos de vícios construtivos (se houver)",
-        "Laudo de vistoria com vícios documentados",
-        "Declaração de IR com imóvel financiado"
-      ],
-      "provas_como_obter": {
-        "Contrato": "Solicitar cópia à construtora ou corretora — direito garantido pelo CDC",
-        "Boletos juros de obra": "Extratos bancários ou e-mails com boletos — guardar todos desde o início",
-        "Comprovantes aluguel": "Recibos de aluguel ou extratos bancários mostrando pagamentos ao locador",
-        "Comunicados da construtora": "E-mails, cartas e aplicativos da construtora — guardar todos"
-      },
-      "orientacao_cliente": [
-        "Guardar TODOS os boletos de juros de obra pagos — são restituíveis após o prazo de tolerância",
-        "Calcular quantos meses de atraso houve após o prazo + 180 dias — cada mês vale 0,5% do imóvel",
-        "Guardar recibos de aluguel do período — comprovam lucros cessantes",
-        "Fotografar vícios construtivos assim que receber as chaves — infiltração, pintura, elétrica",
-        "NÃO assinar nada que seja 'quitação geral' de eventuais danos antes de consultar o advogado"
-      ],
-      "probabilidade_base": 85,
-      "fatores_que_aumentam": ["Atraso superior a 180 dias documentado", "Construtora alegou Covid (não exclui responsabilidade no TJDFT)", "Juros de obra pagos durante o atraso", "Vícios construtivos documentados"],
-      "fatores_que_diminuem": ["Atraso inferior a 180 dias", "Cliente já assinou quitação geral", "Sem comprovante de pagamento dos juros de obra"],
-      "valor_referencia": "Lucros cessantes: 0,5% ao mês × valor do imóvel × meses de atraso. Juros de obra: valor total pago após prazo+tolerância. Dano moral: R$ 5.000 a R$ 15.000.",
-      "formula_honorarios": "20% sobre condenação total. Causa de valor alto — honorários podem ser tabelados pela OAB."
-    }
-  ]
+﻿{
+    "_meta":  {
+                  "versao":  "2.0",
+                  "criado_em":  "30/05/2026",
+                  "novidades":  "Guia probatório, marcos temporais, orientação ao cliente, probabilidade de êxito"
+              },
+    "temas":  [
+                  {
+                      "id":  "TC-ALIMENTOS",
+                      "subtema":  "Exoneração de Alimentos — Maioridade",
+                      "keywords":  [
+                                       "alimentos",
+                                       "exoneração",
+                                       "pensão",
+                                       "filho maior",
+                                       "maioridade",
+                                       "pró-labore alimentar",
+                                       "desconto folha",
+                                       "FAB",
+                                       "pensão alimentícia"
+                                   ],
+                      "perguntas_consulta":  [
+                                                 {
+                                                     "id":  1,
+                                                     "pergunta":  "Quando foi fixada a pensão originalmente? (mês/ano e número do processo)",
+                                                     "motivo":  "Marco inicial da linha do tempo"
+                                                 },
+                                                 {
+                                                     "id":  2,
+                                                     "pergunta":  "Qual a idade atual do(s) filho(s) e qual a profissão ou situação acadêmica?",
+                                                     "motivo":  "Define estratégia: exoneração total ou modificação com termo final"
+                                                 },
+                                                 {
+                                                     "id":  3,
+                                                     "pergunta":  "O desconto é em folha de pagamento? Qual a empresa/órgão?",
+                                                     "motivo":  "Define o destinatário do ofício"
+                                                 },
+                                                 {
+                                                     "id":  4,
+                                                     "pergunta":  "O(s) filho(s) concordam com o pedido?",
+                                                     "motivo":  "Consentimento transforma o processo em consensual — muito mais rápido"
+                                                 },
+                                                 {
+                                                     "id":  5,
+                                                     "pergunta":  "O alimentando está empregado ou estudando?",
+                                                     "motivo":  "Empregado: PREVJUD confirma. Estudante sob 24 anos: pedir modificação com termo final"
+                                                 }
+                                             ],
+                      "marcos_temporais":  [
+                                               "Data da sentença/acordo original de alimentos",
+                                               "Data de nascimento de cada filho",
+                                               "Data em que atingiu a maioridade (18 anos)",
+                                               "Data de início do emprego (se houver)",
+                                               "Data prevista de formatura (se universitário)"
+                                           ],
+                      "marcos_descricao":  {
+                                               "Data da sentença/acordo original de alimentos":  "Quando foi fixada a pensão? Ex: 10/03/2015. Buscar no processo original ou no contracheque.",
+                                               "Data de nascimento de cada filho":  "Informar a data de nascimento de cada filho que recebe a pensão. Se forem vários, listar todos.",
+                                               "Data em que atingiu a maioridade (18 anos)":  "Data em que o filho completou 18 anos. Se ainda não completou, coloque \u0027Ainda menor\u0027. Se já completou, essa é a data-chave da prescrição.",
+                                               "Data de início do emprego (se houver)":  "Se o filho trabalha formalmente, quando começou? Isso será confirmado via PREVJUD. Se não trabalha, coloque \u0027Não se aplica\u0027.",
+                                               "Data prevista de formatura (se universitário)":  "Se o filho é universitário, quando termina o curso? Isso define se há prazo para redução. Se não estuda, coloque \u0027Não se aplica\u0027."
+                                           },
+                      "provas_essenciais":  [
+                                                "Íntegra do processo original (com a sentença que fixou os alimentos)",
+                                                "Contracheque atualizado (últimos 3 meses) com o desconto identificado",
+                                                "Documentos de identidade dos filhos (RG + CPF)",
+                                                "Declaração de anuência assinada pelo(s) filho(s)",
+                                                "Comprovante de endereço do alimentante"
+                                            ],
+                      "provas_desejaveis":  [
+                                                "Carteira de trabalho ou holerite do filho (prova de emprego)",
+                                                "Declaração de matrícula universitária (se for pedir termo final)",
+                                                "Comprovante de renda do filho"
+                                            ],
+                      "provas_como_obter":  {
+                                                "Íntegra do processo":  "PJe do TJDFT com login do advogado ou balcão da vara",
+                                                "Contracheque":  "Cliente solicita ao RH da empresa ou baixa no app do banco",
+                                                "Declaração de anuência":  "Elaborar e enviar para o filho assinar — pode ser por WhatsApp",
+                                                "Matrícula universitária":  "Portal da universidade ou secretaria acadêmica",
+                                                "Comprovante de emprego":  "CTPS digitalizada ou holerite do mês atual"
+                                            },
+                      "orientacao_cliente":  [
+                                                 "Solicitar a íntegra do processo no sistema PJe (informaremos o login)",
+                                                 "Trazer os últimos 3 contracheques mostrando o desconto da pensão",
+                                                 "Pedir para o(s) filho(s) assinarem a declaração que enviaremos por WhatsApp",
+                                                 "Se o filho trabalha: pedir um holerite ou foto da CTPS",
+                                                 "Se o filho estuda: pedir declaração de matrícula na secretaria da universidade"
+                                             ],
+                      "probabilidade_base":  80,
+                      "fatores_que_aumentam":  [
+                                                   "Filho empregado formalmente",
+                                                   "Filho acima de 24 anos",
+                                                   "Consentimento expresso do filho"
+                                               ],
+                      "fatores_que_diminuem":  [
+                                                   "Filho universitário sem emprego e abaixo de 24 anos",
+                                                   "Processo adversarial (filho contesta)"
+                                               ],
+                      "valor_referencia":  "Desconto atual × 12 meses (dividido por número de filhos)",
+                      "formula_honorarios":  "R$ *** fixo + ***% êxito. Sugestão: R$ 2.000-5.000 fixo por filho",
+                      "polo_passivo":  {
+                                           "sugestao":  "Ex-cônjuge ou responsável que paga a pensão (pode ser o próprio filho se maior)",
+                                           "tipo":  "PF",
+                                           "dados":  [
+                                                         "Nome completo",
+                                                         "CPF",
+                                                         "Endereço"
+                                                     ],
+                                           "alerta":  "Se o desconto é em folha, o empregador/órgão pagador pode ser réu solidário"
+                                       }
+                  },
+                  {
+                      "id":  "TC-AEREO",
+                      "subtema":  "Overbooking / Atraso / Cancelamento de Voo",
+                      "keywords":  [
+                                       "overbooking",
+                                       "voo",
+                                       "passagem",
+                                       "aéreo",
+                                       "latam",
+                                       "azul",
+                                       "gol",
+                                       "embarque",
+                                       "cancelamento",
+                                       "atraso",
+                                       "preterição",
+                                       "companhia aérea",
+                                       "bagagem"
+                                   ],
+                      "perguntas_consulta":  [
+                                                 {
+                                                     "id":  1,
+                                                     "pergunta":  "O que aconteceu exatamente? (overbooking, atraso, cancelamento, extravio de bagagem?)",
+                                                     "motivo":  "Define qual artigo da ANAC se aplica"
+                                                 },
+                                                 {
+                                                     "id":  2,
+                                                     "pergunta":  "Qual a data e o horário do voo? Qual companhia?",
+                                                     "motivo":  "Marco temporal principal"
+                                                 },
+                                                 {
+                                                     "id":  3,
+                                                     "pergunta":  "Qual foi o impacto? (perdeu conexão, ficou preso no aeroporto, perdeu evento/reunião?)",
+                                                     "motivo":  "Determina o valor do dano moral"
+                                                 },
+                                                 {
+                                                     "id":  4,
+                                                     "pergunta":  "A companhia ofereceu algo? (reacomodação, voucher, reembolso?)",
+                                                     "motivo":  "Oferta inadequada agrava a conduta da empresa"
+                                                 },
+                                                 {
+                                                     "id":  5,
+                                                     "pergunta":  "Tem cartão de embarque e comprovante da passagem?",
+                                                     "motivo":  "Prova essencial — sem ela a ação enfraquece muito"
+                                                 }
+                                             ],
+                      "marcos_temporais":  [
+                                               "Data da compra da passagem",
+                                               "Data e horário do voo original",
+                                               "Data e horário de chegada efetiva ao destino",
+                                               "Data de qualquer reclamação feita à companhia",
+                                               "Data de eventuais gastos extras (hotel, alimentação, outro voo)"
+                                           ],
+                      "provas_essenciais":  [
+                                                "Cartão de embarque original (impresso ou print)",
+                                                "Comprovante de compra da passagem (e-mail de confirmação ou app)",
+                                                "Comprovante de check-in (confirma que estava presente)",
+                                                "Prints de eventuais mensagens da companhia aérea",
+                                                "Notas fiscais de gastos extras (hotel, alimentação, táxi)"
+                                            ],
+                      "provas_desejaveis":  [
+                                                "Fotos no aeroporto com data e hora visíveis",
+                                                "Comunicações com SAC da companhia (protocolo, e-mail)",
+                                                "Declaração de testemunhas (companheiros de viagem)",
+                                                "Contrato ou convite de evento perdido (reunião, casamento, formatura)"
+                                            ],
+                      "provas_como_obter":  {
+                                                "Cartão de embarque":  "Print da tela do celular ou e-mail recebido da companhia",
+                                                "Comprovante de compra":  "E-mail de confirmação — buscar na caixa de entrada",
+                                                "Gastos extras":  "Notas fiscais do hotel e restaurante — solicitar duplicata se perdeu",
+                                                "Protocolo SAC":  "Reclamação na plataforma da companhia — salvar número do protocolo",
+                                                "Fotos aeroporto":  "Verificar galeria do celular — metadados confirmam data e local"
+                                            },
+                      "orientacao_cliente":  [
+                                                 "Salvar TODOS os e-mails da companhia aérea (confirmação, alteração, notificação)",
+                                                 "Print das mensagens no app da companhia",
+                                                 "Guardar todas as notas fiscais de gastos extras (hotel, alimentação, transporte)",
+                                                 "Registrar reclamação no site da companhia E no site da ANAC (www.anac.gov.br) — gera protocolo",
+                                                 "Verificar se tem fotos no aeroporto com horário visível"
+                                             ],
+                      "probabilidade_base":  85,
+                      "fatores_que_aumentam":  [
+                                                   "Cartão de embarque em mãos",
+                                                   "Gastos extras documentados",
+                                                   "Evento importante perdido",
+                                                   "Companhia não ofereceu nada"
+                                               ],
+                      "fatores_que_diminuem":  [
+                                                   "Sem cartão de embarque",
+                                                   "Atraso inferior a 4h sem cancelamento",
+                                                   "Companhia ofereceu reacomodação adequada"
+                                               ],
+                      "valor_referencia":  "Dano moral: R$ 3.000 a R$ 15.000 + reembolso de gastos + DES ANAC",
+                      "formula_honorarios":  "20% sobre condenação total. Sem entrada.",
+                      "polo_passivo":  {
+                                           "sugestao":  "Companhia aérea responsável pelo voo",
+                                           "tipo":  "PJ",
+                                           "dados":  [
+                                                         "Razão Social (ex: LATAM Airlines Brasil S.A.)",
+                                                         "CNPJ",
+                                                         "Sede para citação"
+                                                     ],
+                                           "alerta":  "Em voos com codeshare, ambas as companhias respondem solidariamente — incluir as duas"
+                                       }
+                  },
+                  {
+                      "id":  "TC-TRANSITO",
+                      "subtema":  "Acidente de Trânsito",
+                      "keywords":  [
+                                       "acidente",
+                                       "colisão",
+                                       "batida",
+                                       "trânsito",
+                                       "veículo",
+                                       "carro",
+                                       "moto",
+                                       "BO",
+                                       "boletim de ocorrência",
+                                       "dano",
+                                       "seguro"
+                                   ],
+                      "perguntas_consulta":  [
+                                                 {
+                                                     "id":  1,
+                                                     "pergunta":  "Quando e onde aconteceu o acidente?",
+                                                     "motivo":  "Marco temporal + competência"
+                                                 },
+                                                 {
+                                                     "id":  2,
+                                                     "pergunta":  "O cliente foi o atingido ou o causador?",
+                                                     "motivo":  "Define o polo processual"
+                                                 },
+                                                 {
+                                                     "id":  3,
+                                                     "pergunta":  "Houve lesão corporal ou só dano material?",
+                                                     "motivo":  "Lesão corporal: ação penal paralela possível"
+                                                 },
+                                                 {
+                                                     "id":  4,
+                                                     "pergunta":  "Foi feito boletim de ocorrência?",
+                                                     "motivo":  "Prova essencial — sem BO a ação enfraquece muito"
+                                                 },
+                                                 {
+                                                     "id":  5,
+                                                     "pergunta":  "O outro veículo tem seguro? O cliente tem seguro?",
+                                                     "motivo":  "Pode acionar o seguro diretamente — mais rápido que ação judicial"
+                                                 }
+                                             ],
+                      "marcos_temporais":  [
+                                               "Data e horário do acidente",
+                                               "Data do boletim de ocorrência",
+                                               "Data de atendimento médico (se houver lesão)",
+                                               "Data do orçamento de reparo do veículo",
+                                               "Data de qualquer comunicação com o seguro"
+                                           ],
+                      "provas_essenciais":  [
+                                                "Boletim de Ocorrência (BO) — cópia completa",
+                                                "Fotos do local e dos veículos (com data e hora)",
+                                                "Documentos do veículo (CRLV, CNH)",
+                                                "Orçamento de reparo (mínimo 2 orçamentos)",
+                                                "Laudos médicos e atestados (se houver lesão)"
+                                            ],
+                      "provas_desejaveis":  [
+                                                "Câmeras de segurança do local (solicitar imediatamente — apagam em dias)",
+                                                "Testemunhas com nome e contato",
+                                                "Dados do seguro do outro veículo",
+                                                "Fotos das lesões corporais (se houver)",
+                                                "Nota fiscal do conserto ou perda total"
+                                            ],
+                      "provas_como_obter":  {
+                                                "Boletim de Ocorrência":  "Delegacia mais próxima ou Delegacia Virtual (PCDF.DF.GOV.BR)",
+                                                "Câmeras de segurança":  "Solicitar ao estabelecimento IMEDIATAMENTE — ligação + protocolo escrito",
+                                                "Laudos médicos":  "UPA, Hospital ou médico particular — solicitar atestado detalhado",
+                                                "Orçamento":  "Oficina autorizada da marca do veículo — pedir em papel timbrado",
+                                                "Dados do seguro":  "Placa do veículo do outro → consulta no site do DETRAN"
+                                            },
+                      "orientacao_cliente":  [
+                                                 "Não lavar ou reparar o veículo antes de fazer perícia ou fotos detalhadas",
+                                                 "Solicitar câmeras de segurança do local HOJE MESMO — apagam em 72h",
+                                                 "Fazer BO se ainda não fez — pode ser feito online",
+                                                 "Anotar nome, placa e telefone de todas as testemunhas",
+                                                 "Guardar todos os comprovantes médicos e de transporte alternativo"
+                                             ],
+                      "probabilidade_base":  75,
+                      "fatores_que_aumentam":  [
+                                                   "BO lavrado",
+                                                   "Câmeras de segurança",
+                                                   "Testemunhas identificadas",
+                                                   "Lesão corporal documentada"
+                                               ],
+                      "fatores_que_diminuem":  [
+                                                   "Sem BO",
+                                                   "Sem fotos",
+                                                   "Cliente era o causador",
+                                                   "Sem testemunhas"
+                                               ],
+                      "valor_referencia":  "Danos materiais: custo real do reparo. Dano moral (se lesão): R$ 5.000 a R$ 30.000",
+                      "formula_honorarios":  "20% sobre condenação. Entrada opcional conforme caso.",
+                      "polo_passivo":  {
+                                           "sugestao":  "Motorista causador do acidente e/ou proprietário do veículo",
+                                           "tipo":  "PF",
+                                           "dados":  [
+                                                         "Nome completo",
+                                                         "CPF",
+                                                         "Endereço",
+                                                         "Placa do veículo"
+                                                     ],
+                                           "alerta":  "Se o veículo tem seguro, a seguradora pode ser incluída como ré"
+                                       }
+                  },
+                  {
+                      "id":  "TC-TRABALHISTA",
+                      "subtema":  "Reclamação Trabalhista",
+                      "keywords":  [
+                                       "trabalhista",
+                                       "clt",
+                                       "empregado",
+                                       "demissão",
+                                       "rescisão",
+                                       "férias",
+                                       "13°",
+                                       "fgts",
+                                       "horas extras",
+                                       "assédio",
+                                       "jornada",
+                                       "carteira",
+                                       "registro",
+                                       "pejotização"
+                                   ],
+                      "perguntas_consulta":  [
+                                                 {
+                                                     "id":  1,
+                                                     "pergunta":  "O contrato era formal (CLT) ou informal?",
+                                                     "motivo":  "Informal: precisa provar o vínculo primeiro"
+                                                 },
+                                                 {
+                                                     "id":  2,
+                                                     "pergunta":  "Quando começou e quando terminou o vínculo?",
+                                                     "motivo":  "Prescrição trabalhista: 2 anos após demissão"
+                                                 },
+                                                 {
+                                                     "id":  3,
+                                                     "pergunta":  "Por que foi demitido? (justa causa, sem justa causa, pediu demissão?)",
+                                                     "motivo":  "Define as verbas rescisórias devidas"
+                                                 },
+                                                 {
+                                                     "id":  4,
+                                                     "pergunta":  "Recebeu as verbas rescisórias? Assinou algo?",
+                                                     "motivo":  "Quitação assinada pode complicar — analisar o documento"
+                                                 },
+                                                 {
+                                                     "id":  5,
+                                                     "pergunta":  "Qual o principal problema: FGTS, horas extras, férias, assédio?",
+                                                     "motivo":  "Determina o foco da ação e o valor estimado"
+                                                 }
+                                             ],
+                      "marcos_temporais":  [
+                                               "Data de admissão",
+                                               "Data de demissão",
+                                               "Data da assinatura da rescisão (se houver)",
+                                               "Data da homologação no sindicato (se houver)",
+                                               "Data de qualquer denúncia de assédio (se aplicável)"
+                                           ],
+                      "provas_essenciais":  [
+                                                "CTPS (Carteira de Trabalho) — digitalizada",
+                                                "Contrato de trabalho (se houver)",
+                                                "Holerites dos últimos 12 meses",
+                                                "Termo de rescisão (TRCT) assinado",
+                                                "Comprovante de saldo FGTS (app FGTS)"
+                                            ],
+                      "provas_desejaveis":  [
+                                                "Controle de ponto ou registros de horário",
+                                                "E-mails ou WhatsApp com superiores (prova de jornada ou assédio)",
+                                                "Testemunhas de colegas de trabalho",
+                                                "Comunicados internos da empresa",
+                                                "Fotos do ambiente de trabalho (se assédio/condições inadequadas)"
+                                            ],
+                      "provas_como_obter":  {
+                                                "Saldo FGTS":  "App FGTS (disponível para iOS e Android) — extrato completo",
+                                                "CTPS digital":  "App Carteira de Trabalho Digital (Gov.br)",
+                                                "Holerites":  "Solicitar ao RH formalmente (por escrito/e-mail)",
+                                                "Controle de ponto":  "Requerer ao empregador — ele é obrigado a fornecer",
+                                                "WhatsApp":  "Print das conversas — não apagar nada"
+                                            },
+                      "orientacao_cliente":  [
+                                                 "Não apagar NENHUMA mensagem de WhatsApp ou e-mail com a empresa",
+                                                 "Baixar o extrato do FGTS pelo app agora — antes que mude algo",
+                                                 "Fotografar a CTPS completa (todas as páginas com anotações)",
+                                                 "Guardar todos os holerites — pedir cópias ao RH se não tiver",
+                                                 "Anotar nome e contato de ex-colegas que possam ser testemunhas"
+                                             ],
+                      "probabilidade_base":  70,
+                      "fatores_que_aumentam":  [
+                                                   "CTPS anotada",
+                                                   "Holerites completos",
+                                                   "Testemunhas disponíveis",
+                                                   "FGTS não depositado comprovado"
+                                               ],
+                      "fatores_que_diminuem":  [
+                                                   "Rescisão assinada com quitação",
+                                                   "Prazo de 2 anos vencido",
+                                                   "Contrato informal sem prova"
+                                               ],
+                      "valor_referencia":  "Varia: FGTS + multa 40% + férias + 13° + horas extras. Calcular com holerites.",
+                      "formula_honorarios":  "30% sobre condenação. Sem entrada (caso típico).",
+                      "polo_passivo":  {
+                                           "sugestao":  "Empresa empregadora",
+                                           "tipo":  "PJ",
+                                           "dados":  [
+                                                         "Razão Social",
+                                                         "CNPJ",
+                                                         "Endereço da sede ou filial onde trabalhava"
+                                                     ],
+                                           "alerta":  "Verificar se há grupo econômico — outras empresas podem responder solidariamente"
+                                       }
+                  },
+                  {
+                      "id":  "TC-NEG",
+                      "subtema":  "Negativação Indevida",
+                      "keywords":  [
+                                       "negativação",
+                                       "serasa",
+                                       "spc",
+                                       "nome sujo",
+                                       "protesto",
+                                       "cobrança indevida",
+                                       "dívida quitada",
+                                       "não reconhece a dívida",
+                                       "inscrito indevidamente",
+                                       "crédito"
+                                   ],
+                      "perguntas_consulta":  [
+                                                 {
+                                                     "id":  1,
+                                                     "pergunta":  "Quando foi feita a negativação? (mês/ano)",
+                                                     "motivo":  "Prescrição de 3 anos a partir da data"
+                                                 },
+                                                 {
+                                                     "id":  2,
+                                                     "pergunta":  "A dívida já estava paga antes da negativação?",
+                                                     "motivo":  "Dívida quitada = dano moral mais forte"
+                                                 },
+                                                 {
+                                                     "id":  3,
+                                                     "pergunta":  "Tem comprovante de pagamento?",
+                                                     "motivo":  "Prova documental essencial"
+                                                 },
+                                                 {
+                                                     "id":  4,
+                                                     "pergunta":  "Já entrou em contato com a empresa antes?",
+                                                     "motivo":  "Reclamação ignorada agrava a conduta"
+                                                 },
+                                                 {
+                                                     "id":  5,
+                                                     "pergunta":  "Tem outras negativações ativas (de outros credores)?",
+                                                     "motivo":  "Súm. 385 STJ: segunda negativação legítima pode afastar o dano moral"
+                                                 }
+                                             ],
+                      "marcos_temporais":  [
+                                               "Data da negativação no Serasa/SPC",
+                                               "Data do pagamento da dívida (se já paga)",
+                                               "Data da reclamação junto à empresa (se houver)",
+                                               "Data em que o cliente descobriu a negativação"
+                                           ],
+                      "marcos_descricao":  {
+                                               "Data da negativação no Serasa/SPC":  "Quando o nome foi inscrito no Serasa/SPC? Consta no relatório do app Serasa. Fundamental para calcular a prescrição de 3 anos.",
+                                               "Data do pagamento da dívida (se já paga)":  "Se a dívida já estava paga antes da negativação, quando foi o pagamento? Ex: 05/01/2024. Essa é a prova mais forte. Se nunca pagou, coloque \u0027Não se aplica\u0027.",
+                                               "Data da reclamação junto à empresa (se houver)":  "Se o cliente já tentou resolver diretamente com a empresa, quando foi? Empresa que ignorou a reclamação agrava o dano moral. Se não reclamou, \u0027Não se aplica\u0027.",
+                                               "Data em que o cliente descobriu a negativação":  "Quando o cliente ficou sabendo que estava negativado? Ex: tentou fazer um financiamento e foi reprovado."
+                                           },
+                      "provas_essenciais":  [
+                                                "Comprovante de pagamento (boleto quitado, TED, recibo)",
+                                                "Print da negativação no Serasa/SPC com data",
+                                                "Consulta completa ao Serasa (verificar outras negativações)",
+                                                "Protocolo de reclamação junto à empresa (se houver)"
+                                            ],
+                      "provas_desejaveis":  [
+                                                "E-mail ou WhatsApp de contato com a empresa",
+                                                "Extrato bancário confirmando o pagamento",
+                                                "Print do app do banco mostrando o débito"
+                                            ],
+                      "provas_como_obter":  {
+                                                "Consulta Serasa":  "App Serasa (gratuito) ou site serasa.com.br — relatório completo",
+                                                "Comprovante pagamento":  "Internet banking ou app do banco — selecionar o comprovante",
+                                                "Protocolo reclamação":  "Site ou app da empresa — registrar e salvar o número"
+                                            },
+                      "orientacao_cliente":  [
+                                                 "Baixar o relatório completo do Serasa agora (app gratuito) — ver TODAS as negativações",
+                                                 "Salvar o comprovante de pagamento — se não tiver, solicitar segunda via no banco",
+                                                 "Fazer reclamação formal na empresa pelo site ou SAC e guardar o número de protocolo",
+                                                 "NÃO pagar a dívida novamente sem consultar o advogado"
+                                             ],
+                      "probabilidade_base":  80,
+                      "fatores_que_aumentam":  [
+                                                   "Dívida quitada comprovada",
+                                                   "Única negativação no nome",
+                                                   "Empresa ignorou reclamação"
+                                               ],
+                      "fatores_que_diminuem":  [
+                                                   "Outras negativações legítimas (Súm. 385 STJ)",
+                                                   "Sem comprovante de pagamento",
+                                                   "Prescrição próxima"
+                                               ],
+                      "valor_referencia":  "R$ 3.000 a R$ 15.000 (Juizados Especiais)",
+                      "formula_honorarios":  "20% sobre condenação. Juizados: sem honorários sucumbenciais em 1ª instância.",
+                      "polo_passivo":  {
+                                           "sugestao":  "Empresa que realizou a negativação indevida",
+                                           "tipo":  "PJ",
+                                           "dados":  [
+                                                         "Razão Social",
+                                                         "CNPJ",
+                                                         "Endereço para citação"
+                                                     ],
+                                           "alerta":  "Se não souber qual empresa negativou, buscar no relatório completo do Serasa (app gratuito)"
+                                       }
+                  },
+                  {
+                      "id":  "TC-BANCO",
+                      "subtema":  "Fraude Bancária / Golpe / Cobrança Indevida",
+                      "keywords":  [
+                                       "banco",
+                                       "fraude",
+                                       "golpe",
+                                       "pix",
+                                       "empréstimo indevido",
+                                       "cartão clonado",
+                                       "conta invadida",
+                                       "débito não reconhecido",
+                                       "estelionato",
+                                       "golpe do pix",
+                                       "falsa central",
+                                       "portabilidade indevida",
+                                       "consignado indevido",
+                                       "boleto falso",
+                                       "maquininha"
+                                   ],
+                      "perguntas_consulta":  [
+                                                 {
+                                                     "id":  1,
+                                                     "pergunta":  "O que aconteceu exatamente? O cliente colaborou de alguma forma (forneceu senha, seguiu instruções por telefone) ou a fraude ocorreu sem qualquer participação dele?",
+                                                     "motivo":  "CRUCIAL no TJDFT 2026: fraude nos sistemas do banco = fortuito INTERNO (banco responde). Golpe por engenharia social onde cliente colaborou = pode ser fortuito EXTERNO (banco pode não responder). Essa distinção define o caso"
+                                                 },
+                                                 {
+                                                     "id":  2,
+                                                     "pergunta":  "As transações fraudulentas eram compatíveis com o perfil do cliente? (horário, valor, local, sequência)",
+                                                     "motivo":  "TJDFT 2026: banco tem dever de monitoramento antifraude. Transações atípicas (alto valor de madrugada, fora do padrão) que o sistema não bloqueou = falha do serviço = banco responde. Pedir extrato do período para comparar"
+                                                 },
+                                                 {
+                                                     "id":  3,
+                                                     "pergunta":  "O cliente é idoso (acima de 60 anos) ou possui alguma vulnerabilidade especial?",
+                                                     "motivo":  "TJDFT 2026: consumidor idoso = hipervulnerável. Banco tem dever QUALIFICADO de cautela. Empréstimo consignado atípico para idoso com benefício previdenciário que o banco não bloqueou = responsabilidade agravada"
+                                                 },
+                                                 {
+                                                     "id":  4,
+                                                     "pergunta":  "O banco negou a reclamação? Apresentou argumento de que o cliente forneceu os dados ou que o sistema é seguro?",
+                                                     "motivo":  "TJDFT: banco que não apresenta prova técnica (logs, relatório antifraude, NSU da transação) não cumpre o ônus probatório do CDC art. 14 §3º. Negativa genérica \u0027o sistema é seguro\u0027 não basta"
+                                                 },
+                                                 {
+                                                     "id":  5,
+                                                     "pergunta":  "Se foi fraude via PIX: o banco abriu o MED (Mecanismo Especial de Devolução)? Quanto foi recuperado? Qual o valor total ainda não devolvido?",
+                                                     "motivo":  "TJDFT: o banco PAGADOR tem obrigação de abrir o MED via DICT (Diretório de Identificadores de Contas Transacionais) imediatamente após a comunicação da fraude. Erro crítico: banco que classifica como \u0027falha operacional\u0027 em vez de \u0027fraude\u0027 no DICT trava o fluxo automático — isso é falha do banco e gera responsabilidade. Pedir via ofício: confirmação do MED, classificação usada, prazo de abertura e valores bloqueados/devolvidos"
+                                                 }
+                                             ],
+                      "marcos_temporais":  [
+                                               "Data em que ocorreu a fraude/golpe",
+                                               "Data em que o cliente percebeu",
+                                               "Data do boletim de ocorrência",
+                                               "Data da reclamação no banco",
+                                               "Data da resposta do banco (se houver)"
+                                           ],
+                      "provas_essenciais":  [
+                                                "Extrato bancário do período — antes, durante e depois da fraude (para mostrar perfil de consumo)",
+                                                "Boletim de Ocorrência (BO) — delegacia física ou online",
+                                                "Protocolo de reclamação no banco (SAC, agência ou app) com resposta formal",
+                                                "Print/captura de todas as comunicações com o banco (SAC, Ouvidoria, e-mail)"
+                                            ],
+                      "provas_desejaveis":  [
+                                                "Histórico de transações dos 3 meses anteriores (para demonstrar perfil de consumo normal)",
+                                                "Resposta formal do banco negando o estorno — quanto mais genérica, melhor para nós",
+                                                "Protocolo no Banco Central (www.bcb.gov.br) e no Reclame Aqui",
+                                                "Print das mensagens do golpista (WhatsApp, e-mail, SMS) — não apagar",
+                                                "Contrato do empréstimo (se empréstimo indevido) — verificar se tem assinatura válida"
+                                            ],
+                      "provas_como_obter":  {
+                                                "BO online":  "Delegacia Virtual PCDF: www.pcdf.df.gov.br — rápido e gratuito. Fazer HOJE",
+                                                "Extrato histórico":  "App ou internet banking — exportar em PDF os últimos 3-6 meses. Essencial para provar que as transações fraudulentas estavam fora do perfil",
+                                                "NSU e logs técnicos":  "Via ofício judicial ao banco — requerer NSU da transação, identificação do terminal POS, relatório do sistema antifraude e logs de autenticação. TJDFT: banco que não apresenta esses dados não cumpre o ônus do CDC art. 14 §3º",
+                                                "Contrato empréstimo indevido":  "Solicitar ao banco via SAC — verificar se tem assinatura válida do cliente. Res. BACEN 4.549/2017: empréstimo não autorizado que foi convertido em rotativo/parcelamento compulsório = prova da cobrança indevida",
+                                                "Protocolo Banco Central":  "www.bcb.gov.br → Fale Conosco → Registrar Reclamação. Banco tem prazo para responder. Descumprimento = sanção administrativa",
+                                                "Reclame Aqui":  "reclameaqui.com.br — gera pressão pública e serve como prova da reclamação extrajudicial"
+                                            },
+                      "observacao_juridica":  "Res. BACEN 4.549/2017: regula crédito rotativo do cartão. Quando banco cobra juros rotativos sobre valor fraudulento que o cliente contestou, isso serve como prova da cobrança indevida. ATENÇÃO: casos com cálculo de evolução de dívida envolvendo Res. 4.549 podem ser enviados à vara cível comum (não Juizado Especial) por exigir perícia técnica. | DICT e MED (PIX): O DICT — Diretório de Identificadores de Contas Transacionais — é o sistema do Banco Central que centraliza marcações de fraude PIX. O MED — Mecanismo Especial de Devolução — é acionado pelo banco pagador via DICT para recuperar valores. ERRO CRÍTICO: banco que classifica a fraude como \u0027falha operacional\u0027 em vez de \u0027fraude\u0027 no DICT trava o fluxo automático de devolução — isso é falha do banco pagador. Pedir via ofício judicial: (1) se o MED foi aberto; (2) a classificação usada; (3) o prazo de abertura; (4) o que foi recuperado. Res. BCB 103/2021 arts. 41-C e 41-D.",
+                      "orientacao_cliente":  [
+                                                 "Fazer BO HOJE — pode ser online em 10 minutos (www.pcdf.df.gov.br). Descrever exatamente o que aconteceu",
+                                                 "NÃO apagar nenhuma mensagem do golpista — print de tudo (WhatsApp, SMS, e-mail)",
+                                                 "Guardar extrato bancário completo — quanto mais histórico, melhor para mostrar que as transações eram atípicas",
+                                                 "Reclamar no Banco Central além do SAC — banco tem prazo para responder sob pena de sanção",
+                                                 "Se cliente idoso: mencionar a idade sempre — o TJDFT reconhece hipervulnerabilidade e agrava a responsabilidade do banco"
+                                             ],
+                      "probabilidade_base":  75,
+                      "fatores_que_aumentam":  [
+                                                   "Transações claramente fora do perfil do cliente",
+                                                   "Cliente idoso (hipervulnerável)",
+                                                   "Banco sem prova técnica (logs, relatório antifraude)",
+                                                   "BO registrado",
+                                                   "Banco negou formalmente sem justificativa técnica",
+                                                   "Portabilidade ou empréstimo sem assinatura válida"
+                                               ],
+                      "fatores_que_diminuem":  [
+                                                   "Cliente forneceu senha/dados voluntariamente (golpe da falsa central)",
+                                                   "Cliente seguiu instruções do golpista e colaborou ativamente",
+                                                   "Banco apresentou logs técnicos provando que transação foi autenticada"
+                                               ],
+                      "valor_referencia":  "Restituição integral do valor fraudado. Dano moral: NÃO é automático — precisa de agravante (hipervulnerável, negativa reiterada, valor alto). Quando configurado: R$ 3.000 a R$ 10.000.",
+                      "formula_honorarios":  "20% sobre condenação total (material + moral).",
+                      "polo_passivo":  {
+                                           "sugestao":  "Instituição financeira onde ocorreu a fraude",
+                                           "tipo":  "PJ",
+                                           "dados":  [
+                                                         "Razão Social do banco",
+                                                         "CNPJ",
+                                                         "Endereço para citação"
+                                                     ],
+                                           "alerta":  "Em fraude via PIX, o banco pagador é o réu principal — o banco recebedor pode ser incluído se não cooperou com o MED"
+                                       }
+                  },
+                  {
+                      "id":  "TC-PLANO",
+                      "subtema":  "Plano de Saúde — Negativa de Cobertura",
+                      "keywords":  [
+                                       "plano de saúde",
+                                       "negativa",
+                                       "cobertura",
+                                       "cirurgia negada",
+                                       "exame negado",
+                                       "internação",
+                                       "procedimento negado",
+                                       "operadora",
+                                       "convênio",
+                                       "unimed",
+                                       "amil",
+                                       "sulamerica",
+                                       "plano negou",
+                                       "carência",
+                                       "rol da ANS"
+                                   ],
+                      "perguntas_consulta":  [
+                                                 {
+                                                     "id":  1,
+                                                     "pergunta":  "O que foi negado — cirurgia, internação, exame ou medicamento? É urgência/emergência ou eletivo?",
+                                                     "motivo":  "TJDFT: carência NÃO se aplica em urgência/emergência. Negativa em AVC, infarto, etc. = dano moral in re ipsa. Eletivo exige análise do rol ANS"
+                                                 },
+                                                 {
+                                                     "id":  2,
+                                                     "pergunta":  "O plano alegou que o procedimento está fora do rol da ANS? Qual o fundamento da negativa por escrito?",
+                                                     "motivo":  "Lei 14.454/2022: procedimentos fora do rol da ANS PODEM ser exigidos se: (1) sem alternativa terapêutica no rol + (2) respaldo técnico-científico + (3) prescrição médica. TJDFT vem deferindo liminares"
+                                                 },
+                                                 {
+                                                     "id":  3,
+                                                     "pergunta":  "O médico que prescreveu é credenciado pelo plano? A prescrição é formal e detalhada?",
+                                                     "motivo":  "TJDFT reconhece que cabe ao médico — não à operadora — definir o tratamento adequado. Prescrição detalhada com justificativa clínica é essencial"
+                                                 },
+                                                 {
+                                                     "id":  4,
+                                                     "pergunta":  "Há quanto tempo o cliente é segurado? Está adimplente? Já cumpriu a carência?",
+                                                     "motivo":  "Carência cumprida + adimplência comprovada = argumento forte. Urgência: carência não se aplica por lei (Lei 9.656, art. 12, V, c)"
+                                                 },
+                                                 {
+                                                     "id":  5,
+                                                     "pergunta":  "Já registrou reclamação na ANS? A negativa veio por escrito com fundamentação?",
+                                                     "motivo":  "ANS pressiona a operadora em 5 dias úteis. Negativa sem fundamentação por escrito = ilegal. TJDFT concede tutela de urgência em 48h em casos graves"
+                                                 }
+                                             ],
+                      "marcos_temporais":  [
+                                               "Data de início do plano",
+                                               "Data da solicitação do procedimento",
+                                               "Data da negativa formal",
+                                               "Data da reclamação na ANS (se houver)",
+                                               "Data prevista do procedimento (urgência)"
+                                           ],
+                      "provas_essenciais":  [
+                                                "Solicitação médica do procedimento (pedido do médico)",
+                                                "Carta de negativa da operadora (com o fundamento)",
+                                                "Apólice ou contrato do plano de saúde",
+                                                "Comprovante de pagamento das mensalidades (adimplência)",
+                                                "Prontuário médico / relatório de necessidade"
+                                            ],
+                      "provas_desejaveis":  [
+                                                "Protocolo de reclamação na ANS",
+                                                "Laudo médico detalhado com justificativa de urgência",
+                                                "Orçamento do procedimento negado"
+                                            ],
+                      "provas_como_obter":  {
+                                                "Carta de negativa":  "Solicitar formalmente à operadora — por escrito ou e-mail",
+                                                "Reclamação ANS":  "Site da ANS: www.ans.gov.br → Reclamações → registrar online",
+                                                "Contrato plano":  "App ou site da operadora — área do beneficiário",
+                                                "Prontuário médico":  "Solicitar na clínica ou hospital — direito garantido por lei"
+                                            },
+                      "orientacao_cliente":  [
+                                                 "Solicitar a negativa POR ESCRITO à operadora — eles são obrigados a fornecer",
+                                                 "Registrar reclamação na ANS IMEDIATAMENTE (www.ans.gov.br) — acelera a resposta",
+                                                 "Guardar todos os boletos pagos dos últimos 12 meses",
+                                                 "Pedir ao médico um relatório detalhado da necessidade do procedimento",
+                                                 "Se for urgência: ir ao hospital — eles são obrigados a atender"
+                                             ],
+                      "probabilidade_base":  85,
+                      "fatores_que_aumentam":  [
+                                                   "Urgência comprovada",
+                                                   "Adimplência comprovada",
+                                                   "Negativa por escrito",
+                                                   "ANS já notificada"
+                                               ],
+                      "fatores_que_diminuem":  [
+                                                   "Carência não cumprida",
+                                                   "Doença preexistente não declarada",
+                                                   "Médico fora da rede sem necessidade"
+                                               ],
+                      "valor_referencia":  "Tutela: obrigação de fazer (procedimento). Dano moral: R$ 5.000 a R$ 20.000",
+                      "formula_honorarios":  "20% sobre dano moral + R$ 1.500-3.000 fixo se tutela urgente.",
+                      "polo_passivo":  {
+                                           "sugestao":  "Operadora do plano de saúde",
+                                           "tipo":  "PJ",
+                                           "dados":  [
+                                                         "Razão Social da operadora",
+                                                         "CNPJ",
+                                                         "Endereço para citação"
+                                                     ],
+                                           "alerta":  "Verificar se é plano coletivo — a empresa contratante pode ser litisconsorte passiva"
+                                       }
+                  },
+                  {
+                      "id":  "TC-MEDICAMENTO",
+                      "subtema":  "Medicamento de Alto Custo — Plano de Saúde ou Estado",
+                      "keywords":  [
+                                       "medicamento",
+                                       "remédio",
+                                       "alto custo",
+                                       "fora do rol",
+                                       "ANS negou",
+                                       "plano não cobre",
+                                       "tratamento negado",
+                                       "medicamento negado",
+                                       "quimioterapia",
+                                       "biológico",
+                                       "oncológico",
+                                       "uso domiciliar",
+                                       "CONITEC",
+                                       "RENAME"
+                                   ],
+                      "perguntas_consulta":  [
+                                                 {
+                                                     "id":  1,
+                                                     "pergunta":  "O medicamento foi negado pelo plano de saúde ou pelo Estado (SUS/Secretaria de Saúde)?",
+                                                     "motivo":  "São ações completamente diferentes. Plano: ação no TJDFT contra operadora. Estado: ação contra DF/União no TJDFT ou Federal. Definir o réu é o primeiro passo"
+                                                 },
+                                                 {
+                                                     "id":  2,
+                                                     "pergunta":  "O medicamento tem registro na ANVISA? O médico prescreveu para a indicação aprovada ou uso off-label?",
+                                                     "motivo":  "TJDFT 2026: medicamento com registro ANVISA para a indicação prescrita = cobertura mais fácil. Off-label = exige requisitos da Lei 14.454/2022 (sem alternativa + respaldo científico)"
+                                                 },
+                                                 {
+                                                     "id":  3,
+                                                     "pergunta":  "O medicamento está no rol da ANS (para plano) ou no RENAME/CONITEC (para SUS)? Qual a alternativa terapêutica disponível?",
+                                                     "motivo":  "Se está no rol: cobertura obrigatória, ação simples. Se não está: precisa provar ausência de alternativa eficaz no rol. Laudo médico detalhado é essencial"
+                                                 },
+                                                 {
+                                                     "id":  4,
+                                                     "pergunta":  "Qual a patologia e qual o risco à vida ou à saúde se não receber o medicamento?",
+                                                     "motivo":  "TJDFT defere tutelas de urgência em 48h quando há risco de óbito ou agravamento grave. Multa diária (astreintes) de até R$ 10.000/dia por descumprimento"
+                                                 },
+                                                 {
+                                                     "id":  5,
+                                                     "pergunta":  "Já tem laudo médico detalhado justificando o medicamento? Já tentou solução administrativa (ANS ou Secretaria)?",
+                                                     "motivo":  "Laudo com justificativa clínica, nome do medicamento, dosagem e ausência de alternativa = prova central. ANS: reclamação acelera. Estado: Câmara de Resolução de Demandas de Saúde (CREDS) do DF"
+                                                 }
+                                             ],
+                      "marcos_temporais":  [
+                                               "Data do diagnóstico da doença",
+                                               "Data da prescrição do medicamento pelo médico",
+                                               "Data da negativa formal do plano ou do Estado",
+                                               "Data de reclamação na ANS ou na Secretaria de Saúde"
+                                           ],
+                      "marcos_descricao":  {
+                                               "Data do diagnóstico da doença":  "Quando o cliente foi diagnosticado? Isso estabelece o histórico do caso e demonstra a necessidade do tratamento.",
+                                               "Data da prescrição do medicamento pelo médico":  "Quando o médico prescreveu? A prescrição recente demonstra necessidade atual. Solicitar laudo atualizado.",
+                                               "Data da negativa formal do plano ou do Estado":  "Quando foi negado? A negativa por escrito é essencial — o plano é obrigado a fornecer por lei.",
+                                               "Data de reclamação na ANS ou na Secretaria de Saúde":  "Registro administrativo antes da ação — não é obrigatório mas acelera a resposta e serve como prova."
+                                           },
+                      "provas_essenciais":  [
+                                                "Prescrição médica detalhada (nome do medicamento, dosagem, indicação, justificativa clínica)",
+                                                "Laudo médico com diagnóstico e justificativa de que não há alternativa terapêutica equivalente no rol",
+                                                "Negativa formal do plano ou do Estado (por escrito, com fundamentação)",
+                                                "Comprovante de adimplência do plano (últimos 3 boletos pagos)",
+                                                "Registro da ANVISA para o medicamento (consultar em consultas.anvisa.gov.br)"
+                                            ],
+                      "provas_desejaveis":  [
+                                                "Estudos científicos ou diretrizes médicas que embasam o uso do medicamento",
+                                                "Protocolo clínico do hospital ou clínica",
+                                                "Reclamação registrada na ANS (para plano) ou na CREDS/Secretaria (para Estado)",
+                                                "Orçamento do medicamento mostrando o alto custo"
+                                            ],
+                      "provas_como_obter":  {
+                                                "Prescrição detalhada":  "Solicitar ao médico especialista laudo com CID, nome do medicamento, dosagem, motivo da escolha e ausência de alternativa equivalente",
+                                                "Registro ANVISA":  "Site: consultas.anvisa.gov.br — buscar pelo nome do medicamento — gratuito e imediato",
+                                                "Negativa por escrito":  "Solicitar formalmente por e-mail ou carta — o plano tem prazo de 5 dias úteis para responder (ANS RN 566/2022)",
+                                                "Reclamação ANS":  "www.ans.gov.br → Canais de atendimento. O plano deve responder em 5 dias úteis sob pena de sanção",
+                                                "CREDS DF":  "Secretaria de Saúde do DF — câmara para resolver demandas de medicamentos do SUS antes do juiz"
+                                            },
+                      "orientacao_cliente":  [
+                                                 "Pedir ao médico um laudo DETALHADO — com CID, nome do medicamento, por que não há alternativa no rol, e referência a estudos científicos",
+                                                 "Solicitar a negativa POR ESCRITO ao plano — o plano é obrigado a fornecer com fundamentação",
+                                                 "Registrar reclamação na ANS imediatamente (www.ans.gov.br) — acelera muito a resposta",
+                                                 "URGENTE: se há risco de vida, podemos pedir tutela de urgência para o juiz — decisão em 48h com multa de R$ 10.000/dia",
+                                                 "Guardar todos os recibos/notas do medicamento se estiver comprando do próprio bolso — base para ressarcimento"
+                                             ],
+                      "probabilidade_base":  85,
+                      "fatores_que_aumentam":  [
+                                                   "Medicamento com registro ANVISA para a indicação",
+                                                   "Laudo médico detalhado com ausência de alternativa",
+                                                   "Risco de vida documentado",
+                                                   "Negativa formal por escrito do plano",
+                                                   "Adimplência comprovada"
+                                               ],
+                      "fatores_que_diminuem":  [
+                                                   "Uso off-label sem respaldo científico robusto",
+                                                   "Medicamento experimental sem registro ANVISA",
+                                                   "Alternativa terapêutica disponível no rol da ANS"
+                                               ],
+                      "valor_referencia":  "Tutela: fornecimento imediato do medicamento. Dano moral: R$ 5.000 a R$ 15.000. Ressarcimento de valores pagos do próprio bolso.",
+                      "formula_honorarios":  "R$ *** fixo + 20% sobre dano moral. Urgência: honorários na liminar podem ser antecipados.",
+                      "polo_passivo":  {
+                                           "sugestao":  "Plano de saúde: a operadora. SUS: Estado do DF e/ou União",
+                                           "tipo":  "PJ",
+                                           "dados":  [
+                                                         "Razão Social e CNPJ da operadora",
+                                                         "Para SUS: Secretaria de Saúde do DF + AGU"
+                                                     ],
+                                           "alerta":  "Ação contra o Estado: competência pode ser Vara da Fazenda Pública — não Juizado Especial"
+                                       }
+                  },
+                  {
+                      "id":  "TC-CONSUMIDOR",
+                      "subtema":  "Dano Moral — Relação de Consumo (Geral)",
+                      "keywords":  [
+                                       "consumidor",
+                                       "produto com defeito",
+                                       "serviço mal prestado",
+                                       "empresa",
+                                       "loja",
+                                       "fornecedor",
+                                       "cdc",
+                                       "dano",
+                                       "prejuízo",
+                                       "atendimento",
+                                       "propaganda enganosa",
+                                       "imóvel",
+                                       "apartamento",
+                                       "publicidade enganosa"
+                                   ],
+                      "perguntas_consulta":  [
+                                                 {
+                                                     "id":  1,
+                                                     "pergunta":  "O que aconteceu e quando?",
+                                                     "motivo":  "Prescrição de 3 a 5 anos conforme fundamento"
+                                                 },
+                                                 {
+                                                     "id":  2,
+                                                     "pergunta":  "É produto com defeito ou serviço mal prestado?",
+                                                     "motivo":  "Define o artigo do CDC aplicável"
+                                                 },
+                                                 {
+                                                     "id":  3,
+                                                     "pergunta":  "Fez reclamação para a empresa? Qual foi a resposta?",
+                                                     "motivo":  "Reclamação ignorada agrava o dano moral"
+                                                 },
+                                                 {
+                                                     "id":  4,
+                                                     "pergunta":  "Tem nota fiscal ou comprovante de compra?",
+                                                     "motivo":  "Prova da relação de consumo"
+                                                 },
+                                                 {
+                                                     "id":  5,
+                                                     "pergunta":  "O problema já foi resolvido ou ainda está ativo?",
+                                                     "motivo":  "Dano continuado amplia o valor"
+                                                 }
+                                             ],
+                      "marcos_temporais":  [
+                                               "Data da compra ou contratação",
+                                               "Data em que o problema apareceu",
+                                               "Data da reclamação à empresa",
+                                               "Data da resposta (se houver)"
+                                           ],
+                      "provas_essenciais":  [
+                                                "Nota fiscal / contrato / comprovante de compra",
+                                                "Fotos ou vídeos do defeito/problema",
+                                                "Registro de reclamação (protocolo SAC, Procon, Reclame Aqui)"
+                                            ],
+                      "provas_desejaveis":  [
+                                                "Resposta da empresa por escrito (e-mail ou WhatsApp)",
+                                                "Orçamento de reparo ou substituição",
+                                                "Testemunhas"
+                                            ],
+                      "provas_como_obter":  {
+                                                "Nota fiscal":  "App do estabelecimento ou e-mail de compra",
+                                                "Protocolo reclamação":  "Site da empresa + Procon-DF (www.procon.df.gov.br)",
+                                                "Reclame aqui":  "Registrar em reclameaqui.com.br — gera pressão e é prova"
+                                            },
+                      "orientacao_cliente":  [
+                                                 "Guardar a nota fiscal ou comprovante — sem ela a ação enfraquece",
+                                                 "Fotografar ou filmar o problema agora",
+                                                 "Registrar reclamação formal na empresa e salvar o número de protocolo",
+                                                 "Registrar no Reclame Aqui — é gratuito e serve como prova"
+                                             ],
+                      "probabilidade_base":  65,
+                      "fatores_que_aumentam":  [
+                                                   "Nota fiscal em mãos",
+                                                   "Empresa ignorou reclamação",
+                                                   "Dano continuado",
+                                                   "Empresa de grande porte"
+                                               ],
+                      "fatores_que_diminuem":  [
+                                                   "Sem nota fiscal",
+                                                   "Mero aborrecimento sem impacto real",
+                                                   "Problema já resolvido"
+                                               ],
+                      "valor_referencia":  "R$ 2.000 a R$ 10.000 (Juizados Especiais)",
+                      "formula_honorarios":  "20% sobre condenação.",
+                      "polo_passivo":  {
+                                           "sugestao":  "Empresa fornecedora do produto ou serviço",
+                                           "tipo":  "PJ",
+                                           "dados":  [
+                                                         "Razão Social",
+                                                         "CNPJ",
+                                                         "Endereço para citação"
+                                                     ],
+                                           "alerta":  "CNPJ disponível na nota fiscal ou no site da empresa — busca gratuita em www.receita.fazenda.gov.br"
+                                       }
+                  },
+                  {
+                      "id":  "TC-S01",
+                      "subtema":  "Sócio de Fachada / Desconsideração da Personalidade Jurídica",
+                      "keywords":  [
+                                       "sócia",
+                                       "sócio",
+                                       "quadro societário",
+                                       "fachada",
+                                       "cnpj",
+                                       "execução fiscal",
+                                       "desconsideração",
+                                       "empregada virou sócia",
+                                       "pró-labore",
+                                       "empresa quebrou",
+                                       "dívidas da empresa"
+                                   ],
+                      "perguntas_consulta":  [
+                                                 {
+                                                     "id":  1,
+                                                     "pergunta":  "Quando foi incluído no quadro societário? (mês e ano)",
+                                                     "motivo":  "Define prescrição e estratégia trabalhista"
+                                                 },
+                                                 {
+                                                     "id":  2,
+                                                     "pergunta":  "Ainda consta como sócio no CNPJ hoje?",
+                                                     "motivo":  "Se sim, prazo trabalhista NÃO começou a correr"
+                                                 },
+                                                 {
+                                                     "id":  3,
+                                                     "pergunta":  "A execução fiscal — de quando é a dívida? Já era sócio nessa época?",
+                                                     "motivo":  "CTN art. 135: exige poderes de gestão"
+                                                 },
+                                                 {
+                                                     "id":  4,
+                                                     "pergunta":  "Tem provas de que continuou subordinado (holerites, e-mails com ordens)?",
+                                                     "motivo":  "Prova de simulação — essencial para a ação declaratória"
+                                                 },
+                                                 {
+                                                     "id":  5,
+                                                     "pergunta":  "Tem WhatsApp ou e-mail com ordens do chefe após virar sócio?",
+                                                     "motivo":  "Prova digital é o divisor de águas no TJDFT"
+                                                 }
+                                             ],
+                      "marcos_temporais":  [
+                                               "Data de admissão como empregado",
+                                               "Data da demissão formal",
+                                               "Data de inclusão no quadro societário",
+                                               "Data de início das dívidas da empresa",
+                                               "Data de saída do quadro societário (se houver)"
+                                           ],
+                      "provas_essenciais":  [
+                                                "CTPS — verificar anotações do período como empregado",
+                                                "Contrato social / alteração que incluiu o cliente como sócio",
+                                                "Holerites do período como empregado E como sócio",
+                                                "Consulta ao CNPJ na Receita Federal (composição atual)",
+                                                "WhatsApp ou e-mails com ordens do superior após inclusão"
+                                            ],
+                      "provas_desejaveis":  [
+                                                "Contracheques de pró-labore (valor fixo = salário disfarçado)",
+                                                "Extratos bancários mostrando depósitos de pró-labore",
+                                                "Prints de ausência de participação em reuniões/atas",
+                                                "Declaração de outros ex-funcionários"
+                                            ],
+                      "provas_como_obter":  {
+                                                "Consulta CNPJ":  "Receita Federal: www.cnpj.receita.fazenda.gov.br — gratuito",
+                                                "CTPS digital":  "App Carteira de Trabalho Digital (Gov.br)",
+                                                "WhatsApp":  "Print das conversas — solicitar exportação do histórico ao cliente",
+                                                "Contrato social":  "Junta Comercial do DF: www.jucis.df.gov.br — consulta pública"
+                                            },
+                      "orientacao_cliente":  [
+                                                 "URGENTE: fazer backup de todos os WhatsApp e e-mails antes que contas sejam desativadas",
+                                                 "Consultar CNPJ agora para confirmar se ainda está no quadro societário",
+                                                 "Reunir CTPS, rescisão e holerites do período como empregado",
+                                                 "Não apagar nenhuma mensagem — prints de tudo",
+                                                 "Verificar se tem atas de reunião assinadas (se nunca assinou, é prova de simulação)"
+                                             ],
+                      "probabilidade_base":  65,
+                      "fatores_que_aumentam":  [
+                                                   "WhatsApp com ordens após inclusão",
+                                                   "Holerites contínuos",
+                                                   "Pró-labore fixo igual ao salário anterior",
+                                                   "Sem participação em atas"
+                                               ],
+                      "fatores_que_diminuem":  [
+                                                   "Assinou atas como sócio",
+                                                   "Prazo de 2 anos vencido para verbas",
+                                                   "Sem prova de subordinação"
+                                               ],
+                      "valor_referencia":  "Risco que o cliente corre: valor das execuções em curso",
+                      "formula_honorarios":  "R$ *** fixo por frente (civil/fiscal/trabalhista) + êxito.",
+                      "polo_passivo":  {
+                                           "sugestao":  "A empresa (pessoa jurídica) e/ou os sócios que forçaram a inclusão no quadro societário",
+                                           "tipo":  "PJ/PF",
+                                           "dados":  [
+                                                         "CNPJ da empresa",
+                                                         "Nome e CPF dos sócios responsáveis",
+                                                         "Endereço da sede"
+                                                     ],
+                                           "alerta":  "Nas execuções fiscais já em curso, o réu é a Fazenda Pública — verificar quem figura no polo ativo de cada execução"
+                                       }
+                  },
+                  {
+                      "id":  "TC-PATERNIDADE",
+                      "subtema":  "Investigação / Reconhecimento de Paternidade",
+                      "keywords":  [
+                                       "paternidade",
+                                       "pai",
+                                       "reconhecimento",
+                                       "filho",
+                                       "investigação de paternidade",
+                                       "DNA",
+                                       "registro",
+                                       "certidão",
+                                       "nome do pai",
+                                       "genitor desconhecido",
+                                       "pai biológico",
+                                       "post mortem",
+                                       "pai faleceu",
+                                       "pai morreu",
+                                       "paternidade socioafetiva",
+                                       "pai registral"
+                                   ],
+                      "perguntas_consulta":  [
+                                                 {
+                                                     "id":  1,
+                                                     "pergunta":  "O suposto pai está vivo ou já faleceu? Se faleceu, quando?",
+                                                     "motivo":  "Define a estratégia: vivo = DNA direto. Falecido (post mortem) = DNA com parente ou prova testemunhal + documental. O TJDFT reconhece ambas as vias."
+                                                 },
+                                                 {
+                                                     "id":  2,
+                                                     "pergunta":  "É paternidade biológica ou socioafetiva? Há relacionamento documentado entre a mãe e o suposto pai?",
+                                                     "motivo":  "Biológica: DNA é a prova central. Socioafetiva: exige \u0027posse do estado de filho\u0027 — tratamento público, nome e fama. O TJDFT nega casos com apenas afeto sem prova robusta."
+                                                 },
+                                                 {
+                                                     "id":  3,
+                                                     "pergunta":  "Os herdeiros ou parentes do suposto pai sabem do caso? Vão cooperar com o DNA?",
+                                                     "motivo":  "Crucial no post mortem: se os herdeiros negarem o DNA, o TJDFT aplica presunção de paternidade (Súmula 301 STJ + Lei 8.560/92). A recusa vira prova contra eles."
+                                                 },
+                                                 {
+                                                     "id":  4,
+                                                     "pergunta":  "Há testemunhas do relacionamento — familiares, amigos, vizinhos que viram o casal juntos?",
+                                                     "motivo":  "O TJDFT exige corroboração testemunhal + documental quando o DNA não é possível. Testemunhas que viram o relacionamento no período da concepção são essenciais."
+                                                 },
+                                                 {
+                                                     "id":  5,
+                                                     "pergunta":  "O cliente quer só o reconhecimento ou também quer alimentos e herança?",
+                                                     "motivo":  "Define o escopo da ação: reconhecimento puro (imprescritível) ou cumulado com alimentos/herança (prazos diferentes). No post mortem, a herança é automática com o reconhecimento."
+                                                 }
+                                             ],
+                      "marcos_temporais":  [
+                                               "Período do relacionamento entre a mãe e o suposto pai biológico",
+                                               "Data de nascimento de quem busca o reconhecimento",
+                                               "Data do registro de nascimento (com ou sem nome do pai)",
+                                               "Data em que o suposto pai soube da gravidez (se souber)",
+                                               "Data da última tentativa de contato ou reconhecimento"
+                                           ],
+                      "marcos_descricao":  {
+                                               "Período do relacionamento entre a mãe e o suposto pai biológico":  "Quando a mãe se relacionou com o suposto pai? Ex: \u0027de março a julho de 2000\u0027. Se foi um relacionamento eventual ou esporádico, descreva. Se não souber, coloque \u0027Mãe não soube informar\u0027.",
+                                               "Data de nascimento de quem busca o reconhecimento":  "É a data de nascimento do próprio cliente — seja ele(a) criança, adolescente ou adulto. Define quem assina a ação: se menor de 18, a mãe representa. Se adulto, ele mesmo entra. Se o pai já faleceu (post mortem), esta data ainda é necessária.",
+                                               "Data do registro de nascimento (com ou sem nome do pai)":  "Quando a certidão de nascimento foi registrada no cartório. Se o nome do pai biológico consta, informe. Se consta só o pai registral (diferente do biológico), informe também — isso muda a estratégia.",
+                                               "Data em que o suposto pai soube da gravidez (se souber)":  "Se o pai soube da gravidez e não reconheceu, isso fortalece a ação. Se já faleceu e nunca soube, coloque \u0027Pai faleceu — não se aplica\u0027. Se a mãe nunca contou, coloque \u0027Mãe nunca informou\u0027.",
+                                               "Data da última tentativa de contato ou reconhecimento":  "Última vez que houve contato com o suposto pai ou com a família dele para tentar o reconhecimento. Se foi a tia que veio contar, informe quando. Se nunca houve tentativa, coloque \u0027Não houve tentativa anterior\u0027."
+                                           },
+                      "provas_essenciais":  [
+                                                "Certidão de nascimento de quem busca o reconhecimento (original)",
+                                                "Documento de identidade do cliente e da mãe (se menor)",
+                                                "Certidão de óbito do suposto pai (se post mortem)",
+                                                "Qualquer prova do relacionamento entre a mãe e o suposto pai no período da concepção",
+                                                "Nomes e contatos de testemunhas que viram o relacionamento"
+                                            ],
+                      "provas_desejaveis":  [
+                                                "Resultado de DNA já realizado (laboratório particular ou judicial)",
+                                                "Fotos do casal juntos com data visível",
+                                                "WhatsApp, e-mails ou mensagens do suposto pai reconhecendo o filho (mesmo indiretamente)",
+                                                "Certidão de casamento ou de óbito para localizar herdeiros (no post mortem)",
+                                                "Documentos que provem dependência financeira ou pagamento de despesas pelo pai"
+                                            ],
+                      "provas_como_obter":  {
+                                                "DNA post mortem":  "Com parente direto do falecido (filho, irmão, pai) — solicitar ao juiz se herdeiros recusarem. ATENÇÃO: recusa gera presunção de paternidade (Súmula 301 STJ)",
+                                                "WhatsApp":  "Exportar histórico: Abrir conversa → três pontinhos → Exportar conversa → Sem mídia. Salvar e enviar ao advogado",
+                                                "Fotos com data":  "Galeria do celular mostra data nas propriedades. Verificar desde o período do relacionamento",
+                                                "Testemunhas":  "Familiares, amigos em comum, vizinhos, colegas de trabalho — anotar nome completo, telefone e o que presenciaram",
+                                                "Certidão de óbito":  "Cartório do local do falecimento ou app e-Cartório — necessária para identificar herdeiros"
+                                            },
+                      "orientacao_cliente":  [
+                                                 "Guardar TUDO que comprove o relacionamento da mãe com o suposto pai — fotos, mensagens, cartas, declarações",
+                                                 "Se o pai faleceu: levantar quem são os herdeiros e se há inventário aberto — isso define quem serão os réus",
+                                                 "Anotar nome e contato de todas as pessoas que sabiam do relacionamento e possam ser testemunhas",
+                                                 "Se os herdeiros se recusarem ao DNA, isso é BOM para nós — o TJDFT aplica presunção de paternidade",
+                                                 "Verificar se há fotos, cartas ou documentos antigos em posse de familiares que comprovem o relacionamento"
+                                             ],
+                      "probabilidade_base":  80,
+                      "fatores_que_aumentam":  [
+                                                   "DNA positivo já realizado",
+                                                   "Herdeiros se recusam ao DNA (gera presunção)",
+                                                   "Mensagens reconhecendo o filho",
+                                                   "Testemunhas do relacionamento",
+                                                   "Fotos do casal no período da concepção"
+                                               ],
+                      "fatores_que_diminuem":  [
+                                                   "Sem nenhuma prova do relacionamento",
+                                                   "Sem testemunhas identificadas",
+                                                   "Caso socioafetivo sem \u0027posse do estado de filho\u0027 documentada"
+                                               ],
+                      "valor_referencia":  "Reconhecimento: direito personalíssimo — imprescritível. Alimentos: 15-30% da renda. Herança (post mortem): participação no espólio.",
+                      "formula_honorarios":  "R$ *** fixo + ***% sobre alimentos fixados (se aplicável). Post mortem com herança: negociar % sobre quinhão.",
+                      "polo_passivo":  {
+                                           "sugestao":  "Pai vivo: o próprio suposto pai. Post mortem: os herdeiros do falecido",
+                                           "tipo":  "PF",
+                                           "dados":  [
+                                                         "Nome completo",
+                                                         "CPF",
+                                                         "Endereço"
+                                                     ],
+                                           "alerta":  "POST MORTEM: é necessário identificar TODOS os herdeiros — se desconhecidos, pedir curador especial ou citação por edital. A tia e o primo que conhecem o caso podem ajudar a identificar"
+                                       }
+                  },
+                  {
+                      "id":  "TC-FAMILIA",
+                      "subtema":  "Divórcio / Partilha / Guarda",
+                      "keywords":  [
+                                       "divórcio",
+                                       "separação",
+                                       "partilha",
+                                       "guarda",
+                                       "pensão",
+                                       "alimentos",
+                                       "família",
+                                       "casamento",
+                                       "união estável",
+                                       "regime de bens"
+                                   ],
+                      "perguntas_consulta":  [
+                                                 {
+                                                     "id":  1,
+                                                     "pergunta":  "Qual o pedido principal? (divórcio, partilha, guarda, alimentos?)",
+                                                     "motivo":  "Define qual ação ou se é cumulação"
+                                                 },
+                                                 {
+                                                     "id":  2,
+                                                     "pergunta":  "Existe acordo entre as partes ou é litigioso?",
+                                                     "motivo":  "Consensual: mais rápido e barato. Litigioso: mais complexo"
+                                                 },
+                                                 {
+                                                     "id":  3,
+                                                     "pergunta":  "Qual o regime de bens do casamento?",
+                                                     "motivo":  "Determina o que entra na partilha"
+                                                 },
+                                                 {
+                                                     "id":  4,
+                                                     "pergunta":  "Há filhos menores? Quem está com eles?",
+                                                     "motivo":  "Guarda e alimentos são pontos críticos"
+                                                 },
+                                                 {
+                                                     "id":  5,
+                                                     "pergunta":  "Há bens a partilhar? (imóvel, empresa, veículo, investimentos?)",
+                                                     "motivo":  "Define a complexidade e o valor da causa"
+                                                 }
+                                             ],
+                      "marcos_temporais":  [
+                                               "Data do casamento ou início da união estável",
+                                               "Data da separação de fato",
+                                               "Data de nascimento dos filhos (se houver)",
+                                               "Data de aquisição dos principais bens"
+                                           ],
+                      "provas_essenciais":  [
+                                                "Certidão de casamento atualizada",
+                                                "Documentos dos bens (escritura do imóvel, CRLV do carro, extratos de investimentos)",
+                                                "Certidão de nascimento dos filhos (se houver)",
+                                                "Pacto antenupcial (se houver)"
+                                            ],
+                      "provas_desejaveis":  [
+                                                "Extratos bancários dos últimos 12 meses",
+                                                "Declaração de Imposto de Renda do casal",
+                                                "Documentos de dívidas em comum",
+                                                "Laudos de avaliação de imóveis"
+                                            ],
+                      "provas_como_obter":  {
+                                                "Certidão de casamento":  "Cartório onde foi celebrado ou app e-Cartório",
+                                                "Escritura imóvel":  "Cartório de Registro de Imóveis do DF",
+                                                "Extratos bancários":  "App do banco — período dos últimos 12 meses",
+                                                "IRPF":  "Site da Receita Federal — área do contribuinte"
+                                            },
+                      "orientacao_cliente":  [
+                                                 "Levantar todos os bens do casal com documentação (não esquecer investimentos e previdência)",
+                                                 "Verificar se há dívidas em nome do casal",
+                                                 "Se houver filhos: definir com quem estão e a rotina atual",
+                                                 "Não movimentar bens do casal sem orientação do advogado"
+                                             ],
+                      "probabilidade_base":  90,
+                      "fatores_que_aumentam":  [
+                                                   "Caso consensual",
+                                                   "Documentação completa",
+                                                   "Partes cooperativas"
+                                               ],
+                      "fatores_que_diminuem":  [
+                                                   "Caso litigioso",
+                                                   "Bens não documentados",
+                                                   "Patrimônio escondido pelo outro cônjuge"
+                                               ],
+                      "valor_referencia":  "Valor dos bens a partilhar. Honorários: tabela OAB sobre o valor da causa.",
+                      "formula_honorarios":  "R$ *** fixo (consensual) ou % do patrimônio (litigioso).",
+                      "polo_passivo":  {
+                                           "sugestao":  "O cônjuge ou companheiro(a)",
+                                           "tipo":  "PF",
+                                           "dados":  [
+                                                         "Nome completo",
+                                                         "CPF",
+                                                         "Endereço atual"
+                                                     ],
+                                           "alerta":  "Se já está em outro endereço, tentar localizar via redes sociais, parentes ou DETRAN"
+                                       }
+                  },
+                  {
+                      "id":  "TC-BAGAGEM",
+                      "subtema":  "Extravio / Dano de Bagagem — Transporte Aéreo",
+                      "keywords":  [
+                                       "bagagem",
+                                       "extravio",
+                                       "mala",
+                                       "mala extraviada",
+                                       "mala perdida",
+                                       "bagagem danificada",
+                                       "RIB",
+                                       "relatório de irregularidade",
+                                       "mala não chegou",
+                                       "bagagem sumiu"
+                                   ],
+                      "perguntas_consulta":  [
+                                                 {
+                                                     "id":  1,
+                                                     "pergunta":  "A bagagem foi extraviada definitivamente ou devolvida com atraso? Se devolvida, em quantos dias?",
+                                                     "motivo":  "Definitivo (\u003e21 dias) = dano moral presumido pelo TJDFT. Temporário = dano moral configurado mas quantum menor (R$ 1.000 a R$ 3.000)"
+                                                 },
+                                                 {
+                                                     "id":  2,
+                                                     "pergunta":  "O cliente registrou o RIB (Relatório de Irregularidade de Bagagem) no aeroporto no momento do incidente?",
+                                                     "motivo":  "O RIB é a prova-chave. O TJDFT exige para comprovar o incidente. Sem ele a ação enfraquece muito"
+                                                 },
+                                                 {
+                                                     "id":  3,
+                                                     "pergunta":  "O voo era nacional ou internacional? Qual companhia e qual trecho?",
+                                                     "motivo":  "Internacional: Convenção de Montreal limita danos materiais (teto 1.000 DES) mas NÃO limita danos morais — estes seguem o CDC"
+                                                 },
+                                                 {
+                                                     "id":  4,
+                                                     "pergunta":  "O cliente teve gastos emergenciais por causa do extravio? (roupas, medicamentos, equipamentos)?",
+                                                     "motivo":  "Gastos documentados com nota fiscal são ressarcíveis. Sem nota o juiz arbitra por equidade — vale registrar mesmo sem comprovante"
+                                                 },
+                                                 {
+                                                     "id":  5,
+                                                     "pergunta":  "A bagagem continha itens especiais — medicamentos de uso contínuo, equipamentos de trabalho, itens de bebê?",
+                                                     "motivo":  "Itens essenciais agravam o dano moral significativamente no TJDFT. Medicamentos de uso contínuo foram fator determinante em acórdãos recentes"
+                                                 }
+                                             ],
+                      "marcos_temporais":  [
+                                               "Data e horário do voo",
+                                               "Data e horário do registro do RIB no aeroporto",
+                                               "Data de retorno da bagagem (se devolvida)",
+                                               "Data de qualquer reclamação formal à companhia"
+                                           ],
+                      "marcos_descricao":  {
+                                               "Data e horário do voo":  "Data do voo em que a bagagem foi extraviada. Se houve conexão, informar qual trecho gerou o problema.",
+                                               "Data e horário do registro do RIB no aeroporto":  "Quando o cliente registrou o Relatório de Irregularidade de Bagagem no balcão da companhia no aeroporto. Essa data é essencial.",
+                                               "Data de retorno da bagagem (se devolvida)":  "Se a bagagem foi devolvida, em que data? Calcule quantos dias ficou sem ela. Menos de 7 dias = prazo ANAC. Mais de 21 dias = extravio definitivo.",
+                                               "Data de qualquer reclamação formal à companhia":  "Data de e-mail, chat ou protocolo de reclamação à companhia. Guardar número de protocolo."
+                                           },
+                      "provas_essenciais":  [
+                                                "RIB (Relatório de Irregularidade de Bagagem) — registrado no aeroporto",
+                                                "Comprovante da passagem e cartão de embarque",
+                                                "Conversas de WhatsApp ou e-mail com a companhia sobre o extravio",
+                                                "Notas fiscais de gastos emergenciais (roupas, medicamentos, itens de necessidade)"
+                                            ],
+                      "provas_desejaveis":  [
+                                                "Fotos dos itens que estavam na mala (se tiver)",
+                                                "Protocolo de reclamação junto à ANAC (www.anac.gov.br)",
+                                                "Laudo ou avaliação dos itens danificados (se bagagem danificada)"
+                                            ],
+                      "provas_como_obter":  {
+                                                "RIB":  "Solicitar cópia ao balcão da companhia no aeroporto imediatamente. Se não tiver cópia, pedir via SAC da companhia com o número do protocolo",
+                                                "Gastos emergenciais":  "Notas fiscais de farmácias, lojas de roupa, etc. Se perdeu, solicitar segunda via. Juiz arbitra por equidade mesmo sem nota",
+                                                "Reclamação ANAC":  "Site www.anac.gov.br → Canais de atendimento → Reclamação. Gera número de protocolo que fortalece a ação",
+                                                "Comprovante passagem":  "E-mail de confirmação de compra — buscar na caixa de entrada pelo nome da companhia"
+                                            },
+                      "orientacao_cliente":  [
+                                                 "URGENTE: registrar o RIB no balcão da companhia no aeroporto ANTES de sair — sem isso a ação enfraquece",
+                                                 "Guardar TODAS as conversas com a companhia (WhatsApp, e-mail, chat) — não apagar nada",
+                                                 "Guardar notas fiscais de qualquer gasto emergencial causado pelo extravio",
+                                                 "Registrar reclamação na ANAC (www.anac.gov.br) — gera pressão e serve como prova",
+                                                 "Se bagagem não chegar em 21 dias — extravio definitivo. Acionar imediatamente"
+                                             ],
+                      "probabilidade_base":  85,
+                      "fatores_que_aumentam":  [
+                                                   "RIB registrado no aeroporto",
+                                                   "Extravio definitivo (\u003e21 dias)",
+                                                   "Gastos emergenciais documentados",
+                                                   "Itens essenciais na mala (medicamentos, equipamentos)"
+                                               ],
+                      "fatores_que_diminuem":  [
+                                                   "Sem RIB",
+                                                   "Bagagem devolvida rápido (menos de 24h)",
+                                                   "Atraso por condições climáticas documentadas pela companhia"
+                                               ],
+                      "valor_referencia":  "Dano moral: R$ 1.000 (temporário/1-4 dias) a R$ 4.500 por pessoa (definitivo). Danos materiais: valor dos bens (com nota) ou arbitramento por equidade (sem nota)",
+                      "formula_honorarios":  "20% sobre condenação total. Juizados Especiais — sem entrada.",
+                      "polo_passivo":  {
+                                           "sugestao":  "Companhia aérea responsável pelo trecho onde ocorreu o extravio",
+                                           "tipo":  "PJ",
+                                           "dados":  [
+                                                         "Razão Social da companhia",
+                                                         "CNPJ",
+                                                         "Endereço para citação"
+                                                     ],
+                                           "alerta":  "Voo com conexão: verificar qual trecho causou o extravio. Em codeshare, incluir ambas as companhias"
+                                       }
+                  },
+                  {
+                      "id":  "TC-IMOVEL",
+                      "subtema":  "Atraso na Entrega de Imóvel / Construtora",
+                      "keywords":  [
+                                       "imóvel",
+                                       "apartamento",
+                                       "construtora",
+                                       "atraso na entrega",
+                                       "obra atrasada",
+                                       "chaves",
+                                       "entrega do imóvel",
+                                       "prazo de entrega",
+                                       "incorporadora",
+                                       "habite-se"
+                                   ],
+                      "perguntas_consulta":  [
+                                                 {
+                                                     "id":  1,
+                                                     "pergunta":  "Qual era o prazo de entrega previsto no contrato ou no termo de reserva? O imóvel já foi entregue?",
+                                                     "motivo":  "O TJDFT reconhece o termo de reserva como oferta vinculante (CDC art. 30). 180 dias de tolerância são aceitos — calcule se já extrapolou"
+                                                 },
+                                                 {
+                                                     "id":  2,
+                                                     "pergunta":  "A construtora alegou pandemia ou outro motivo de força maior para justificar o atraso?",
+                                                     "motivo":  "O TJDFT entende que pandemia e escassez de insumos são fortuito INTERNO da construtora — não excluem responsabilidade. Isso favorece o cliente"
+                                                 },
+                                                 {
+                                                     "id":  3,
+                                                     "pergunta":  "O cliente está pagando juros de obra (juros de evolução de obra) desde quando?",
+                                                     "motivo":  "Juros de obra cobrados após o prazo de entrega + 180 dias são indevidos e devem ser restituídos integralmente"
+                                                 },
+                                                 {
+                                                     "id":  4,
+                                                     "pergunta":  "O cliente estava pagando aluguel ou ficou com despesas extras por não ter recebido o imóvel no prazo?",
+                                                     "motivo":  "Lucros cessantes: 0,5% ao mês sobre o valor do imóvel por mês de atraso — esse é o padrão do TJDFT"
+                                                 },
+                                                 {
+                                                     "id":  5,
+                                                     "pergunta":  "Há vícios de construção além do atraso? (infiltração, pintura, elétrica, hidráulica)?",
+                                                     "motivo":  "Vícios construtivos são pedido adicional — aumentam o valor da causa e configuram dano moral autônomo"
+                                                 }
+                                             ],
+                      "marcos_temporais":  [
+                                               "Data de assinatura do contrato ou termo de reserva",
+                                               "Prazo de entrega previsto originalmente",
+                                               "Prazo de entrega com 180 dias de tolerância",
+                                               "Data efetiva de entrega das chaves (se entregue)",
+                                               "Data de início do pagamento dos juros de obra"
+                                           ],
+                      "marcos_descricao":  {
+                                               "Data de assinatura do contrato ou termo de reserva":  "Quando foi assinado? O termo de reserva também vincula a construtora — vale tanto quanto o contrato formal.",
+                                               "Prazo de entrega previsto originalmente":  "Data exata prevista no contrato ou termo de reserva para entrega das chaves.",
+                                               "Prazo de entrega com 180 dias de tolerância":  "Some 180 dias ao prazo original — o TJDFT aceita essa tolerância. A partir daqui, tudo é atraso indenizável.",
+                                               "Data efetiva de entrega das chaves (se entregue)":  "Quando as chaves foram entregues de fato? A diferença entre essa data e o prazo com tolerância é o período do dano.",
+                                               "Data de início do pagamento dos juros de obra":  "Desde quando o cliente paga juros de obra? Os pagamentos após o prazo + 180 dias são restituíveis."
+                                           },
+                      "provas_essenciais":  [
+                                                "Contrato de compra e venda ou termo de reserva (com prazo de entrega)",
+                                                "Comprovantes de pagamento dos juros de obra (boletos pagos)",
+                                                "Comprovantes de aluguel pago no período do atraso (se aplicável)",
+                                                "Notificações ou comunicados da construtora sobre o atraso"
+                                            ],
+                      "provas_desejaveis":  [
+                                                "E-mails ou WhatsApp com a construtora sobre o atraso",
+                                                "Fotos de vícios construtivos (se houver)",
+                                                "Laudo de vistoria com vícios documentados",
+                                                "Declaração de IR com imóvel financiado"
+                                            ],
+                      "provas_como_obter":  {
+                                                "Contrato":  "Solicitar cópia à construtora ou corretora — direito garantido pelo CDC",
+                                                "Boletos juros de obra":  "Extratos bancários ou e-mails com boletos — guardar todos desde o início",
+                                                "Comprovantes aluguel":  "Recibos de aluguel ou extratos bancários mostrando pagamentos ao locador",
+                                                "Comunicados da construtora":  "E-mails, cartas e aplicativos da construtora — guardar todos"
+                                            },
+                      "orientacao_cliente":  [
+                                                 "Guardar TODOS os boletos de juros de obra pagos — são restituíveis após o prazo de tolerância",
+                                                 "Calcular quantos meses de atraso houve após o prazo + 180 dias — cada mês vale 0,5% do imóvel",
+                                                 "Guardar recibos de aluguel do período — comprovam lucros cessantes",
+                                                 "Fotografar vícios construtivos assim que receber as chaves — infiltração, pintura, elétrica",
+                                                 "NÃO assinar nada que seja \u0027quitação geral\u0027 de eventuais danos antes de consultar o advogado"
+                                             ],
+                      "probabilidade_base":  85,
+                      "fatores_que_aumentam":  [
+                                                   "Atraso superior a 180 dias documentado",
+                                                   "Construtora alegou Covid (não exclui responsabilidade no TJDFT)",
+                                                   "Juros de obra pagos durante o atraso",
+                                                   "Vícios construtivos documentados"
+                                               ],
+                      "fatores_que_diminuem":  [
+                                                   "Atraso inferior a 180 dias",
+                                                   "Cliente já assinou quitação geral",
+                                                   "Sem comprovante de pagamento dos juros de obra"
+                                               ],
+                      "valor_referencia":  "Lucros cessantes: 0,5% ao mês × valor do imóvel × meses de atraso. Juros de obra: valor total pago após prazo+tolerância. Dano moral: R$ 5.000 a R$ 15.000.",
+                      "formula_honorarios":  "20% sobre condenação total. Causa de valor alto — honorários podem ser tabelados pela OAB.",
+                      "polo_passivo":  {
+                                           "sugestao":  "Construtora/incorporadora",
+                                           "tipo":  "PJ",
+                                           "dados":  [
+                                                         "Razão Social",
+                                                         "CNPJ",
+                                                         "Endereço da sede"
+                                                     ],
+                                           "alerta":  "Se comprou pela corretora, verificar se a incorporadora é empresa diferente — réu é a incorporadora, não a corretora"
+                                       }
+                  }
+              ]
 }

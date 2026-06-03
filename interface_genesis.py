@@ -328,45 +328,17 @@ if st.session_state.step == 1:
 
     cep = st.text_input("CEP")
 
-    # ── POLO PASSIVO ──────────────────────────────────────────────────────────
-    st.markdown("<br>", unsafe_allow_html=True)
-    st.markdown('<div class="section-title">POLO PASSIVO — Contra quem vamos ajuizar</div>',
-                unsafe_allow_html=True)
-
-    col_r1, col_r2 = st.columns(2)
-    with col_r1:
-        reu_tipo = st.selectbox("Tipo", ["Pessoa Jurídica", "Pessoa Física"], key="reu1_tipo")
-        reu_nome = st.text_input("Nome / Razão Social *", key="reu1_nome")
-    with col_r2:
-        reu_doc  = st.text_input("CPF / CNPJ", key="reu1_doc")
-
-    segundo_reu = st.checkbox("Adicionar segundo réu")
-    reu2_nome, reu2_doc, reu2_tipo = "", "", "Pessoa Jurídica"
-    if segundo_reu:
-        col_r3, col_r4 = st.columns(2)
-        with col_r3:
-            reu2_tipo = st.selectbox("Tipo (2º réu)", ["Pessoa Jurídica", "Pessoa Física"], key="reu2_tipo")
-            reu2_nome = st.text_input("Nome / Razão Social (2º réu)", key="reu2_nome")
-        with col_r4:
-            reu2_doc = st.text_input("CPF / CNPJ (2º réu)", key="reu2_doc")
-
     st.markdown("<br>", unsafe_allow_html=True)
     if st.button("Avançar →"):
         if not nome or not telefone:
             st.error("Nome e telefone são obrigatórios.")
-        elif not reu_nome:
-            st.error("Informe o nome do réu (polo passivo).")
         else:
-            polo_passivo = [{"nome": reu_nome, "doc": reu_doc, "tipo": reu_tipo}]
-            if segundo_reu and reu2_nome:
-                polo_passivo.append({"nome": reu2_nome, "doc": reu2_doc, "tipo": reu2_tipo})
-
             st.session_state.dados["cliente"] = {
                 "nome": nome, "cpf": cpf, "rg": rg,
                 "nascimento": nascimento, "profissao": profissao,
                 "telefone": telefone, "email": email,
                 "endereco": endereco, "cep": cep,
-                "polo_passivo": polo_passivo,
+                "polo_passivo": [],
                 "data_atendimento": datetime.now().strftime("%d/%m/%Y %H:%M")
             }
             st.session_state.step = 2
@@ -526,6 +498,50 @@ elif st.session_state.step == 4:
             if como:
                 st.markdown(f"{emoji} **{prova}**  \n→ {como}")
 
+    # ── POLO PASSIVO GUIADO ───────────────────────────────────────────────────
+    st.markdown("<br>", unsafe_allow_html=True)
+    st.markdown('<div class="section-title">POLO PASSIVO — Contra quem vamos ajuizar</div>',
+                unsafe_allow_html=True)
+
+    polo_info = tema.get("polo_passivo", {})
+    if polo_info:
+        st.markdown(f"""
+        <div style="background:#141F35;border-left:4px solid #22D3EE;border-radius:8px;
+                    padding:14px 18px;margin-bottom:12px">
+            <div style="color:#22D3EE;font-size:0.75rem;font-weight:700;letter-spacing:2px;
+                        text-transform:uppercase;margin-bottom:6px">Gênesis sugere</div>
+            <div style="color:#E2E8F0;font-size:0.95rem;font-weight:600">{polo_info.get('sugestao','')}</div>
+        </div>
+        """, unsafe_allow_html=True)
+
+        dados_necessarios = polo_info.get("dados", [])
+        if dados_necessarios:
+            st.caption(f"📋 Dados necessários: {' · '.join(dados_necessarios)}")
+
+        alerta_polo = polo_info.get("alerta", "")
+        if alerta_polo:
+            st.warning(f"⚠️ {alerta_polo}")
+
+    st.markdown("<div style='margin-top:8px'></div>", unsafe_allow_html=True)
+
+    reu_nome = st.text_input("Nome / Razão Social do Réu *", key="reu_nome",
+                              placeholder="Ex: LATAM Airlines Brasil S.A.")
+    col_r1, col_r2 = st.columns(2)
+    with col_r1:
+        reu_tipo = st.selectbox("Tipo", ["Pessoa Jurídica", "Pessoa Física"], key="reu_tipo")
+    with col_r2:
+        reu_doc = st.text_input("CPF / CNPJ", key="reu_doc")
+
+    segundo_reu = st.checkbox("Adicionar segundo réu")
+    reu2_nome, reu2_doc, reu2_tipo = "", "", "Pessoa Jurídica"
+    if segundo_reu:
+        col_r3, col_r4 = st.columns(2)
+        with col_r3:
+            reu2_nome = st.text_input("Nome / Razão Social (2º réu)", key="reu2_nome")
+        with col_r4:
+            reu2_tipo = st.selectbox("Tipo", ["Pessoa Jurídica", "Pessoa Física"], key="reu2_tipo")
+            reu2_doc  = st.text_input("CPF / CNPJ (2º réu)", key="reu2_doc")
+
     st.markdown("<br>", unsafe_allow_html=True)
     st.markdown("**Honorários:**")
     col_h = st.columns(3)
@@ -543,6 +559,10 @@ elif st.session_state.step == 4:
             st.rerun()
     with col_nav[1]:
         if st.button("⚡ Gerar Análise e Documentos"):
+            polo = [{"nome": reu_nome, "doc": reu_doc, "tipo": reu_tipo}] if reu_nome else []
+            if segundo_reu and reu2_nome:
+                polo.append({"nome": reu2_nome, "doc": reu2_doc, "tipo": reu2_tipo})
+            st.session_state.dados["cliente"]["polo_passivo"] = polo
             st.session_state.dados["provas_tem"] = provas_tem
             st.session_state.dados["honor"] = {
                 "fixo": fixo, "exito": exito,
