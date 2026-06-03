@@ -277,13 +277,13 @@
     {
       "id": "TC-BANCO",
       "subtema": "Fraude Bancária / Golpe / Cobrança Indevida",
-      "keywords": ["banco", "fraude", "golpe", "pix", "empréstimo indevido", "cartão clonado", "conta invadida", "débito não reconhecido", "estelionato", "golpe do pix"],
+      "keywords": ["banco", "fraude", "golpe", "pix", "empréstimo indevido", "cartão clonado", "conta invadida", "débito não reconhecido", "estelionato", "golpe do pix", "falsa central", "portabilidade indevida", "consignado indevido", "boleto falso", "maquininha"],
       "perguntas_consulta": [
-        {"id": 1, "pergunta": "O que aconteceu exatamente? (PIX, empréstimo, cartão?)", "motivo": "Define o fundamento jurídico"},
-        {"id": 2, "pergunta": "Quando aconteceu?", "motivo": "Prescrição: 5 anos (CDC art. 27)"},
-        {"id": 3, "pergunta": "Já registrou boletim de ocorrência?", "motivo": "Prova da fraude e da boa-fé do cliente"},
-        {"id": 4, "pergunta": "Fez reclamação no banco? Qual foi a resposta?", "motivo": "Negativa do banco agrava a responsabilidade"},
-        {"id": 5, "pergunta": "O valor já foi estornado parcialmente?", "motivo": "Define se pede restituição + dano ou só dano"}
+        {"id": 1, "pergunta": "O que aconteceu exatamente? O cliente colaborou de alguma forma (forneceu senha, seguiu instruções por telefone) ou a fraude ocorreu sem qualquer participação dele?", "motivo": "CRUCIAL no TJDFT 2026: fraude nos sistemas do banco = fortuito INTERNO (banco responde). Golpe por engenharia social onde cliente colaborou = pode ser fortuito EXTERNO (banco pode não responder). Essa distinção define o caso"},
+        {"id": 2, "pergunta": "As transações fraudulentas eram compatíveis com o perfil do cliente? (horário, valor, local, sequência)", "motivo": "TJDFT 2026: banco tem dever de monitoramento antifraude. Transações atípicas (alto valor de madrugada, fora do padrão) que o sistema não bloqueou = falha do serviço = banco responde. Pedir extrato do período para comparar"},
+        {"id": 3, "pergunta": "O cliente é idoso (acima de 60 anos) ou possui alguma vulnerabilidade especial?", "motivo": "TJDFT 2026: consumidor idoso = hipervulnerável. Banco tem dever QUALIFICADO de cautela. Empréstimo consignado atípico para idoso com benefício previdenciário que o banco não bloqueou = responsabilidade agravada"},
+        {"id": 4, "pergunta": "O banco negou a reclamação? Apresentou argumento de que o cliente forneceu os dados ou que o sistema é seguro?", "motivo": "TJDFT: banco que não apresenta prova técnica (logs, relatório antifraude, NSU da transação) não cumpre o ônus probatório do CDC art. 14 §3º. Negativa genérica 'o sistema é seguro' não basta"},
+        {"id": 5, "pergunta": "Qual o valor total da fraude? Já foi estornado parcialmente? O banco apresentou resposta formal por escrito?", "motivo": "Define pedidos: restituição integral + dano moral (se agravantes). Fraude simples sem agravante = TJDFT NÃO reconhece dano moral automaticamente. Com hipervulnerável ou negativa reiterada = dano moral configurado"}
       ],
       "marcos_temporais": [
         "Data em que ocorreu a fraude/golpe",
@@ -293,33 +293,36 @@
         "Data da resposta do banco (se houver)"
       ],
       "provas_essenciais": [
-        "Boletim de Ocorrência (BO) — delegacia ou online",
-        "Extrato bancário mostrando o lançamento indevido",
-        "Protocolo de reclamação no banco (SAC ou agência)",
-        "Print das mensagens do golpista (se WhatsApp/e-mail)"
+        "Extrato bancário do período — antes, durante e depois da fraude (para mostrar perfil de consumo)",
+        "Boletim de Ocorrência (BO) — delegacia física ou online",
+        "Protocolo de reclamação no banco (SAC, agência ou app) com resposta formal",
+        "Print/captura de todas as comunicações com o banco (SAC, Ouvidoria, e-mail)"
       ],
       "provas_desejaveis": [
-        "Resposta formal do banco negando o estorno",
-        "Protocolo no Banco Central (www.bcb.gov.br → Registrar Reclamação)",
-        "Prints de todas as comunicações com o banco"
+        "Histórico de transações dos 3 meses anteriores (para demonstrar perfil de consumo normal)",
+        "Resposta formal do banco negando o estorno — quanto mais genérica, melhor para nós",
+        "Protocolo no Banco Central (www.bcb.gov.br) e no Reclame Aqui",
+        "Print das mensagens do golpista (WhatsApp, e-mail, SMS) — não apagar",
+        "Contrato do empréstimo (se empréstimo indevido) — verificar se tem assinatura válida"
       ],
       "provas_como_obter": {
-        "BO online": "Delegacia Virtual PCDF: www.pcdf.df.gov.br/servicos/delegacia-virtual",
-        "Extrato bancário": "App do banco — período do ocorrido — exportar em PDF",
-        "Protocolo banco": "SAC do banco + registrar no Banco Central (www.bcb.gov.br)",
-        "Reclame aqui": "Registrar em reclameaqui.com.br — gera pressão adicional"
+        "BO online": "Delegacia Virtual PCDF: www.pcdf.df.gov.br — rápido e gratuito. Fazer HOJE",
+        "Extrato histórico": "App ou internet banking — exportar em PDF os últimos 3-6 meses. Essencial para provar que as transações fraudulentas estavam fora do perfil",
+        "Protocolo Banco Central": "www.bcb.gov.br → Fale Conosco → Registrar Reclamação. O banco tem prazo para responder",
+        "Reclame Aqui": "reclameaqui.com.br — gera pressão pública e serve como prova da reclamação extrajudicial",
+        "Contrato empréstimo": "Solicitar ao banco via SAC — o banco é obrigado a fornecer cópia"
       },
       "orientacao_cliente": [
-        "Fazer BO HOJE MESMO — pode ser feito online em 10 minutos",
-        "Não apagar nenhuma mensagem do golpista — print de tudo",
-        "Registrar reclamação no Banco Central além do SAC do banco",
-        "Verificar se há outras movimentações suspeitas no extrato",
-        "Bloquear o cartão/conta se ainda não fez"
+        "Fazer BO HOJE — pode ser online em 10 minutos (www.pcdf.df.gov.br). Descrever exatamente o que aconteceu",
+        "NÃO apagar nenhuma mensagem do golpista — print de tudo (WhatsApp, SMS, e-mail)",
+        "Guardar extrato bancário completo — quanto mais histórico, melhor para mostrar que as transações eram atípicas",
+        "Reclamar no Banco Central além do SAC — banco tem prazo para responder sob pena de sanção",
+        "Se cliente idoso: mencionar a idade sempre — o TJDFT reconhece hipervulnerabilidade e agrava a responsabilidade do banco"
       ],
       "probabilidade_base": 75,
-      "fatores_que_aumentam": ["BO registrado", "Banco negou formalmente", "Valor elevado", "Cliente claramente de boa-fé"],
-      "fatores_que_diminuem": ["Sem BO", "Cliente compartilhou senha", "Banco já estornou parte"],
-      "valor_referencia": "R$ 3.000 a R$ 10.000 dano moral + restituição integral do valor",
+      "fatores_que_aumentam": ["Transações claramente fora do perfil do cliente", "Cliente idoso (hipervulnerável)", "Banco sem prova técnica (logs, relatório antifraude)", "BO registrado", "Banco negou formalmente sem justificativa técnica", "Portabilidade ou empréstimo sem assinatura válida"],
+      "fatores_que_diminuem": ["Cliente forneceu senha/dados voluntariamente (golpe da falsa central)", "Cliente seguiu instruções do golpista e colaborou ativamente", "Banco apresentou logs técnicos provando que transação foi autenticada"],
+      "valor_referencia": "Restituição integral do valor fraudado. Dano moral: NÃO é automático — precisa de agravante (hipervulnerável, negativa reiterada, valor alto). Quando configurado: R$ 3.000 a R$ 10.000.",
       "formula_honorarios": "20% sobre condenação total (material + moral)."
     },
 
