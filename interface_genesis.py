@@ -202,9 +202,97 @@ st.markdown(f"""
 temas = carregar_temas()
 
 if "step" not in st.session_state:
-    st.session_state.step = 1
+    st.session_state.step = 0          # 0 = tela inicial de seleção
 if "dados" not in st.session_state:
     st.session_state.dados = {}
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# STEP 0 — TELA INICIAL: NOVO CLIENTE ou CLIENTE EXISTENTE
+# ═══════════════════════════════════════════════════════════════════════════════
+if st.session_state.step == 0:
+    st.markdown("<br>", unsafe_allow_html=True)
+
+    col_a, col_b = st.columns(2)
+    with col_a:
+        st.markdown("""
+        <div style="background:#141F35;border:2px solid #3A82FF;border-radius:16px;
+                    padding:32px;text-align:center;cursor:pointer">
+            <div style="font-size:2.5rem">👤</div>
+            <div style="font-size:1.1rem;font-weight:800;color:#E2E8F0;margin:12px 0 6px">
+                Novo Atendimento
+            </div>
+            <div style="color:#94A3B8;font-size:0.85rem">
+                Primeira consulta com este cliente
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+        if st.button("Iniciar novo atendimento", use_container_width=True, type="primary"):
+            st.session_state.step = 1
+            st.session_state.dados = {}
+            st.rerun()
+
+    with col_b:
+        st.markdown("""
+        <div style="background:#141F35;border:2px solid #22D3EE;border-radius:16px;
+                    padding:32px;text-align:center">
+            <div style="font-size:2.5rem">📁</div>
+            <div style="font-size:1.1rem;font-weight:800;color:#E2E8F0;margin:12px 0 6px">
+                Cliente Existente
+            </div>
+            <div style="color:#94A3B8;font-size:0.85rem">
+                Ver histórico de atendimentos anteriores
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+
+        busca = st.text_input("🔍 Digite o nome do cliente",
+                              placeholder="Ex: Vaneuza...",
+                              key="busca_cliente")
+
+        if busca and len(busca) >= 2:
+            # Busca pastas de clientes que contenham o nome
+            pastas = sorted(CLIENTES_DIR.glob(f"*"), key=lambda p: p.stat().st_mtime, reverse=True)
+            encontrados = [p for p in pastas if busca.lower() in p.name.lower() and p.is_dir()]
+
+            if encontrados:
+                for pasta in encontrados[:5]:
+                    nome_pasta = pasta.name
+                    data_pasta = pasta.stat().st_mtime
+                    from datetime import datetime as _dt
+                    data_fmt = _dt.fromtimestamp(data_pasta).strftime("%d/%m/%Y %H:%M")
+                    # Detecta tema pelo card salvo
+                    card = pasta / "03_card_do_caso.txt"
+                    tema_txt = ""
+                    if card.exists():
+                        linhas = card.read_text(encoding="utf-8").split("\n")
+                        for linha in linhas:
+                            if "Tema" in linha:
+                                tema_txt = linha.strip()
+                                break
+
+                    st.markdown(f"""
+                    <div style="background:#0F1829;border:1px solid #1E3354;border-radius:10px;
+                                padding:14px 18px;margin:8px 0">
+                        <div style="font-weight:700;color:#E2E8F0;font-size:0.9rem">📁 {nome_pasta}</div>
+                        <div style="color:#94A3B8;font-size:0.78rem">{data_fmt} · {tema_txt}</div>
+                    </div>
+                    """, unsafe_allow_html=True)
+
+                    col_v, col_n = st.columns(2)
+                    with col_v:
+                        if st.button("📂 Abrir pasta", key=f"abrir_{nome_pasta}"):
+                            import subprocess, platform
+                            if platform.system() == "Windows":
+                                subprocess.Popen(f'explorer "{pasta}"')
+                    with col_n:
+                        if st.button("+ Novo atendimento", key=f"novo_{nome_pasta}"):
+                            st.session_state.step = 1
+                            st.session_state.dados = {}
+                            st.rerun()
+            else:
+                st.caption("Nenhum atendimento encontrado para este nome.")
+
+    st.stop()   # não renderiza o resto enquanto step == 0
 
 steps = ["Cliente", "Caso", "Entrevista", "Provas", "Resultado"]
 cols_step = st.columns(len(steps))
@@ -724,6 +812,6 @@ elif st.session_state.step == 5:
         if st.button("+ Novo Atendimento"):
             for key in ["pasta_cliente", "obs_advogado", "prazo_provas", "proximo_contato"]:
                 st.session_state.pop(key, None)
-            st.session_state.step = 1
+            st.session_state.step = 0
             st.session_state.dados = {}
             st.rerun()
