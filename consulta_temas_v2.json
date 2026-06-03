@@ -472,13 +472,13 @@
     {
       "id": "TC-PATERNIDADE",
       "subtema": "Investigação / Reconhecimento de Paternidade",
-      "keywords": ["paternidade", "pai", "reconhecimento", "filho", "investigação de paternidade", "DNA", "registro", "certidão", "nome do pai", "genitor desconhecido", "pai biológico"],
+      "keywords": ["paternidade", "pai", "reconhecimento", "filho", "investigação de paternidade", "DNA", "registro", "certidão", "nome do pai", "genitor desconhecido", "pai biológico", "post mortem", "pai faleceu", "pai morreu", "paternidade socioafetiva", "pai registral"],
       "perguntas_consulta": [
-        {"id": 1, "pergunta": "O suposto pai já sabe da existência do filho? Qual foi a reação?", "motivo": "Define se é caso consensual (reconhecimento voluntário) ou litigioso (investigação judicial)"},
-        {"id": 2, "pergunta": "Há quanto tempo o filho existe e qual a idade atual?", "motivo": "Criança menor: mãe representa. Adulto: propõe a própria ação"},
-        {"id": 3, "pergunta": "Existe algum contato ou relacionamento documentado entre a mãe e o suposto pai?", "motivo": "Mensagens, fotos, e-mails — prova do relacionamento que originou o filho"},
-        {"id": 4, "pergunta": "O suposto pai tem condições financeiras? Trabalha formalmente?", "motivo": "Define se já pede alimentos junto com a paternidade"},
-        {"id": 5, "pergunta": "Há testemunhas do relacionamento ou da convivência?", "motivo": "Testemunho corrobora a prova digital — importante quando não há DNA voluntário"}
+        {"id": 1, "pergunta": "O suposto pai está vivo ou já faleceu? Se faleceu, quando?", "motivo": "Define a estratégia: vivo = DNA direto. Falecido (post mortem) = DNA com parente ou prova testemunhal + documental. O TJDFT reconhece ambas as vias."},
+        {"id": 2, "pergunta": "É paternidade biológica ou socioafetiva? Há relacionamento documentado entre a mãe e o suposto pai?", "motivo": "Biológica: DNA é a prova central. Socioafetiva: exige 'posse do estado de filho' — tratamento público, nome e fama. O TJDFT nega casos com apenas afeto sem prova robusta."},
+        {"id": 3, "pergunta": "Os herdeiros ou parentes do suposto pai sabem do caso? Vão cooperar com o DNA?", "motivo": "Crucial no post mortem: se os herdeiros negarem o DNA, o TJDFT aplica presunção de paternidade (Súmula 301 STJ + Lei 8.560/92). A recusa vira prova contra eles."},
+        {"id": 4, "pergunta": "Há testemunhas do relacionamento — familiares, amigos, vizinhos que viram o casal juntos?", "motivo": "O TJDFT exige corroboração testemunhal + documental quando o DNA não é possível. Testemunhas que viram o relacionamento no período da concepção são essenciais."},
+        {"id": 5, "pergunta": "O cliente quer só o reconhecimento ou também quer alimentos e herança?", "motivo": "Define o escopo da ação: reconhecimento puro (imprescritível) ou cumulado com alimentos/herança (prazos diferentes). No post mortem, a herança é automática com o reconhecimento."}
       ],
       "marcos_temporais": [
         "Período do relacionamento entre a mãe e o suposto pai biológico",
@@ -495,38 +495,38 @@
         "Data da última tentativa de contato ou reconhecimento": "Última vez que houve contato com o suposto pai ou com a família dele para tentar o reconhecimento. Se foi a tia que veio contar, informe quando. Se nunca houve tentativa, coloque 'Não houve tentativa anterior'."
       },
       "provas_essenciais": [
-        "Certidão de nascimento do filho (original)",
-        "Documento de identidade da mãe e do filho",
-        "Prints de conversas no WhatsApp com o suposto pai",
-        "Fotos juntos com data visível (galeria do celular)",
-        "Qualquer comprovante de relacionamento (e-mails, redes sociais, declarações)"
+        "Certidão de nascimento de quem busca o reconhecimento (original)",
+        "Documento de identidade do cliente e da mãe (se menor)",
+        "Certidão de óbito do suposto pai (se post mortem)",
+        "Qualquer prova do relacionamento entre a mãe e o suposto pai no período da concepção",
+        "Nomes e contatos de testemunhas que viram o relacionamento"
       ],
       "provas_desejaveis": [
-        "Resultado de teste de DNA (se já realizado)",
-        "Declaração de testemunhas do relacionamento",
-        "Comprovante de pagamento de despesas do filho pelo suposto pai",
-        "Mensagens reconhecendo o filho (mesmo que indiretamente)",
-        "Fotos do suposto pai com o filho (convivência)"
+        "Resultado de DNA já realizado (laboratório particular ou judicial)",
+        "Fotos do casal juntos com data visível",
+        "WhatsApp, e-mails ou mensagens do suposto pai reconhecendo o filho (mesmo indiretamente)",
+        "Certidão de casamento ou de óbito para localizar herdeiros (no post mortem)",
+        "Documentos que provem dependência financeira ou pagamento de despesas pelo pai"
       ],
       "provas_como_obter": {
-        "WhatsApp": "Exportar histórico de conversa: Abrir a conversa → três pontinhos → Exportar conversa → Sem mídia — salvar e enviar ao advogado",
-        "Fotos com data": "Galeria do celular mostra a data nas propriedades da foto — fazer print incluindo a data",
-        "Teste de DNA": "Laboratório particular (resultado em 5-10 dias, R$ 500-1.500) OU solicitar ao juiz que determine o DNA obrigatório",
-        "Redes sociais": "Print de perfil do suposto pai + conversas no Instagram/Facebook — não apagar nada",
-        "Testemunhas": "Familiares, amigos em comum, vizinhos — anotar nome completo e contato"
+        "DNA post mortem": "Com parente direto do falecido (filho, irmão, pai) — solicitar ao juiz se herdeiros recusarem. ATENÇÃO: recusa gera presunção de paternidade (Súmula 301 STJ)",
+        "WhatsApp": "Exportar histórico: Abrir conversa → três pontinhos → Exportar conversa → Sem mídia. Salvar e enviar ao advogado",
+        "Fotos com data": "Galeria do celular mostra data nas propriedades. Verificar desde o período do relacionamento",
+        "Testemunhas": "Familiares, amigos em comum, vizinhos, colegas de trabalho — anotar nome completo, telefone e o que presenciaram",
+        "Certidão de óbito": "Cartório do local do falecimento ou app e-Cartório — necessária para identificar herdeiros"
       },
       "orientacao_cliente": [
-        "NÃO apagar nenhuma mensagem do WhatsApp com o suposto pai — nem as antigas",
-        "Salvar todas as fotos juntos — verificar a galeria do celular desde o período do relacionamento",
-        "Verificar se o suposto pai mencionou o filho em alguma mensagem — mesmo indiretamente",
-        "Anotar nomes e contatos de pessoas que presenciaram o relacionamento (familiares, amigos)",
-        "Se o filho já fez DNA: trazer o resultado. Se não: discutiremos a estratégia para solicitar ao juiz"
+        "Guardar TUDO que comprove o relacionamento da mãe com o suposto pai — fotos, mensagens, cartas, declarações",
+        "Se o pai faleceu: levantar quem são os herdeiros e se há inventário aberto — isso define quem serão os réus",
+        "Anotar nome e contato de todas as pessoas que sabiam do relacionamento e possam ser testemunhas",
+        "Se os herdeiros se recusarem ao DNA, isso é BOM para nós — o TJDFT aplica presunção de paternidade",
+        "Verificar se há fotos, cartas ou documentos antigos em posse de familiares que comprovem o relacionamento"
       ],
-      "probabilidade_base": 85,
-      "fatores_que_aumentam": ["DNA positivo já realizado", "Mensagens reconhecendo o filho", "Fotos do relacionamento", "Suposto pai admitiu para terceiros"],
-      "fatores_que_diminuem": ["Sem nenhuma prova do relacionamento", "Suposto pai nega e vai contestar DNA", "Muito tempo sem contato e sem provas"],
-      "valor_referencia": "Paternidade: direito personalíssimo (sem valor patrimonial). Alimentos: 15-30% da renda do pai (se for pedido junto).",
-      "formula_honorarios": "R$ *** fixo + ***% sobre alimentos fixados (se aplicável). Sugestão: R$ 2.000-4.000 fixo."
+      "probabilidade_base": 80,
+      "fatores_que_aumentam": ["DNA positivo já realizado", "Herdeiros se recusam ao DNA (gera presunção)", "Mensagens reconhecendo o filho", "Testemunhas do relacionamento", "Fotos do casal no período da concepção"],
+      "fatores_que_diminuem": ["Sem nenhuma prova do relacionamento", "Sem testemunhas identificadas", "Caso socioafetivo sem 'posse do estado de filho' documentada"],
+      "valor_referencia": "Reconhecimento: direito personalíssimo — imprescritível. Alimentos: 15-30% da renda. Herança (post mortem): participação no espólio.",
+      "formula_honorarios": "R$ *** fixo + ***% sobre alimentos fixados (se aplicável). Post mortem com herança: negociar % sobre quinhão."
     },
 
     {
