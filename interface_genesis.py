@@ -293,7 +293,7 @@ elif st.session_state.step == 2:
 
     descricao = st.text_area(
         "Descreva o que aconteceu",
-        placeholder="Ex: Meu cliente foi demitido sem justa causa após 5 anos de empresa. Não recebeu FGTS...",
+        placeholder="Ex: Meu cliente teve o nome negativado indevidamente no Serasa. A dívida já estava paga há 6 meses e a empresa se recusa a retirar...",
         height=150
     )
 
