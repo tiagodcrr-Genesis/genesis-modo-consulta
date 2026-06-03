@@ -255,37 +255,55 @@ if st.session_state.step == 0:
             encontrados = [p for p in pastas if busca.lower() in p.name.lower() and p.is_dir()]
 
             if encontrados:
+                import platform as _plat, subprocess as _sub
+                from datetime import datetime as _dt
+
                 for pasta in encontrados[:5]:
                     nome_pasta = pasta.name
-                    data_pasta = pasta.stat().st_mtime
-                    from datetime import datetime as _dt
-                    data_fmt = _dt.fromtimestamp(data_pasta).strftime("%d/%m/%Y %H:%M")
-                    # Detecta tema pelo card salvo
+                    data_fmt = _dt.fromtimestamp(pasta.stat().st_mtime).strftime("%d/%m/%Y %H:%M")
                     card = pasta / "03_card_do_caso.txt"
                     tema_txt = ""
                     if card.exists():
-                        linhas = card.read_text(encoding="utf-8").split("\n")
-                        for linha in linhas:
+                        for linha in card.read_text(encoding="utf-8").split("\n"):
                             if "Tema" in linha:
                                 tema_txt = linha.strip()
                                 break
 
-                    st.markdown(f"""
-                    <div style="background:#0F1829;border:1px solid #1E3354;border-radius:10px;
-                                padding:14px 18px;margin:8px 0">
-                        <div style="font-weight:700;color:#E2E8F0;font-size:0.9rem">📁 {nome_pasta}</div>
-                        <div style="color:#94A3B8;font-size:0.78rem">{data_fmt} · {tema_txt}</div>
-                    </div>
-                    """, unsafe_allow_html=True)
+                    with st.expander(f"📁 {nome_pasta}  ·  {data_fmt}  ·  {tema_txt}"):
+                        # Lista documentos com download
+                        docs = [
+                            ("01_cadastro_cliente.txt",    "📋 Cadastro",        "text/plain"),
+                            ("02_linha_do_tempo.txt",       "📅 Linha do Tempo",  "text/plain"),
+                            ("03_card_do_caso.txt",         "🃏 Card do Caso",    "text/plain"),
+                            ("04_guia_probatorio.txt",      "🔍 Guia Probatório", "text/plain"),
+                            ("05_orientacao_cliente.docx",  "📝 Orientação",      "application/vnd.openxmlformats-officedocument.wordprocessingml.document"),
+                            ("06_proposta_honorarios.docx", "💰 Proposta",        "application/vnd.openxmlformats-officedocument.wordprocessingml.document"),
+                            ("07_procuracao.docx",          "✍️ Procuração",      "application/vnd.openxmlformats-officedocument.wordprocessingml.document"),
+                            ("08_contrato_honorarios.docx", "📄 Contrato",        "application/vnd.openxmlformats-officedocument.wordprocessingml.document"),
+                            ("09_plano_de_acao.txt",        "📌 Plano de Ação",   "text/plain"),
+                        ]
+                        col_d1, col_d2 = st.columns(2)
+                        for i, (fname, label, mime) in enumerate(docs):
+                            fpath = pasta / fname
+                            if fpath.exists():
+                                with (col_d1 if i % 2 == 0 else col_d2):
+                                    st.download_button(
+                                        label=f"⬇️ {label}",
+                                        data=fpath.read_bytes(),
+                                        file_name=fname,
+                                        mime=mime,
+                                        key=f"dl_{nome_pasta}_{fname}",
+                                        use_container_width=True
+                                    )
 
-                    col_v, col_n = st.columns(2)
-                    with col_v:
-                        if st.button("📂 Abrir pasta", key=f"abrir_{nome_pasta}"):
-                            import subprocess, platform
-                            if platform.system() == "Windows":
-                                subprocess.Popen(f'explorer "{pasta}"')
-                    with col_n:
-                        if st.button("+ Novo atendimento", key=f"novo_{nome_pasta}"):
+                        # Abre Explorer no Windows local
+                        if _plat.system() == "Windows":
+                            if st.button("📂 Abrir no Explorer", key=f"exp_{nome_pasta}"):
+                                _sub.Popen(f'explorer "{pasta}"')
+
+                        st.markdown("---")
+                        if st.button("+ Novo atendimento para este cliente", key=f"novo_{nome_pasta}",
+                                     use_container_width=True):
                             st.session_state.step = 1
                             st.session_state.dados = {}
                             st.rerun()
