@@ -269,7 +269,8 @@ if st.session_state.step == 0:
                                 tema_txt = linha.strip()
                                 break
 
-                    with st.expander(f"📁 {nome_pasta}  ·  {data_fmt}  ·  {tema_txt}"):
+                    nome_display = nome_pasta.split("_")[0].capitalize()
+                    with st.expander(f"📁 {nome_display} — {data_fmt} — {tema_txt if tema_txt else 'sem tema'}"):
                         # Lista documentos com download
                         docs = [
                             ("01_cadastro_cliente.txt",    "📋 Cadastro",        "text/plain"),
