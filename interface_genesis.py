@@ -302,10 +302,21 @@ if st.session_state.step == 0:
                                 _sub.Popen(f'explorer "{pasta}"')
 
                         st.markdown("---")
-                        if st.button("+ Novo atendimento para este cliente", key=f"novo_{nome_pasta}",
-                                     use_container_width=True):
+                        # Lê cadastro salvo para pré-preencher
+                        cad_file = pasta / "01_cadastro_cliente.txt"
+                        nome_cli, tel_cli = "", ""
+                        if cad_file.exists():
+                            for ln in cad_file.read_text(encoding="utf-8").split("\n"):
+                                if "Nome" in ln and ":" in ln:
+                                    nome_cli = ln.split(":", 1)[-1].strip()
+                                if "Telefone" in ln and ":" in ln:
+                                    tel_cli = ln.split(":", 1)[-1].strip()
+                        if st.button("+ Novo caso para este cliente", key=f"novo_{nome_pasta}",
+                                     use_container_width=True, type="primary"):
                             st.session_state.step = 1
                             st.session_state.dados = {}
+                            st.session_state["prefill_nome"] = nome_cli
+                            st.session_state["prefill_tel"]  = tel_cli
                             st.rerun()
             else:
                 st.caption("Nenhum atendimento encontrado para este nome.")
@@ -330,17 +341,28 @@ st.markdown("<br>", unsafe_allow_html=True)
 # STEP 1 — CADASTRO DO CLIENTE
 # ═══════════════════════════════════════════════════════════════════════════════
 if st.session_state.step == 1:
+    # Botão voltar para home
+    if st.button("← Voltar"):
+        st.session_state.step = 0
+        st.session_state.pop("prefill_nome", None)
+        st.session_state.pop("prefill_tel", None)
+        st.rerun()
+
     st.markdown('<div class="section-title">01 — DADOS DO CLIENTE</div>', unsafe_allow_html=True)
+
+    # Pré-preenchimento se vier de cliente existente
+    _pnome = st.session_state.pop("prefill_nome", "")
+    _ptel  = st.session_state.pop("prefill_tel", "")
 
     col1, col2 = st.columns(2)
     with col1:
-        nome      = st.text_input("Nome completo *")
+        nome      = st.text_input("Nome completo *", value=_pnome)
         cpf       = st.text_input("CPF")
         rg        = st.text_input("RG")
         nascimento= st.text_input("Data de nascimento (DD/MM/AAAA)")
     with col2:
         profissao = st.text_input("Profissão")
-        telefone  = st.text_input("Telefone / WhatsApp *")
+        telefone  = st.text_input("Telefone / WhatsApp *", value=_ptel)
         email     = st.text_input("E-mail")
         endereco  = st.text_input("Endereço completo")
 
@@ -525,40 +547,43 @@ elif st.session_state.step == 4:
     if polo_info:
         st.markdown(f"""
         <div style="background:#141F35;border-left:4px solid #22D3EE;border-radius:8px;
-                    padding:14px 18px;margin-bottom:12px">
-            <div style="color:#22D3EE;font-size:0.75rem;font-weight:700;letter-spacing:2px;
-                        text-transform:uppercase;margin-bottom:6px">Gênesis sugere</div>
-            <div style="color:#E2E8F0;font-size:0.95rem;font-weight:600">{polo_info.get('sugestao','')}</div>
+                    padding:14px 18px;margin-bottom:10px">
+            <div style="color:#22D3EE;font-size:0.72rem;font-weight:700;letter-spacing:2px;
+                        text-transform:uppercase;margin-bottom:4px">Gênesis sugere</div>
+            <div style="color:#E2E8F0;font-size:0.92rem;font-weight:600">{polo_info.get('sugestao','')}</div>
         </div>
         """, unsafe_allow_html=True)
+        if polo_info.get("alerta"):
+            st.warning(f"⚠️ {polo_info['alerta']}")
 
-        dados_necessarios = polo_info.get("dados", [])
-        if dados_necessarios:
-            st.caption(f"📋 Dados necessários: {' · '.join(dados_necessarios)}")
+    # Campos dinâmicos baseados no tipo (PF ou PJ)
+    tipo_polo = polo_info.get("tipo", "PJ")
+    is_pf = tipo_polo == "PF"
+    is_variavel = "/" in tipo_polo  # PF/PJ
 
-        alerta_polo = polo_info.get("alerta", "")
-        if alerta_polo:
-            st.warning(f"⚠️ {alerta_polo}")
+    if is_variavel:
+        reu_tipo = st.radio("Tipo do réu", ["Pessoa Jurídica", "Pessoa Física"],
+                            horizontal=True, key="reu_tipo")
+        is_pf = reu_tipo == "Pessoa Física"
+    else:
+        reu_tipo = "Pessoa Física" if is_pf else "Pessoa Jurídica"
 
-    st.markdown("<div style='margin-top:8px'></div>", unsafe_allow_html=True)
-
-    reu_nome = st.text_input("Nome / Razão Social do Réu *", key="reu_nome",
-                              placeholder="Ex: LATAM Airlines Brasil S.A.")
     col_r1, col_r2 = st.columns(2)
     with col_r1:
-        reu_tipo = st.selectbox("Tipo", ["Pessoa Jurídica", "Pessoa Física"], key="reu_tipo")
+        label_nome = "Nome completo" if is_pf else "Razão Social"
+        reu_nome = st.text_input(f"{label_nome} *", key="reu_nome")
     with col_r2:
-        reu_doc = st.text_input("CPF / CNPJ", key="reu_doc")
+        label_doc = "CPF" if is_pf else "CNPJ"
+        reu_doc = st.text_input(label_doc, key="reu_doc")
 
     segundo_reu = st.checkbox("Adicionar segundo réu")
-    reu2_nome, reu2_doc, reu2_tipo = "", "", "Pessoa Jurídica"
+    reu2_nome, reu2_doc, reu2_tipo = "", "", reu_tipo
     if segundo_reu:
         col_r3, col_r4 = st.columns(2)
         with col_r3:
-            reu2_nome = st.text_input("Nome / Razão Social (2º réu)", key="reu2_nome")
+            reu2_nome = st.text_input(f"{label_nome} (2º réu)", key="reu2_nome")
         with col_r4:
-            reu2_tipo = st.selectbox("Tipo", ["Pessoa Jurídica", "Pessoa Física"], key="reu2_tipo")
-            reu2_doc  = st.text_input("CPF / CNPJ (2º réu)", key="reu2_doc")
+            reu2_doc = st.text_input(f"{label_doc} (2º réu)", key="reu2_doc")
 
     st.markdown("<br>", unsafe_allow_html=True)
     st.markdown("**Honorários:**")
