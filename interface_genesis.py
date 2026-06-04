@@ -271,31 +271,33 @@ if st.session_state.step == 0:
 
                     nome_display = nome_pasta.split("_")[0].capitalize()
                     with st.expander(f"📁 {nome_display} — {data_fmt} — {tema_txt if tema_txt else 'sem tema'}"):
-                        # Lista documentos com download
-                        docs = [
-                            ("01_cadastro_cliente.txt",    "📋 Cadastro",        "text/plain"),
-                            ("02_linha_do_tempo.txt",       "📅 Linha do Tempo",  "text/plain"),
-                            ("03_card_do_caso.txt",         "🃏 Card do Caso",    "text/plain"),
-                            ("04_guia_probatorio.txt",      "🔍 Guia Probatório", "text/plain"),
-                            ("05_orientacao_cliente.docx",  "📝 Orientação",      "application/vnd.openxmlformats-officedocument.wordprocessingml.document"),
-                            ("06_proposta_honorarios.docx", "💰 Proposta",        "application/vnd.openxmlformats-officedocument.wordprocessingml.document"),
-                            ("07_procuracao.docx",          "✍️ Procuração",      "application/vnd.openxmlformats-officedocument.wordprocessingml.document"),
-                            ("08_contrato_honorarios.docx", "📄 Contrato",        "application/vnd.openxmlformats-officedocument.wordprocessingml.document"),
-                            ("09_plano_de_acao.txt",        "📌 Plano de Ação",   "text/plain"),
+                        import io as _io, zipfile as _zf2
+
+                        # ZIP com todos os documentos
+                        _buf = _io.BytesIO()
+                        _arquivos = [
+                            "01_cadastro_cliente.txt","02_linha_do_tempo.txt",
+                            "03_card_do_caso.txt","04_guia_probatorio.txt",
+                            "05_orientacao_cliente.docx","06_proposta_honorarios.docx",
+                            "07_procuracao.docx","08_contrato_honorarios.docx",
+                            "09_plano_de_acao.txt",
                         ]
-                        col_d1, col_d2 = st.columns(2)
-                        for i, (fname, label, mime) in enumerate(docs):
-                            fpath = pasta / fname
-                            if fpath.exists():
-                                with (col_d1 if i % 2 == 0 else col_d2):
-                                    st.download_button(
-                                        label=f"⬇️ {label}",
-                                        data=fpath.read_bytes(),
-                                        file_name=fname,
-                                        mime=mime,
-                                        key=f"dl_{nome_pasta}_{fname}",
-                                        use_container_width=True
-                                    )
+                        with _zf2.ZipFile(_buf, 'w', _zf2.ZIP_DEFLATED) as _zfile:
+                            for _f in _arquivos:
+                                _fp = pasta / _f
+                                if _fp.exists():
+                                    _zfile.write(_fp, _f)
+                        _buf.seek(0)
+
+                        st.download_button(
+                            label=f"📁 Baixar todos os documentos",
+                            data=_buf.read(),
+                            file_name=f"genesis_{nome_pasta}.zip",
+                            mime="application/zip",
+                            key=f"zip_{nome_pasta}",
+                            use_container_width=True,
+                            type="primary"
+                        )
 
                         # Abre Explorer no Windows local
                         if _plat.system() == "Windows":
@@ -740,6 +742,7 @@ elif st.session_state.step == 5:
             ("08_contrato_honorarios.docx", "📄", "Contrato de Honorários",   "#F0FDF4", "#16A34A"),
         ]
 
+        # Lista os documentos gerados
         col_d1, col_d2 = st.columns(2)
         for i, (fname, icon, label, bg, cor) in enumerate(docs_info):
             fpath = pasta_cliente / fname
@@ -748,26 +751,36 @@ elif st.session_state.step == 5:
                 if fpath.exists():
                     st.markdown(f"""
                     <div style="background:{bg};border:1px solid {cor}30;border-left:4px solid {cor};
-                                border-radius:10px;padding:14px 18px;margin-bottom:4px;
-                                display:flex;align-items:center;gap:12px;">
-                        <span style="font-size:1.4rem">{icon}</span>
+                                border-radius:10px;padding:12px 16px;margin-bottom:6px;
+                                display:flex;align-items:center;gap:10px;">
+                        <span style="font-size:1.2rem">{icon}</span>
                         <div>
-                            <div style="font-weight:700;color:#E2E8F0;font-size:0.9rem">{label}</div>
-                            <div style="color:#16A34A;font-size:0.75rem;font-weight:600">✓ Gerado</div>
+                            <div style="font-weight:700;color:#1a1a2e;font-size:0.85rem">{label}</div>
+                            <div style="color:#16A34A;font-size:0.72rem;font-weight:600">✓ Gerado</div>
                         </div>
                     </div>
                     """, unsafe_allow_html=True)
-                    mime = ("application/vnd.openxmlformats-officedocument.wordprocessingml.document"
-                            if fname.endswith(".docx") else "text/plain")
-                    st.download_button(
-                        label="⬇️ Baixar",
-                        data=fpath.read_bytes(),
-                        file_name=fname,
-                        mime=mime,
-                        key=f"dl_{fname}",
-                        use_container_width=True,
-                    )
-                    st.markdown("<div style='margin-bottom:8px'></div>", unsafe_allow_html=True)
+
+        # ── BOTÃO ÚNICO: BAIXAR TUDO EM ZIP ──────────────────────────────────
+        import io, zipfile as _zip
+        zip_buf = io.BytesIO()
+        slug_nome = cliente['nome'].split()[0].lower()
+        with _zip.ZipFile(zip_buf, 'w', _zip.ZIP_DEFLATED) as zf:
+            for fname, _, label, _, _ in docs_info:
+                fpath = pasta_cliente / fname
+                if fpath.exists():
+                    zf.write(fpath, fname)
+        zip_buf.seek(0)
+
+        st.markdown("<br>", unsafe_allow_html=True)
+        st.download_button(
+            label=f"📁 Baixar pasta completa — {cliente['nome']}",
+            data=zip_buf.read(),
+            file_name=f"genesis_{slug_nome}_{datetime.now().strftime('%Y%m%d')}.zip",
+            mime="application/zip",
+            use_container_width=True,
+            type="primary",
+        )
 
         # ── PASTA DO CLIENTE ──────────────────────────────────────────────────
         import platform, subprocess
