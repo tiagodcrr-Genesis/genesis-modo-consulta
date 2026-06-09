@@ -167,19 +167,24 @@ def carregar_temas():
     with open(TEMAS_JSON, encoding="utf-8") as f:
         return json.load(f)["temas"]
 
+def _normalizar(texto):
+    """Remove acentos para comparacao robusta."""
+    import unicodedata
+    return unicodedata.normalize('NFKD', texto).encode('ASCII', 'ignore').decode('ASCII').lower()
+
 def detectar_tema(descricao, temas):
-    desc = descricao.lower()
+    desc_norm = _normalizar(descricao)
     melhor, melhor_pts = None, 0
     for t in temas:
-        pts = sum(1 for kw in t["keywords"] if kw.lower() in desc)
+        pts = sum(1 for kw in t["keywords"] if _normalizar(kw) in desc_norm)
         if pts > melhor_pts:
             melhor_pts, melhor = pts, t
     return melhor if melhor_pts >= 1 else None
 
 def calcular_situacao_caso(provas_tem):
     """Retorna a situação do caso baseada nos 3 status das provas."""
-    nao_tem = sum(1 for v in provas_tem.values() if "Não tem" in str(v))
-    buscar  = sum(1 for v in provas_tem.values() if "Vai buscar" in str(v))
+    nao_tem = sum(1 for v in provas_tem.values() if "Não tenho" in str(v) or "Não sei" in str(v))
+    buscar  = sum(1 for v in provas_tem.values() if "Vou buscar" in str(v))
     if nao_tem == 0 and buscar == 0:
         return "CASO BEM DOCUMENTADO", "#34D399", "#022C22"
     elif nao_tem == 0:
@@ -192,8 +197,8 @@ _nome = "G" + chr(202) + "NESIS"
 st.markdown(f"""
 <div class="genesis-header">
     <p style="font-size:4rem;font-weight:900;letter-spacing:2px;color:#FFFFFF;margin:0;text-align:center;text-shadow:0 2px 20px rgba(0,0,0,0.3)">{_nome}</p>
-    <p style="font-size:0.85rem;letter-spacing:3px;color:rgba(255,255,255,0.75);margin:8px 0 0 0;text-align:center">
-        MODO CONSULTORIA &nbsp;&middot;&nbsp; FERNANDO ROSA ADVOCACIA
+    <p style="font-size:0.95rem;letter-spacing:2px;color:rgba(255,255,255,0.6);margin:6px 0 0 0;text-align:center;font-weight:300">
+        Consultoria Jur&iacute;dica Inteligente
     </p>
 </div>
 """, unsafe_allow_html=True)
@@ -212,38 +217,183 @@ if "dados" not in st.session_state:
 if st.session_state.step == 0:
     st.markdown("<br>", unsafe_allow_html=True)
 
+    # ── 1. HEADLINE ───────────────────────────────────────────────────────────
+    st.markdown("""
+<div style="text-align:center;max-width:850px;margin:0 auto 0 auto;padding:0 0 24px 0">
+  <p style="font-size:2rem;font-weight:900;color:#F8FAFC;line-height:1.3;margin:0">
+    Transforme cada consulta em uma<br>oportunidade real de contratação.
+  </p>
+</div>
+""", unsafe_allow_html=True)
+
+    # ── 2. BLOCO DE DOR ───────────────────────────────────────────────────────
+    st.markdown("""
+<div style="text-align:center;max-width:850px;margin:0 auto 32px auto">
+  <p style="font-size:1.05rem;color:rgba(255,255,255,0.88);line-height:1.75;margin:0 0 12px 0">
+    Já terminou uma consulta e depois percebeu que esqueceu perguntas importantes,
+    provas relevantes ou documentos essenciais para o caso?
+  </p>
+  <p style="font-size:1.05rem;color:#00D4FF;font-weight:600;margin:0">
+    O Gênesis foi criado para evitar exatamente isso.
+  </p>
+</div>
+""", unsafe_allow_html=True)
+
+    # ── 3. LISTA DE BENEFÍCIOS ────────────────────────────────────────────────
+    st.markdown("""
+<div style="max-width:900px;margin:0 auto 36px auto;text-align:center">
+  <div style="display:inline-flex;flex-direction:column;align-items:flex-start;gap:10px">
+    <div style="color:#F8FAFC;font-size:0.95rem;line-height:1.5">
+      <span style="color:#00D4FF;font-weight:700;margin-right:10px">&#10003;</span>Descubra informações relevantes durante a consulta
+    </div>
+    <div style="color:#F8FAFC;font-size:0.95rem;line-height:1.5">
+      <span style="color:#00D4FF;font-weight:700;margin-right:10px">&#10003;</span>Saiba exatamente quais provas solicitar
+    </div>
+    <div style="color:#F8FAFC;font-size:0.95rem;line-height:1.5">
+      <span style="color:#00D4FF;font-weight:700;margin-right:10px">&#10003;</span>Conduza casos inéditos com mais segurança
+    </div>
+    <div style="color:#F8FAFC;font-size:0.95rem;line-height:1.5">
+      <span style="color:#00D4FF;font-weight:700;margin-right:10px">&#10003;</span>Reduza retrabalho e contatos posteriores
+    </div>
+    <div style="color:#F8FAFC;font-size:0.95rem;line-height:1.5">
+      <span style="color:#00D4FF;font-weight:700;margin-right:10px">&#10003;</span>Aumente a confiança do cliente desde o primeiro atendimento
+    </div>
+  </div>
+</div>
+""", unsafe_allow_html=True)
+
+    # ── 4. BLOCO DE IMPACTO ───────────────────────────────────────────────────
+    st.markdown("""
+<div style="max-width:900px;margin:0 auto 40px auto;
+            background:#0E1E36;border:1px solid #00D4FF;
+            border-radius:16px;padding:28px 36px;text-align:center">
+  <p style="color:#F8FAFC;font-size:1.05rem;font-weight:600;margin:0 0 6px 0">
+    Ao final da consulta, o cliente sai com clareza.
+  </p>
+  <p style="color:#F8FAFC;font-size:1.05rem;font-weight:600;margin:0 0 16px 0">
+    O advogado sai com o caso estruturado.
+  </p>
+  <p style="color:#00D4FF;font-size:0.9rem;font-style:italic;margin:0">
+    Porque grandes causas começam com grandes atendimentos.
+  </p>
+</div>
+""", unsafe_allow_html=True)
+
+    # ── 5. O QUE VOCÊ RECEBE ──────────────────────────────────────────────────
+    st.markdown("""
+<div style="max-width:900px;margin:0 auto 32px auto;text-align:center">
+  <p style="color:#F8FAFC;font-weight:700;font-size:1rem;margin:0 0 16px 0">
+    O que você recebe ao final da consulta?
+  </p>
+  <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:10px">
+    <span style="background:#101D33;border:1px solid rgba(0,212,255,0.35);
+                 border-radius:8px;padding:8px 16px;color:#B7C3D0;font-size:0.82rem">
+      &#10003; Guia probatório personalizado
+    </span>
+    <span style="background:#101D33;border:1px solid rgba(0,212,255,0.35);
+                 border-radius:8px;padding:8px 16px;color:#B7C3D0;font-size:0.82rem">
+      &#10003; Linha do tempo do caso
+    </span>
+    <span style="background:#101D33;border:1px solid rgba(0,212,255,0.35);
+                 border-radius:8px;padding:8px 16px;color:#B7C3D0;font-size:0.82rem">
+      &#10003; Contrato e procuração
+    </span>
+    <span style="background:#101D33;border:1px solid rgba(0,212,255,0.35);
+                 border-radius:8px;padding:8px 16px;color:#B7C3D0;font-size:0.82rem">
+      &#10003; Orientações ao cliente
+    </span>
+    <span style="background:#101D33;border:1px solid rgba(0,212,255,0.35);
+                 border-radius:8px;padding:8px 16px;color:#B7C3D0;font-size:0.82rem">
+      &#10003; Pasta organizada do atendimento
+    </span>
+  </div>
+</div>
+""", unsafe_allow_html=True)
+
+    # ── 6. TRÊS CARDS ─────────────────────────────────────────────────────────
+    c1, c2, c3 = st.columns(3)
+    with c1:
+        st.markdown("""
+<div style="background:#101D33;border:1px solid rgba(0,212,255,0.25);border-top:3px solid #123D8D;
+            border-radius:12px;padding:24px 20px;text-align:center;height:100%">
+  <div style="font-size:1.4rem;margin-bottom:12px">💬</div>
+  <div style="color:#00D4FF;font-weight:700;font-size:0.9rem;margin-bottom:10px">
+    Perguntas Inteligentes
+  </div>
+  <div style="color:#B7C3D0;font-size:0.82rem;line-height:1.6">
+    Conduza o atendimento com mais segurança e descubra informações que normalmente
+    surgiriam apenas depois da consulta.
+  </div>
+</div>""", unsafe_allow_html=True)
+    with c2:
+        st.markdown("""
+<div style="background:#101D33;border:1px solid rgba(0,212,255,0.25);border-top:3px solid #00D4FF;
+            border-radius:12px;padding:24px 20px;text-align:center;height:100%">
+  <div style="font-size:1.4rem;margin-bottom:12px">&#128269;</div>
+  <div style="color:#00D4FF;font-weight:700;font-size:0.9rem;margin-bottom:10px">
+    Guia Probatório
+  </div>
+  <div style="color:#B7C3D0;font-size:0.82rem;line-height:1.6">
+    Saiba exatamente quais provas e documentos solicitar
+    para cada tipo de caso.
+  </div>
+</div>""", unsafe_allow_html=True)
+    with c3:
+        st.markdown("""
+<div style="background:#101D33;border:1px solid rgba(0,212,255,0.25);border-top:3px solid #123D8D;
+            border-radius:12px;padding:24px 20px;text-align:center;height:100%">
+  <div style="font-size:1.4rem;margin-bottom:12px">&#128203;</div>
+  <div style="color:#00D4FF;font-weight:700;font-size:0.9rem;margin-bottom:10px">
+    Documentos Prontos
+  </div>
+  <div style="color:#B7C3D0;font-size:0.82rem;line-height:1.6">
+    Organize contratos, procurações e orientações iniciais sem retrabalho.
+  </div>
+</div>""", unsafe_allow_html=True)
+
+    # ── 7. POR QUE O GÊNESIS EXISTE ──────────────────────────────────────────
+    st.markdown("""
+<div style="max-width:900px;margin:40px auto 36px auto;
+            background:#0A1628;border:1px solid #1A2E50;
+            border-radius:16px;padding:40px 48px;text-align:center">
+  <p style="color:#00D4FF;font-weight:700;font-size:1rem;
+            letter-spacing:2px;text-transform:uppercase;margin:0 0 20px 0">
+    Por que o Gênesis existe?
+  </p>
+  <p style="color:#B7C3D0;font-size:0.95rem;line-height:1.8;margin:0 0 16px 0">
+    Já terminou uma consulta e, dias depois, percebeu que deveria ter feito outras perguntas,
+    solicitado outras provas ou aprofundado melhor determinados pontos do caso?
+  </p>
+  <p style="color:#B7C3D0;font-size:0.95rem;line-height:1.8;margin:0 0 16px 0">
+    Isso acontece porque, muitas vezes, o advogado precisa estudar o problema primeiro
+    para só depois descobrir quais informações realmente importam.
+  </p>
+  <p style="color:#F8FAFC;font-size:1rem;font-weight:600;line-height:1.8;margin:0 0 16px 0">
+    O Gênesis foi criado para encurtar esse caminho.
+  </p>
+  <p style="color:#B7C3D0;font-size:0.95rem;line-height:1.8;margin:0 0 16px 0">
+    Ele identifica o tema do caso, conduz uma entrevista inteligente, orienta a coleta
+    das provas mais relevantes e ajuda você a estruturar o atendimento desde o primeiro contato.
+  </p>
+  <p style="color:#B7C3D0;font-size:0.95rem;line-height:1.8;margin:0">
+    Assim, mesmo diante de situações inéditas, você conduz a consulta com mais segurança,
+    transmite mais confiança ao cliente e aumenta suas chances de transformar
+    um atendimento em contratação.
+  </p>
+</div>
+""", unsafe_allow_html=True)
+
+    st.markdown("<br>", unsafe_allow_html=True)
+
+    # ── BOTÕES ────────────────────────────────────────────────────────────────
     col_a, col_b = st.columns(2)
     with col_a:
-        st.markdown("""
-        <div style="background:#141F35;border:2px solid #3A82FF;border-radius:16px;
-                    padding:32px;text-align:center;cursor:pointer">
-            <div style="font-size:2.5rem">👤</div>
-            <div style="font-size:1.1rem;font-weight:800;color:#E2E8F0;margin:12px 0 6px">
-                Novo Atendimento
-            </div>
-            <div style="color:#94A3B8;font-size:0.85rem">
-                Primeira consulta com este cliente
-            </div>
-        </div>
-        """, unsafe_allow_html=True)
-        if st.button("Iniciar novo atendimento", use_container_width=True, type="primary"):
+        if st.button("Iniciar Novo Atendimento", use_container_width=True, type="primary"):
             st.session_state.step = 1
             st.session_state.dados = {}
             st.rerun()
 
     with col_b:
-        st.markdown("""
-        <div style="background:#141F35;border:2px solid #22D3EE;border-radius:16px;
-                    padding:32px;text-align:center">
-            <div style="font-size:2.5rem">📁</div>
-            <div style="font-size:1.1rem;font-weight:800;color:#E2E8F0;margin:12px 0 6px">
-                Cliente Existente
-            </div>
-            <div style="color:#94A3B8;font-size:0.85rem">
-                Ver histórico de atendimentos anteriores
-            </div>
-        </div>
-        """, unsafe_allow_html=True)
 
         busca = st.text_input("🔍 Digite o nome do cliente",
                               placeholder="Ex: Vaneuza...",
@@ -256,77 +406,96 @@ if st.session_state.step == 0:
 
             if encontrados:
                 import platform as _plat, subprocess as _sub
+                import io as _io, zipfile as _zf2
                 from datetime import datetime as _dt
 
                 for pasta in encontrados[:5]:
                     nome_pasta = pasta.name
-                    data_fmt = _dt.fromtimestamp(pasta.stat().st_mtime).strftime("%d/%m/%Y %H:%M")
-                    card = pasta / "03_card_do_caso.txt"
+                    data_fmt   = _dt.fromtimestamp(pasta.stat().st_mtime).strftime("%d/%m/%Y %H:%M")
+
+                    # Lê tema do card
                     tema_txt = ""
+                    card = pasta / "03_card_do_caso.txt"
                     if card.exists():
-                        for linha in card.read_text(encoding="utf-8").split("\n"):
-                            if "Tema" in linha:
-                                tema_txt = linha.strip()
-                                break
+                        try:
+                            for linha in card.read_text(encoding="utf-8").split("\n"):
+                                if "Tema" in linha:
+                                    tema_txt = linha.split(":", 1)[-1].strip()
+                                    break
+                        except: pass
 
-                    nome_display = nome_pasta.split("_")[0].capitalize()
-                    with st.expander(f"📁 {nome_display} — {data_fmt} — {tema_txt if tema_txt else 'sem tema'}"):
-                        import io as _io, zipfile as _zf2
-
-                        # ZIP com todos os documentos
-                        _buf = _io.BytesIO()
-                        _arquivos = [
-                            "01_cadastro_cliente.txt","02_linha_do_tempo.txt",
-                            "03_card_do_caso.txt","04_guia_probatorio.txt",
-                            "05_orientacao_cliente.docx","06_proposta_honorarios.docx",
-                            "07_procuracao.docx","08_contrato_honorarios.docx",
-                            "09_plano_de_acao.txt",
-                        ]
-                        with _zf2.ZipFile(_buf, 'w', _zf2.ZIP_DEFLATED) as _zfile:
-                            for _f in _arquivos:
-                                _fp = pasta / _f
-                                if _fp.exists():
-                                    _zfile.write(_fp, _f)
-                        _buf.seek(0)
-
-                        st.download_button(
-                            label=f"📁 Baixar todos os documentos",
-                            data=_buf.read(),
-                            file_name=f"genesis_{nome_pasta}.zip",
-                            mime="application/zip",
-                            key=f"zip_{nome_pasta}",
-                            use_container_width=True,
-                            type="primary"
-                        )
-
-                        # Abre Explorer no Windows local
-                        if _plat.system() == "Windows":
-                            if st.button("📂 Abrir no Explorer", key=f"exp_{nome_pasta}"):
-                                _sub.Popen(f'explorer "{pasta}"')
-
-                        st.markdown("---")
-                        # Lê cadastro salvo para pré-preencher
-                        cad_file = pasta / "01_cadastro_cliente.txt"
-                        nome_cli, tel_cli = "", ""
-                        if cad_file.exists():
+                    # Lê nome e telefone do cadastro
+                    nome_cli, tel_cli = "", ""
+                    cad_file = pasta / "01_cadastro_cliente.txt"
+                    if cad_file.exists():
+                        try:
                             for ln in cad_file.read_text(encoding="utf-8").split("\n"):
-                                if "Nome" in ln and ":" in ln:
+                                if "Nome" in ln and ":" in ln and not nome_cli:
                                     nome_cli = ln.split(":", 1)[-1].strip()
-                                if "Telefone" in ln and ":" in ln:
+                                if "Telefone" in ln and ":" in ln and not tel_cli:
                                     tel_cli = ln.split(":", 1)[-1].strip()
-                        if st.button("+ Novo caso para este cliente", key=f"novo_{nome_pasta}",
+                        except: pass
+
+                    nome_display = nome_cli or nome_pasta.split("_")[0].capitalize()
+
+                    # Card do cliente
+                    st.markdown(f"""
+<div style="background:#0F1829;border:1px solid #1E3354;border-radius:10px;
+            padding:14px 18px;margin-bottom:10px;">
+  <div style="color:#E2E8F0;font-weight:700;font-size:0.95rem">{nome_display}</div>
+  <div style="color:#475569;font-size:0.78rem;margin-top:2px">
+    {data_fmt} &nbsp;·&nbsp; {tema_txt if tema_txt else 'sem tema registrado'}
+  </div>
+</div>""", unsafe_allow_html=True)
+
+                    col_b1, col_b2 = st.columns(2)
+
+                    # Botão: novo caso
+                    with col_b1:
+                        if st.button("+ Novo caso", key=f"novo_{nome_pasta}",
                                      use_container_width=True, type="primary"):
-                            st.session_state.step = 1
-                            st.session_state.dados = {}
+                            for _k in ["pasta_cliente", "obs_advogado", "prazo_provas", "proximo_contato"]:
+                                st.session_state.pop(_k, None)
+                            st.session_state.step    = 1
+                            st.session_state.dados   = {}
                             st.session_state["prefill_nome"] = nome_cli
                             st.session_state["prefill_tel"]  = tel_cli
                             st.rerun()
+
+                    # Botão: baixar documentos
+                    with col_b2:
+                        try:
+                            _buf = _io.BytesIO()
+                            _arquivos = [
+                                "01_cadastro_cliente.txt","02_linha_do_tempo.txt",
+                                "03_card_do_caso.txt","04_guia_probatorio.txt",
+                                "05_orientacao_cliente.docx","06_proposta_honorarios.docx",
+                                "07_procuracao.docx","08_contrato_honorarios.docx",
+                                "09_plano_de_acao.txt",
+                            ]
+                            with _zf2.ZipFile(_buf, 'w', _zf2.ZIP_DEFLATED) as _zfile:
+                                for _f in _arquivos:
+                                    _fp = pasta / _f
+                                    if _fp.exists():
+                                        _zfile.write(_fp, _f)
+                            _buf.seek(0)
+                            st.download_button(
+                                label="Baixar documentos",
+                                data=_buf.read(),
+                                file_name=f"genesis_{nome_pasta}.zip",
+                                mime="application/zip",
+                                key=f"zip_{nome_pasta}",
+                                use_container_width=True,
+                            )
+                        except Exception as _e:
+                            st.caption(f"Erro ao gerar ZIP: {_e}")
+
             else:
                 st.caption("Nenhum atendimento encontrado para este nome.")
 
     st.stop()   # não renderiza o resto enquanto step == 0
 
-steps = ["Cliente", "Caso", "Entrevista", "Provas", "Resultado"]
+steps = ["Cliente", "Caso", "Análise", "Entrevista", "Provas", "Resultado"]
 cols_step = st.columns(len(steps))
 for i, (col, step) in enumerate(zip(cols_step, steps), 1):
     with col:
@@ -360,26 +529,45 @@ if st.session_state.step == 1:
     col1, col2 = st.columns(2)
     with col1:
         nome      = st.text_input("Nome completo *", value=_pnome)
-        cpf       = st.text_input("CPF")
+        cpf       = st.text_input("CPF", placeholder="000.000.000-00")
         rg        = st.text_input("RG")
-        nascimento= st.text_input("Data de nascimento (DD/MM/AAAA)")
+        nascimento = st.text_input("Data de nascimento", placeholder="01/01/1980")
     with col2:
         profissao = st.text_input("Profissão")
-        telefone  = st.text_input("Telefone / WhatsApp *", value=_ptel)
+        telefone  = st.text_input("Telefone / WhatsApp *", value=_ptel,
+                                   placeholder="(61) 9-8235-2676")
         email     = st.text_input("E-mail")
         endereco  = st.text_input("Endereço completo")
 
     cep = st.text_input("CEP")
 
     st.markdown("<br>", unsafe_allow_html=True)
+
+    def formatar_data(d):
+        """Converte 01011980 ou 01/01/1980 para 01/01/1980."""
+        d = d.strip().replace("-", "/").replace(".", "/")
+        if len(d) == 8 and "/" not in d:
+            return f"{d[:2]}/{d[2:4]}/{d[4:]}"
+        return d
+
+    def formatar_fone(f):
+        """Converte 61982352676 para (61) 9-8235-2676."""
+        f = f.strip().replace(" ","").replace("-","").replace("(","").replace(")","")
+        if len(f) == 11:
+            return f"({f[:2]}) {f[2]}-{f[3:7]}-{f[7:]}"
+        elif len(f) == 10:
+            return f"({f[:2]}) {f[2:6]}-{f[6:]}"
+        return f
+
     if st.button("Avançar →"):
         if not nome or not telefone:
             st.error("Nome e telefone são obrigatórios.")
         else:
             st.session_state.dados["cliente"] = {
                 "nome": nome, "cpf": cpf, "rg": rg,
-                "nascimento": nascimento, "profissao": profissao,
-                "telefone": telefone, "email": email,
+                "nascimento": formatar_data(nascimento),
+                "profissao": profissao,
+                "telefone": formatar_fone(telefone), "email": email,
                 "endereco": endereco, "cep": cep,
                 "polo_passivo": [],
                 "data_atendimento": datetime.now().strftime("%d/%m/%Y %H:%M")
@@ -388,138 +576,575 @@ if st.session_state.step == 1:
             st.rerun()
 
 # ═══════════════════════════════════════════════════════════════════════════════
-# STEP 2 — DESCRIÇÃO DO CASO
+# STEP 2 — DESCRIÇÃO DO CASO (limpo e intuitivo)
 # ═══════════════════════════════════════════════════════════════════════════════
 elif st.session_state.step == 2:
     nome = st.session_state.dados["cliente"]["nome"]
-    st.markdown(f'<div class="section-title">02 — CASO DE {nome.upper()}</div>', unsafe_allow_html=True)
 
+    st.markdown(f'<div class="section-title">02 — CASO DE {nome.upper()}</div>',
+                unsafe_allow_html=True)
+
+    # ── Instrução clara ───────────────────────────────────────────────────────
+    st.markdown("""
+<div style="background:#0F1829;border:1px solid #1E3354;border-left:4px solid #00D4FF;
+            border-radius:10px;padding:16px 20px;margin-bottom:20px">
+  <div style="color:#F8FAFC;font-size:1rem;font-weight:600;margin-bottom:6px">
+    Me conta o que aconteceu com seu cliente.
+  </div>
+  <div style="color:#94A3B8;font-size:0.85rem;line-height:1.6">
+    Descreva com suas próprias palavras — quanto mais detalhes, mais preciso
+    será o roteiro de perguntas que vou gerar.<br>
+    <span style="color:#00D4FF">O Gênesis identifica o tema automaticamente.</span>
+  </div>
+</div>
+""", unsafe_allow_html=True)
+
+    # ── Campo de texto principal ──────────────────────────────────────────────
     descricao = st.text_area(
-        "Descreva o que aconteceu",
-        placeholder="Ex: Meu cliente teve o nome negativado indevidamente no Serasa. A dívida já estava paga há 6 meses e a empresa se recusa a retirar...",
-        height=150
+        "Descrição do caso",
+        placeholder="Ex: Minha cliente descobriu que seu pai biológico faleceu. Ela nunca foi reconhecida. Quer incluir o nome no registro e participar da herança...",
+        height=180,
+        label_visibility="collapsed"
     )
 
-    # Detecta tema em tempo real
+    # ── Detecção em tempo real ────────────────────────────────────────────────
     tema_detectado = None
     if descricao and len(descricao) > 20:
         tema_detectado = detectar_tema(descricao, temas)
         if tema_detectado:
             st.markdown(f"""
-            <div class="tema-badge">
-                ⚡ Tema identificado: <strong>{tema_detectado['subtema']}</strong>
-            </div>
-            """, unsafe_allow_html=True)
+<div style="background:#0A1E0A;border:1px solid #065F46;border-radius:10px;
+            padding:14px 18px;margin-top:12px;display:flex;align-items:center;gap:10px">
+  <span style="font-size:1.2rem">⚡</span>
+  <div>
+    <div style="color:#34D399;font-size:0.75rem;font-weight:700;letter-spacing:1px">
+      TEMA IDENTIFICADO
+    </div>
+    <div style="color:#F8FAFC;font-size:0.95rem;font-weight:600">
+      {tema_detectado['subtema']}
+    </div>
+  </div>
+</div>
+""", unsafe_allow_html=True)
+        else:
+            st.markdown("""
+<div style="background:#1A0A0A;border:1px solid #7F1D1D;border-radius:10px;
+            padding:12px 18px;margin-top:12px;color:#FCA5A5;font-size:0.85rem">
+  ⚠️ Não consegui identificar o tema ainda. Adicione mais detalhes ou selecione abaixo.
+</div>
+""", unsafe_allow_html=True)
 
-    # Linha do tempo
+    # ── Seleção manual (só aparece se não detectou ou usuário quer corrigir) ──
     st.markdown("<br>", unsafe_allow_html=True)
-    st.markdown('<div class="section-title">LINHA DO TEMPO DOS EVENTOS</div>', unsafe_allow_html=True)
-
-    tema_para_datas = tema_detectado or temas[0]
-    marcos = tema_para_datas.get("marcos_temporais", [])
-    marcos_desc = tema_para_datas.get("marcos_descricao", {})
-
-    datas = {}
-    for i, marco in enumerate(marcos):
-        descricao_campo = marcos_desc.get(marco, "")
-        col_dt1, col_dt2 = st.columns([1, 1])
-        with (col_dt1 if i % 2 == 0 else col_dt2):
-            val = st.text_input(
-                marco,
-                placeholder="DD/MM/AAAA, descrição ou 'Não se aplica'",
-                key=f"data_{tema_para_datas['id']}_{i}"
-            )
-            if descricao_campo:
-                st.caption(f"ℹ️ {descricao_campo}")
-            if val:
-                datas[marco] = val
-        st.markdown("")
-
-    # Seleção manual de tema
-    if not tema_detectado and descricao:
-        st.warning("Tema não detectado automaticamente. Selecione abaixo:")
-
     nomes_temas = [t["subtema"] for t in temas]
     idx_tema = 0
     if tema_detectado:
         idx_tema = next((i for i, t in enumerate(temas) if t["id"] == tema_detectado["id"]), 0)
 
-    tema_escolhido_nome = st.selectbox("Tipo de caso", nomes_temas, index=idx_tema)
+    mostrar_selecao = st.checkbox("Corrigir tema manualmente" if tema_detectado else "Selecionar tema")
+    if mostrar_selecao or not tema_detectado:
+        tema_escolhido_nome = st.selectbox("Tipo de caso", nomes_temas, index=idx_tema,
+                                            label_visibility="collapsed")
+    else:
+        tema_escolhido_nome = tema_detectado["subtema"]
     tema_final = next(t for t in temas if t["subtema"] == tema_escolhido_nome)
 
+    # ── Navegação ─────────────────────────────────────────────────────────────
     col_nav = st.columns(2)
     with col_nav[0]:
         if st.button("← Voltar"):
             st.session_state.step = 1
             st.rerun()
     with col_nav[1]:
-        if st.button("Avançar →"):
-            if not descricao:
+        if st.button("Avançar →", type="primary"):
+            if not descricao or len(descricao) < 10:
                 st.error("Descreva o caso antes de avançar.")
             else:
                 st.session_state.dados["descricao"] = descricao
-                st.session_state.dados["datas"] = datas
+                st.session_state.dados["datas"] = {}   # preenchido no step 3
                 st.session_state.dados["tema"] = tema_final
                 st.session_state.step = 3
                 st.rerun()
 
 # ═══════════════════════════════════════════════════════════════════════════════
-# STEP 3 — ENTREVISTA GUIADA
+# ═══════════════════════════════════════════════════════════════════════════════
+# STEP 3 — ANÁLISE DE INTELIGÊNCIA
 # ═══════════════════════════════════════════════════════════════════════════════
 elif st.session_state.step == 3:
-    tema = st.session_state.dados["tema"]
-    st.markdown(f'<div class="section-title">03 — ENTREVISTA · {tema["subtema"].upper()}</div>', unsafe_allow_html=True)
+    import unicodedata
 
-    respostas = {}
-    for pq in tema.get("perguntas_consulta", []):
+    tema      = st.session_state.dados["tema"]
+    descricao = st.session_state.dados["descricao"]
+    cliente   = st.session_state.dados.get("cliente", {})
+    intel     = tema.get("inteligencia", {})
+
+    def _norm(t):
+        return unicodedata.normalize('NFKD', t).encode('ASCII', 'ignore').decode('ASCII').lower()
+
+    desc_norm = _norm(descricao)
+
+    # ── Detecta subtema (best-score, não first-match) ────────────────────────
+    subtemas_kw = intel.get("subtemas", {})
+    subtema_detectado = intel.get("subtema_default", tema.get("subtema", ""))
+    melhor_pts = 0
+    for nome_sub, kws in subtemas_kw.items():
+        pts = sum(1 for kw in kws if _norm(kw) in desc_norm)
+        if pts > melhor_pts:
+            melhor_pts, subtema_detectado = pts, nome_sub
+
+    # ── Extrai fatos do relato ───────────────────────────────────────────────
+    import re
+    fatos = []
+    nome_cliente = cliente.get("nome", "")
+    if nome_cliente:
+        fatos.append(f"Cliente: {nome_cliente}")
+
+    # Idade
+    m = re.search(r'(\d{1,2})\s*anos', descricao)
+    if m:
+        fatos.append(f"Idade informada: {m.group(1)} anos")
+
+    # Falecimento
+    if any(p in desc_norm for p in ["faleceu", "falecido", "falecimento", "morreu", "obito"]):
+        # Tenta capturar mês/ano
+        m2 = re.search(r'(janeiro|fevereiro|março|marco|abril|maio|junho|julho|agosto|setembro|outubro|novembro|dezembro)\s+de\s+(\d{4})', descricao, re.IGNORECASE)
+        if m2:
+            fatos.append(f"Falecimento mencionado: {m2.group(1)} de {m2.group(2)}")
+        else:
+            fatos.append("Falecimento mencionado no relato")
+
+    # DNA / exame
+    if "dna" in desc_norm or "exame" in desc_norm:
+        fatos.append("Possibilidade de exame de DNA mencionada")
+
+    # Herança / inventário
+    if any(p in desc_norm for p in ["heranca", "inventario", "quinhao", "bens"]):
+        fatos.append("Interesse patrimonial/sucessório mencionado")
+
+    # Registro civil
+    if any(p in desc_norm for p in ["registro", "certidao", "certidão"]):
+        fatos.append("Questão de registro civil mencionada")
+
+    # Guarda / visitas
+    if any(p in desc_norm for p in ["guarda", "visita", "visitacao"]):
+        fatos.append("Questão de guarda/visitas mencionada")
+
+    # Pensão alimentícia
+    if any(p in desc_norm for p in ["pensao", "alimentos", "alimenticio"]):
+        fatos.append("Questão alimentar mencionada")
+
+    # Casamento / divórcio
+    if any(p in desc_norm for p in ["casamento", "casados", "divorc", "separac"]):
+        fatos.append("Vínculo matrimonial mencionado")
+
+    # União estável
+    if any(p in desc_norm for p in ["uniao estavel", "companheiro", "companheira"]):
+        fatos.append("União estável mencionada")
+
+    # Imóvel
+    if any(p in desc_norm for p in ["apartamento", "imovel", "casa", "imovel", "lote"]):
+        fatos.append("Bem imóvel mencionado")
+
+    # ── Fatos TRABALHISTA ────────────────────────────────────────────────────
+    tema_id = tema.get("id", "")
+    if "TRABALHISTA" in tema_id or any(p in desc_norm for p in ["trabalhista","vinculo","clt","trt"]):
+        if any(p in desc_norm for p in ["carteira", "ctps", "anotacao"]):
+            fatos.append("Registro em carteira mencionado")
+        if any(p in desc_norm for p in ["informal", "sem carteira", "autonomo", "autonoma"]):
+            fatos.append("Vínculo informal mencionado")
+        if any(p in desc_norm for p in ["pejotizacao", "pj", "pessoa juridica"]):
+            fatos.append("Possível pejotização (PJ forçada) mencionada")
+        if any(p in desc_norm for p in ["prescrit", "prescricao", "prazo"]):
+            fatos.append("Questão de prescrição mencionada")
+        if any(p in desc_norm for p in ["demissao", "demitido", "dispensado", "rescisao"]):
+            fatos.append("Rescisão/demissão mencionada")
+        if any(p in desc_norm for p in ["subordinacao", "horario", "jornada"]):
+            fatos.append("Indício de subordinação mencionado")
+
+    # ── Fatos SOCIETÁRIO ─────────────────────────────────────────────────────
+    if "SOCIETARIO" in tema_id or any(p in desc_norm for p in ["socio", "quadro", "contrato social", "empresa"]):
+        if any(p in desc_norm for p in ["inclusao indevida", "incluido sem", "sem saber", "sem autorizar"]):
+            fatos.append("Possível inclusão indevida no quadro societário")
+        if any(p in desc_norm for p in ["assinatura", "falsificada", "forjada", "nao assinou"]):
+            fatos.append("Questão de assinatura/falsificação mencionada")
+        if any(p in desc_norm for p in ["desconsideracao", "penhora", "bloqueio", "execucao"]):
+            fatos.append("Execução/desconsideração da personalidade mencionada")
+        if any(p in desc_norm for p in ["nulidade", "nulo", "invalido", "fraudulento"]):
+            fatos.append("Nulidade do ato societário mencionada")
+        if any(p in desc_norm for p in ["jucdf", "junta comercial"]):
+            fatos.append("Via administrativa JUCDF mencionada")
+        if any(p in desc_norm for p in ["trabalhista", "trt", "reclamacao trabalhista"]):
+            fatos.append("Conexão com processo trabalhista mencionada")
+
+    # Label do subtema — usa o detectado diretamente (sem override hardcoded)
+    if subtema_detectado and subtema_detectado != intel.get("subtema_default", ""):
+        subtema_label = f"{tema['subtema']} › {subtema_detectado.title()}"
+    else:
+        subtema_label = tema["subtema"]
+
+    # ── Hipóteses e Lacunas para subtema detectado ───────────────────────────
+    hipoteses_mapa = intel.get("hipoteses", {})
+    lacunas_mapa   = intel.get("lacunas", {})
+
+    hipoteses = hipoteses_mapa.get(subtema_detectado, [])
+    lacunas   = lacunas_mapa.get(subtema_detectado, [])
+
+    # Filtra lacunas que o relato já respondeu
+    lacunas_reais = []
+    for lac in lacunas:
+        lac_norm = _norm(lac)
+        # Heurística: se mais de 3 palavras-chave da lacuna aparecem no relato, pula
+        palavras = [w for w in lac_norm.split() if len(w) > 4]
+        hits = sum(1 for w in palavras if w in desc_norm)
+        if hits < 2:
+            lacunas_reais.append(lac)
+
+    # ── RENDER ──────────────────────────────────────────────────────────────
+    st.markdown('<div class="section-title">03 — O QUE O GÊNESIS ENTENDEU</div>',
+                unsafe_allow_html=True)
+    st.markdown(
+        "<div style='color:#94A3B8;font-size:0.85rem;margin-bottom:1.5rem'>"
+        "Com base no relato inicial, o Gênesis identificou os pontos abaixo. "
+        "As perguntas seguintes servem para confirmar, ajustar ou detalhar."
+        "</div>",
+        unsafe_allow_html=True
+    )
+
+    # Subtema
+    st.markdown(f"""
+    <div style="background:#141F35;border:1px solid #1E3354;border-left:4px solid #818CF8;
+                border-radius:10px;padding:14px 18px;margin-bottom:1rem">
+        <div style="color:#818CF8;font-size:0.7rem;font-weight:700;letter-spacing:2px;
+                    text-transform:uppercase;margin-bottom:4px">Tema identificado</div>
+        <div style="color:#E2E8F0;font-size:1rem;font-weight:700">{subtema_label}</div>
+    </div>
+    """, unsafe_allow_html=True)
+
+    col_a, col_b = st.columns(2)
+
+    # Bloco Fatos Confirmados
+    with col_a:
+        if fatos:
+            fatos_html = "".join(
+                f"<div style='display:flex;align-items:flex-start;gap:8px;margin-bottom:6px'>"
+                f"<span style='color:#34D399;font-weight:700;flex-shrink:0'>✓</span>"
+                f"<span style='color:#CBD5E1;font-size:0.88rem'>{f}</span></div>"
+                for f in fatos
+            )
+            st.markdown(f"""
+            <div style="background:#0F1829;border:1px solid #1E3354;border-radius:10px;
+                        padding:16px 18px;height:100%">
+                <div style="color:#34D399;font-size:0.7rem;font-weight:700;letter-spacing:2px;
+                            text-transform:uppercase;margin-bottom:10px">✓ Fatos identificados</div>
+                {fatos_html}
+            </div>
+            """, unsafe_allow_html=True)
+
+    # Bloco Hipóteses Jurídicas
+    with col_b:
+        if hipoteses:
+            hip_html = "".join(
+                f"<div style='display:flex;align-items:flex-start;gap:8px;margin-bottom:6px'>"
+                f"<span style='color:#FBBF24;font-weight:700;flex-shrink:0'>◈</span>"
+                f"<span style='color:#CBD5E1;font-size:0.88rem'>{h}</span></div>"
+                for h in hipoteses
+            )
+            st.markdown(f"""
+            <div style="background:#0F1829;border:1px solid #1E3354;border-radius:10px;
+                        padding:16px 18px;height:100%">
+                <div style="color:#FBBF24;font-size:0.7rem;font-weight:700;letter-spacing:2px;
+                            text-transform:uppercase;margin-bottom:10px">◈ Hipóteses jurídicas prováveis</div>
+                <div style="color:#64748B;font-size:0.74rem;margin-bottom:8px;font-style:italic">
+                    hipóteses iniciais — sujeitas à confirmação
+                </div>
+                {hip_html}
+            </div>
+            """, unsafe_allow_html=True)
+
+    # Bloco Lacunas
+    if lacunas_reais:
+        st.markdown("<br>", unsafe_allow_html=True)
+        lac_html = "".join(
+            f"<div style='display:flex;align-items:flex-start;gap:8px;margin-bottom:6px'>"
+            f"<span style='color:#F59E0B;font-weight:700;flex-shrink:0'>🟡</span>"
+            f"<span style='color:#CBD5E1;font-size:0.88rem'>{l}</span></div>"
+            for l in lacunas_reais
+        )
         st.markdown(f"""
-        <div style="background:#141F35;border:1px solid #1E3354;border-left:4px solid #3A82FF;
-                    border-radius:10px;padding:16px 20px;margin-bottom:12px;
-                    box-shadow:0 1px 4px rgba(0,0,0,0.06)">
-            <div style="font-weight:700;color:#E2E8F0;font-size:0.95rem;margin-bottom:6px">
-                {pq['id']}. {pq['pergunta']}
+        <div style="background:#0F1829;border:1px solid #1E3354;border-radius:10px;
+                    padding:16px 18px">
+            <div style="color:#F59E0B;font-size:0.7rem;font-weight:700;letter-spacing:2px;
+                        text-transform:uppercase;margin-bottom:10px">🟡 O que ainda precisamos confirmar</div>
+            <div style="color:#64748B;font-size:0.74rem;margin-bottom:8px;font-style:italic">
+                As perguntas seguintes foram geradas a partir dessas lacunas
             </div>
-            <div style="color:#22D3EE;font-size:0.78rem">
-                &#9654;&nbsp; {pq['motivo']}
-            </div>
+            {lac_html}
         </div>
         """, unsafe_allow_html=True)
-        resp = st.text_area("Resposta", key=f"resp_{pq['id']}", height=70,
-                            label_visibility="collapsed",
-                            placeholder="Digite a resposta aqui...")
-        respostas[pq["id"]] = resp or "(não informado)"
-        st.markdown("<div style='margin-bottom:8px'></div>", unsafe_allow_html=True)
 
+    # ── ALERTAS ESTRATÉGICOS por tema/subtema ────────────────────────────────
+    tema_id_s3 = tema.get("id", "")
+
+    # Alerta: STF Tema 1.389 — pejotização suspensa
+    if subtema_detectado == "vinculo_societario" or "pejotizacao" in desc_norm or "pejotiz" in desc_norm:
+        st.markdown("""
+<div style="background:#1A0F00;border:1px solid #F59E0B;border-left:5px solid #F59E0B;
+            border-radius:10px;padding:16px 20px;margin-top:16px">
+  <div style="color:#F59E0B;font-size:0.72rem;font-weight:800;letter-spacing:2px;
+              text-transform:uppercase;margin-bottom:6px">⚠️ Alerta — STF Tema 1.389</div>
+  <div style="color:#FDE68A;font-size:0.9rem;font-weight:600;margin-bottom:4px">
+    Processos de pejotização com verbas trabalhistas estão SUSPENSOS nacionalmente desde abril/2025
+  </div>
+  <div style="color:#B45309;font-size:0.82rem;line-height:1.5">
+    Estratégia recomendada: ajuizar ação <strong>declaratória de vínculo</strong> no TRT-10 (imprescritível).
+    A sentença declaratória serve de base para <strong>nulidade do quadro societário no TJDFT</strong> (CC art. 169 — nulidade absoluta = imprescritível).
+    Consulte TST Tema 30 antes de prosseguir com pedidos de verbas.
+  </div>
+</div>
+""", unsafe_allow_html=True)
+
+    # Alerta: Via administrativa JUCDF — mais rápida e gratuita
+    if subtema_detectado == "nulidade_inclusao" or "SOCIETARIO" in tema_id_s3:
+        st.markdown("""
+<div style="background:#001A0F;border:1px solid #34D399;border-left:5px solid #34D399;
+            border-radius:10px;padding:16px 20px;margin-top:12px">
+  <div style="color:#34D399;font-size:0.72rem;font-weight:800;letter-spacing:2px;
+              text-transform:uppercase;margin-bottom:6px">💡 Via Administrativa — JUCDF</div>
+  <div style="color:#6EE7B7;font-size:0.9rem;font-weight:600;margin-bottom:4px">
+    Exclusão do quadro societário pode ser feita sem processo judicial
+  </div>
+  <div style="color:#065F46;font-size:0.82rem;line-height:1.5">
+    Se houver assinatura falsificada comprovada (perícia grafotécnica ou declaração), o JUCDF
+    aceita pedido administrativo de <strong>anulação de alteração contratual</strong>.
+    É gratuito, mais rápido e não exclui a via judicial posterior.
+    <strong>Avaliar sempre antes de ajuizar.</strong>
+  </div>
+</div>
+""", unsafe_allow_html=True)
+
+    # Alerta: Desconsideração — requisitos da teoria maior
+    if subtema_detectado == "desconsideracao":
+        st.markdown("""
+<div style="background:#0A0A1A;border:1px solid #818CF8;border-left:5px solid #818CF8;
+            border-radius:10px;padding:16px 20px;margin-top:12px">
+  <div style="color:#818CF8;font-size:0.72rem;font-weight:800;letter-spacing:2px;
+              text-transform:uppercase;margin-bottom:6px">⚖️ Atenção — Teoria Maior (CC art. 50)</div>
+  <div style="color:#C7D2FE;font-size:0.9rem;font-weight:600;margin-bottom:4px">
+    TJDFT exige desvio de finalidade OU confusão patrimonial
+  </div>
+  <div style="color:#4338CA;font-size:0.82rem;line-height:1.5">
+    Encerramento irregular da empresa <strong>sozinho não basta</strong> (TJDFT 2127976/2026).
+    É necessário provar: (a) desvio de finalidade — uso da PJ para fins ilícitos;
+    ou (b) confusão patrimonial — mistura de bens pessoais e da empresa.
+    <strong>Competência: Vara Cível comum</strong>, não Vara Empresarial.
+  </div>
+</div>
+""", unsafe_allow_html=True)
+
+    st.markdown("<br>", unsafe_allow_html=True)
     col_nav = st.columns(2)
     with col_nav[0]:
         if st.button("← Voltar"):
             st.session_state.step = 2
             st.rerun()
     with col_nav[1]:
-        if st.button("Avançar →"):
-            st.session_state.dados["respostas"] = respostas
+        if st.button("Avançar — Responder perguntas →", type="primary"):
+            st.session_state.dados["subtema_detectado"] = subtema_detectado
             st.session_state.step = 4
             st.rerun()
 
-# ═══════════════════════════════════════════════════════════════════════════════
-# STEP 4 — GUIA PROBATÓRIO
+# STEP 4 — ENTREVISTA GUIADA
 # ═══════════════════════════════════════════════════════════════════════════════
 elif st.session_state.step == 4:
     tema = st.session_state.dados["tema"]
-    st.markdown(f'<div class="section-title">04 — PROVAS DO CASO</div>', unsafe_allow_html=True)
+    subtema_label_4 = st.session_state.dados.get("subtema_detectado", tema.get("subtema","")).upper()
+    st.markdown(f'<div class="section-title">04 — ENTREVISTA · {subtema_label_4}</div>',
+                unsafe_allow_html=True)
+
+    # ── Seleciona marcos e perguntas baseado no subtema detectado ────────────
+    subtema_det = st.session_state.dados.get("subtema_detectado", "")
+    marcos_sub  = tema.get("marcos_por_subtema", {}).get(subtema_det, {})
+    if marcos_sub:
+        marcos      = marcos_sub.get("marcos", [])
+        marcos_desc = marcos_sub.get("descricao", {})
+    else:
+        marcos      = tema.get("marcos_temporais", [])
+        marcos_desc = tema.get("marcos_descricao", {})
+
+    perguntas_sub = tema.get("perguntas_por_subtema", {}).get(subtema_det, [])
+    perguntas_ativas = perguntas_sub if perguntas_sub else tema.get("perguntas_consulta", [])
+
+    datas = st.session_state.dados.get("datas", {})
+
+    if marcos:
+        st.markdown('<div class="section-title">LINHA DO TEMPO DOS EVENTOS</div>',
+                    unsafe_allow_html=True)
+        st.caption("Preencha o que souber. Deixe em branco ou escreva 'Não sei' se não tiver a informação.")
+        st.markdown("<br>", unsafe_allow_html=True)
+
+        col_dt1, col_dt2 = st.columns(2)
+        for i, marco in enumerate(marcos):
+            descricao_campo = marcos_desc.get(marco, "")
+            with (col_dt1 if i % 2 == 0 else col_dt2):
+                val = st.text_input(
+                    marco,
+                    value=datas.get(marco, ""),
+                    placeholder="DD/MM/AAAA ou 'Não se aplica'",
+                    key=f"dt3_{tema['id']}_{i}"
+                )
+                if descricao_campo:
+                    st.caption(f"ℹ️ {descricao_campo}")
+                if val:
+                    datas[marco] = val
+        st.session_state.dados["datas"] = datas
+        st.markdown("<br>", unsafe_allow_html=True)
+        st.markdown("---")
+        st.markdown("<br>", unsafe_allow_html=True)
+
+    # ── MOTOR DE PERGUNTAS CONDICIONAIS ──────────────────────────────────────
+    st.markdown('<div class="section-title">PERGUNTAS DO CASO</div>', unsafe_allow_html=True)
+    st.caption("Responda o que souber. Novas perguntas aparecerão conforme o caso se desenvolve.")
+    st.markdown("<br>", unsafe_allow_html=True)
+
+    # Todas as perguntas do subtema, indexadas por id
+    todas_pqs = perguntas_ativas  # lista com campo 'condicao' opcional
+    todas_por_id = {p["id"]: p for p in todas_pqs if "id" in p}
+
+    # Recupera respostas já dadas nesta sessão
+    respostas = st.session_state.dados.get("respostas_motor", {})
+
+    def _condicao_ok(pq, resps):
+        """Retorna True se a pergunta deve ser exibida."""
+        cond = pq.get("condicao")
+        if not cond:
+            return True
+        # formato: "ID=Valor"
+        partes = cond.split("=", 1)
+        if len(partes) != 2:
+            return False
+        ref_id, val_esperado = partes
+        return resps.get(ref_id, "") == val_esperado
+
+    # Calcula quais perguntas estão ativas agora (com base nas respostas atuais)
+    pqs_visiveis = [p for p in todas_pqs if _condicao_ok(p, respostas)]
+
+    # Renderiza cada pergunta visível
+    num_visivel = 0
+    for pq in pqs_visiveis:
+        pq_id   = pq.get("id", "")
+        tipo    = pq.get("tipo", "texto")
+        opcoes  = pq.get("opcoes", [])
+        cond    = pq.get("condicao")
+
+        # Badge condicional (sinaliza visualmente que surgiu por uma resposta)
+        badge = ""
+        if cond:
+            badge = "<span style='background:#1E3354;color:#22D3EE;font-size:0.65rem;padding:2px 8px;border-radius:99px;margin-left:8px'>↳ pergunta adicional</span>"
+
+        num_visivel += 1
+        st.markdown(f"""
+        <div style="background:#141F35;border:1px solid #1E3354;border-left:4px solid {'#22D3EE' if cond else '#3A82FF'};
+                    border-radius:10px;padding:14px 18px;margin-bottom:8px">
+            <div style="font-weight:700;color:#E2E8F0;font-size:0.92rem;margin-bottom:4px">
+                {num_visivel}. {pq['pergunta']}{badge}
+            </div>
+            <div style="color:#64748B;font-size:0.76rem">
+                &#9654;&nbsp; {pq.get('motivo','')}
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+
+        resp_atual = respostas.get(pq_id, "")
+
+        if tipo == "sim_nao":
+            opcoes_sn = ["— selecione —", "Sim", "Não"]
+            idx_sn = opcoes_sn.index(resp_atual) if resp_atual in opcoes_sn else 0
+            resp = st.selectbox("", opcoes_sn, index=idx_sn,
+                                key=f"motor_{pq_id}", label_visibility="collapsed")
+            if resp != "— selecione —":
+                respostas[pq_id] = resp
+            elif pq_id in respostas:
+                del respostas[pq_id]
+
+        elif tipo == "escolha" and opcoes:
+            opcoes_c = ["— selecione —"] + opcoes
+            idx_c = opcoes_c.index(resp_atual) if resp_atual in opcoes_c else 0
+            resp = st.selectbox("", opcoes_c, index=idx_c,
+                                key=f"motor_{pq_id}", label_visibility="collapsed")
+            if resp != "— selecione —":
+                respostas[pq_id] = resp
+            elif pq_id in respostas:
+                del respostas[pq_id]
+
+        else:  # texto
+            resp = st.text_area("", value=resp_atual, height=68,
+                                key=f"motor_{pq_id}", label_visibility="collapsed",
+                                placeholder="Digite aqui...")
+            if resp.strip():
+                respostas[pq_id] = resp.strip()
+            elif pq_id in respostas:
+                del respostas[pq_id]
+
+        st.markdown("<div style='margin-bottom:4px'></div>", unsafe_allow_html=True)
+
+    # Salva respostas no session_state a cada rerun
+    st.session_state.dados["respostas_motor"] = respostas
+
+    # Contador dinâmico
+    total_possiveis = len(todas_pqs)
+    total_visiveis  = len(pqs_visiveis)
+    st.markdown(f"""
+    <div style="color:#475569;font-size:0.75rem;text-align:right;margin-top:8px">
+        {total_visiveis} pergunta(s) ativas · máximo possível: {total_possiveis}
+    </div>
+    """, unsafe_allow_html=True)
+
+    col_nav = st.columns(2)
+    with col_nav[0]:
+        if st.button("← Voltar"):
+            st.session_state.step = 3
+            st.rerun()
+    with col_nav[1]:
+        if st.button("Avançar →"):
+            # Salva respostas consolidadas (motor condicional)
+            st.session_state.dados["respostas"] = st.session_state.dados.get("respostas_motor", {})
+            st.session_state.step = 5
+            st.rerun()
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# STEP 5 — GUIA PROBATÓRIO
+# ═══════════════════════════════════════════════════════════════════════════════
+elif st.session_state.step == 5:
+    tema = st.session_state.dados["tema"]
+    st.markdown(f'<div class="section-title">05 — PROVAS DO CASO</div>', unsafe_allow_html=True)
 
     st.markdown("**Para cada prova, informe a situação atual:**")
-    st.caption("✅ Já tem  ·  🔄 Vai buscar  ·  ⚠️ Não tem / Não existe")
+    st.caption("Selecione o que melhor descreve a situação de cada documento.")
     st.markdown("<br>", unsafe_allow_html=True)
 
     provas_tem = {}
-    opcoes = ["✅ Já tem", "🔄 Vai buscar", "⚠️ Não tem / Não existe"]
+    opcoes = [
+        "✅ Já tenho",
+        "🔄 Vou buscar",
+        "⚠️ Não tenho e não vou conseguir",
+        "❓ Não sei se existe",
+        "➖ Não se aplica"
+    ]
 
-    for prova in tema.get("provas_essenciais", []):
+    subtema_det = st.session_state.dados.get("subtema_detectado", "")
+    provas_sub_data = tema.get("provas_por_subtema", {}).get(subtema_det, {})
+    provas_ativas = provas_sub_data.get("provas", []) if provas_sub_data else tema.get("provas_essenciais", [])
+    provas_como_obter = provas_sub_data.get("como_obter", {}) if provas_sub_data else tema.get("provas_como_obter", {})
+
+    for prova in provas_ativas:
         col_p1, col_p2 = st.columns([2, 1])
         with col_p1:
-            st.markdown(f"<div style='color:#E2E8F0;font-size:0.9rem;padding-top:8px'>{prova}</div>",
+            st.markdown(f"<div style='color:#E2E8F0;font-size:0.9rem;padding-top:8px;font-weight:600'>{prova}</div>",
                         unsafe_allow_html=True)
+            como = provas_como_obter.get(prova, "")
+            if como:
+                st.markdown(f"<div style='color:#94A3B8;font-size:0.78rem;margin-top:2px'>→ {como}</div>",
+                            unsafe_allow_html=True)
         with col_p2:
             status = st.selectbox(
                 label=prova,
@@ -528,16 +1153,16 @@ elif st.session_state.step == 4:
                 label_visibility="collapsed"
             )
         provas_tem[prova] = status
-        st.markdown("<div style='margin-bottom:4px'></div>", unsafe_allow_html=True)
+        st.markdown("<div style='margin-bottom:8px'></div>", unsafe_allow_html=True)
 
     # Como obter — só mostra para quem vai buscar ou não tem
     st.markdown("<br>", unsafe_allow_html=True)
-    pendentes = {p: s for p, s in provas_tem.items() if "Vai buscar" in s or "Não tem" in s}
+    pendentes = {p: s for p, s in provas_tem.items() if "Vou buscar" in s or "Não tenho" in s}
     if pendentes:
         st.markdown("**Como obter as provas pendentes:**")
         for prova, status in pendentes.items():
-            como = tema.get("provas_como_obter", {}).get(prova, "")
-            emoji = "🔄" if "Vai buscar" in status else "⚠️"
+            como = provas_como_obter.get(prova, "")
+            emoji = "🔄" if "Vou buscar" in status else "⚠️"
             if como:
                 st.markdown(f"{emoji} **{prova}**  \n→ {como}")
 
@@ -574,7 +1199,7 @@ elif st.session_state.step == 4:
     col_r1, col_r2 = st.columns(2)
     with col_r1:
         label_nome = "Nome completo" if is_pf else "Razão Social"
-        reu_nome = st.text_input(f"{label_nome} *", key="reu_nome")
+        reu_nome = st.text_input(label_nome, key="reu_nome")
     with col_r2:
         label_doc = "CPF" if is_pf else "CNPJ"
         reu_doc = st.text_input(label_doc, key="reu_doc")
@@ -601,7 +1226,7 @@ elif st.session_state.step == 4:
     col_nav = st.columns(2)
     with col_nav[0]:
         if st.button("← Voltar"):
-            st.session_state.step = 3
+            st.session_state.step = 4
             st.rerun()
     with col_nav[1]:
         if st.button("⚡ Gerar Análise e Documentos"):
@@ -615,18 +1240,27 @@ elif st.session_state.step == 4:
                 "parcelas": parcelas,
                 "referencia": tema.get("valor_referencia", "A calcular")
             }
-            st.session_state.step = 5
+            st.session_state.step = 6
             st.rerun()
 
 # ═══════════════════════════════════════════════════════════════════════════════
-# STEP 5 — RESULTADO FINAL
+# STEP 6 — RESULTADO FINAL
 # ═══════════════════════════════════════════════════════════════════════════════
-elif st.session_state.step == 5:
+elif st.session_state.step == 6:
     import sys
     sys.path.insert(0, str(PASTA))
     from modo_consultoria_v2 import gerar_todos_documentos
 
     d = st.session_state.dados
+    # Proteção: se dados incompletos, volta ao início
+    chaves_necessarias = ["cliente", "tema", "descricao", "datas", "respostas", "provas_tem", "honor"]
+    if not all(k in d for k in chaves_necessarias):
+        st.error("Sessão incompleta. Reiniciando atendimento...")
+        st.session_state.step = 0
+        st.session_state.dados = {}
+        for _k in ["pasta_cliente", "obs_advogado", "prazo_provas", "proximo_contato"]:
+            st.session_state.pop(_k, None)
+        st.rerun()
     cliente   = d["cliente"]
     tema      = d["tema"]
     descricao = d["descricao"]
@@ -635,10 +1269,10 @@ elif st.session_state.step == 5:
     provas    = d["provas_tem"]
     honor     = d["honor"]
 
-    # Classifica provas pelos 3 estados
-    provas_ja_tem  = [p for p, v in provas.items() if "Já tem" in str(v)]
-    provas_buscar  = [p for p, v in provas.items() if "Vai buscar" in str(v)]
-    provas_nao_tem = [p for p, v in provas.items() if "Não tem" in str(v)]
+    # Classifica provas pelos estados
+    provas_ja_tem  = [p for p, v in provas.items() if "Já tenho" in str(v)]
+    provas_buscar  = [p for p, v in provas.items() if "Vou buscar" in str(v)]
+    provas_nao_tem = [p for p, v in provas.items() if "Não tenho" in str(v) or "Não sei" in str(v)]
     total = len(provas)
     tem_count = len(provas_ja_tem)
 
@@ -815,10 +1449,12 @@ elif st.session_state.step == 5:
             </div>
             """, unsafe_allow_html=True)
 
-        # ── ORIENTAÇÕES AO CLIENTE ────────────────────────────────────────────
+        # ── ORIENTAÇÕES AO CLIENTE (filtradas por subtema) ───────────────────
         st.markdown("<br>", unsafe_allow_html=True)
         st.markdown('<div class="section-title">ORIENTAÇÕES AO CLIENTE</div>', unsafe_allow_html=True)
-        oris = tema.get("orientacao_cliente", [])
+        subtema_det6 = d.get("subtema_detectado", "")
+        oris = (tema.get("orientacao_por_subtema", {}).get(subtema_det6)
+                or tema.get("orientacao_cliente", []))
         for i, ori in enumerate(oris, 1):
             st.markdown(f"""
             <div style="background:#1E293B;border:1px solid #334155;border-radius:8px;
@@ -850,7 +1486,7 @@ elif st.session_state.step == 5:
                            height=90, key="obs_advogado")
 
         # Gera mensagem de WhatsApp automaticamente
-        provas_faltam = [p for p, v in provas.items() if "Vai buscar" in str(v) or "Não tem" in str(v)]
+        provas_faltam = [p for p, v in provas.items() if "Vou buscar" in str(v) or "Não tenho" in str(v) or "Não sei" in str(v)]
         prazo_str     = prazo_provas.strftime("%d/%m/%Y") if prazo_provas else "___/___/______"
         contato_str   = proximo_contato.strftime("%d/%m/%Y") if proximo_contato else "___/___/______"
 

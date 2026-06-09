@@ -31,7 +31,7 @@ if sys.stdout.encoding and sys.stdout.encoding.lower() != "utf-8":
 PASTA      = Path(__file__).parent
 TEMAS_JSON = PASTA / "consulta_temas_v2.json"
 CLIENTES   = PASTA / "clientes"
-TIMBRE     = Path(r"C:\Users\ADMIM\OneDrive\Área de Trabalho\02 - FROSA - Copia\00 - TIMBRE\2 - TIMBRE_FERNANDO ROSA.docx")
+TIMBRE     = Path(r"C:\Users\ADMIM\OneDrive\Área de Trabalho\1 - TUDO_2026\02 - FROSA\00 - TIMBRE\2 - TIMBRE_FERNANDO ROSA.docx")
 CLIENTES.mkdir(exist_ok=True)
 
 ADV_NOME  = "Fernando Rosa da Silva"
@@ -199,20 +199,40 @@ def gerar_docx_com_timbre(caminho, conteudo_paragrafos):
 
         for bloco in conteudo_paragrafos:
             par = doc.add_paragraph()
-            par.alignment = bloco.get("align", WD_ALIGN_PARAGRAPH.JUSTIFY)
+            # align: 0=esquerda, 1=centralizado, 2=direita, 3=justificado
+            alinhamento = bloco.get("align", WD_ALIGN_PARAGRAPH.JUSTIFY)
+            if bloco.get("center"):
+                alinhamento = WD_ALIGN_PARAGRAPH.CENTER
+            par.alignment = alinhamento
             par.paragraph_format.space_after = Pt(bloco.get("sa", 8))
             run = par.add_run(bloco["texto"])
             run.bold      = bloco.get("bold", False)
-            run.font.name = "Aptos"
+            run.font.name = bloco.get("font", "Arial")
             run.font.size = Pt(bloco.get("size", 12))
 
         doc.save(str(caminho))
         return True
     except Exception as e:
-        # Fallback: salva como txt
-        caminho_txt = caminho.with_suffix(".txt")
-        caminho_txt.write_text("\n".join(b["texto"] for b in conteudo_paragrafos), encoding="utf-8")
-        return False
+        # Log do erro para diagnóstico
+        log = caminho.parent / "_erros_docx.txt"
+        log.write_text(f"Erro ao gerar {caminho.name}: {e}\nTIMBRE: {TIMBRE}\n", encoding="utf-8")
+        # Fallback: salva como docx simples sem timbre
+        try:
+            from docx import Document as DocSimples
+            from docx.shared import Pt as PtS
+            from docx.enum.text import WD_ALIGN_PARAGRAPH as WAP
+            doc2 = DocSimples()
+            for bloco in conteudo_paragrafos:
+                par = doc2.add_paragraph()
+                par.alignment = WAP.CENTER if bloco.get("center") else WAP.JUSTIFY
+                run = par.add_run(bloco["texto"])
+                run.bold = bloco.get("bold", False)
+                run.font.name = "Arial"
+                run.font.size = PtS(12)
+            doc2.save(str(caminho))
+            return True
+        except:
+            return False
 
 def gerar_todos_documentos(pasta_cliente, cliente, tema, descricao,
                             datas, respostas, provas_tem, prob, honor):
@@ -331,7 +351,11 @@ PROVAS ESSENCIAIS
     ori_blocos += [
         {"texto": " ", "sa": 16},
         {"texto": "Qualquer dúvida, estamos à disposição pelo WhatsApp.", "sa": 4},
-        {"texto": f"Atenciosamente,\n{ADV_NOME}\n{ADV_OAB}", "sa": 4},
+        {"texto": " ", "sa": 16},
+        {"texto": ADV_NOME, "bold": True, "center": True, "font": "Arial", "size": 12, "sa": 2},
+        {"texto": ADV_OAB,  "bold": True, "center": True, "font": "Arial", "size": 12, "sa": 2},
+        {"texto": ADV_TEL,  "center": True, "font": "Arial", "size": 11, "sa": 2},
+        {"texto": ADV_EMAIL,"center": True, "font": "Arial", "size": 11, "sa": 2},
     ]
     gerar_docx_com_timbre(pasta_cliente / "05_orientacao_cliente.docx", ori_blocos)
 
@@ -351,7 +375,11 @@ PROVAS ESSENCIAIS
         {"texto": "1. Enviar os documentos listados na orientação ao cliente", "sa": 4},
         {"texto": "2. Assinar o contrato de honorários", "sa": 4},
         {"texto": "3. Início imediato dos trabalhos", "sa": 16},
-        {"texto": f"Atenciosamente,\n{ADV_NOME} — {ADV_OAB}\n{ADV_TEL} | {ADV_EMAIL}", "sa": 4},
+        {"texto": " ", "sa": 16},
+        {"texto": ADV_NOME, "bold": True, "center": True, "font": "Arial", "size": 12, "sa": 2},
+        {"texto": ADV_OAB,  "bold": True, "center": True, "font": "Arial", "size": 12, "sa": 2},
+        {"texto": ADV_TEL,  "center": True, "font": "Arial", "size": 11, "sa": 2},
+        {"texto": ADV_EMAIL,"center": True, "font": "Arial", "size": 11, "sa": 2},
     ]
     gerar_docx_com_timbre(pasta_cliente / "06_proposta_honorarios.docx", prop_blocos)
 
@@ -391,9 +419,12 @@ PROVAS ESSENCIAIS
         {"texto": "As partes elegem o foro da Comarca de Brasília/DF para dirimir quaisquer controvérsias oriundas do presente contrato.", "sa": 24},
         {"texto": "E por estarem de acordo, assinam o presente instrumento em duas vias.", "sa": 24},
         {"texto": f"Brasília/DF, {hoje}", "align": 2, "bold": True, "sa": 36},
-        {"texto": "_" * 42 + "          " + "_" * 42, "align": 1, "sa": 4},
-        {"texto": f"{nome.upper()}                    {ADV_NOME.upper()}", "align": 1, "sa": 2},
-        {"texto": f"CPF nº {cliente['cpf']}                    {ADV_OAB}", "align": 1},
+        {"texto": "_" * 42, "center": True, "sa": 2},
+        {"texto": nome.upper(), "bold": True, "center": True, "font": "Arial", "size": 12, "sa": 2},
+        {"texto": f"CPF nº {cliente['cpf']}", "center": True, "font": "Arial", "size": 12, "sa": 16},
+        {"texto": "_" * 42, "center": True, "sa": 2},
+        {"texto": ADV_NOME.upper(), "bold": True, "center": True, "font": "Arial", "size": 12, "sa": 2},
+        {"texto": ADV_OAB, "bold": True, "center": True, "font": "Arial", "size": 12, "sa": 2},
     ]
     gerar_docx_com_timbre(pasta_cliente / "08_contrato_honorarios.docx", cont_blocos)
 
