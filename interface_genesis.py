@@ -641,7 +641,22 @@ elif st.session_state.step == 2:
     if tema_detectado:
         idx_tema = next((i for i, t in enumerate(temas) if t["id"] == tema_detectado["id"]), 0)
 
-    mostrar_selecao = st.checkbox("Corrigir tema manualmente" if tema_detectado else "Selecionar tema")
+    if tema_detectado:
+        st.markdown("""
+<div style="color:#475569;font-size:0.8rem;margin-bottom:4px">
+  ✏️ <strong>O Gênesis identificou o tema acima automaticamente.</strong>
+  Se estiver errado, marque a caixa abaixo para corrigir.
+</div>
+""", unsafe_allow_html=True)
+    else:
+        st.markdown("""
+<div style="background:#1A0A0A;border:1px solid #7F1D1D;border-radius:8px;
+            padding:10px 14px;color:#FCA5A5;font-size:0.82rem;margin-bottom:8px">
+  ⚠️ Não identifiquei o tema ainda. Selecione o tipo de caso manualmente.
+</div>
+""", unsafe_allow_html=True)
+
+    mostrar_selecao = st.checkbox("✏️ Corrigir tema" if tema_detectado else "Selecionar o tipo de caso")
     if mostrar_selecao or not tema_detectado:
         tema_escolhido_nome = st.selectbox("Tipo de caso", nomes_temas, index=idx_tema,
                                             label_visibility="collapsed")

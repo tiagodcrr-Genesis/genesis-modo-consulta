@@ -489,6 +489,17 @@
         ],
         "revisão aumento": [
           {
+            "id": "RA0",
+            "pergunta": "Qual a idade atual do alimentando?",
+            "tipo": "escolha",
+            "opcoes": [
+              "Menor de 18 anos",
+              "Entre 18 e 24 anos — ainda estuda",
+              "Maior de 24 anos ou já formado"
+            ],
+            "motivo": "Define se aplicam regras de menor, estudante universitário ou adulto independente."
+          },
+          {
             "id": "RA1",
             "pergunta": "Qual o valor atual da pensão e há quanto tempo foi fixada?",
             "motivo": "Defasagem temporal é argumento central para revisão",
@@ -537,6 +548,17 @@
           }
         ],
         "revisão redução": [
+          {
+            "id": "RR0",
+            "pergunta": "Qual a idade atual do alimentando?",
+            "tipo": "escolha",
+            "opcoes": [
+              "Menor de 18 anos",
+              "Entre 18 e 24 anos — ainda estuda",
+              "Maior de 24 anos ou já formado"
+            ],
+            "motivo": "Define se aplicam regras de menor ou de exoneração por maioridade."
+          },
           {
             "id": "RR1",
             "pergunta": "O que mudou na situação do alimentante?",
@@ -644,6 +666,36 @@
             "tipo": "sim_nao",
             "condicao": null
           }
+        ]
+      },
+      "orientacao_por_subtema": {
+        "fixação": [
+          "Reunir comprovantes de renda do alimentante: contracheques, extrato, declaração de IR, consulta ao empregador.",
+          "Documentar as necessidades do alimentando: escola, saúde, moradia, alimentação — guardar notas e recibos.",
+          "Se o filho for menor: certidão de nascimento com o nome do pai é obrigatória.",
+          "Se não houve acordo: o processo pode incluir liminar de alimentos provisórios — costuma ser deferida rapidamente.",
+          "Guarda e alimentos podem ser tratados na mesma ação quando ainda não há processo de família."
+        ],
+        "revisão aumento": [
+          "Documentar o que mudou: novas despesas (escola, plano de saúde, tratamento) com notas e recibos.",
+          "Se a renda do alimentante aumentou: buscar prova — holerite, consulta no CNIS, publicação de promoção.",
+          "A sentença ou acordo anterior é peça fundamental — trazer o número do processo e o valor atual.",
+          "Aumento de despesas do alimentando menor é o fundamento mais sólido — priorizar esse argumento.",
+          "Não é necessário esperar muito tempo desde a última fixação se a mudança for comprovada."
+        ],
+        "revisão redução": [
+          "Documentar a mudança de renda: demissão (CTPS, TRCT), queda de faturamento (extrato, declaração), novo filho (certidão).",
+          "Se há novo filho para sustentar: certidão de nascimento e comprovante de pagamento da outra pensão.",
+          "A sentença ou acordo anterior é peça fundamental — trazer o número do processo e o valor atual.",
+          "O alimentante deve continuar pagando o valor atual até a decisão judicial — suspender unilateralmente gera risco de prisão.",
+          "Se o filho mais velho completou 18 anos e está empregado: exoneração pode ser cumulada com a redução."
+        ],
+        "exoneração": [
+          "Comprovante de emprego do filho: CTPS, contrato de trabalho, holerite — quanto mais recente, melhor.",
+          "Se o filho ainda estuda: a exoneração provavelmente será negada — verificar se é curso integral.",
+          "A sentença ou acordo anterior é peça fundamental — trazer o número do processo.",
+          "Pedir para o filho assinar declaração afirmando que tem renda própria e não depende mais do pai/mãe.",
+          "Se o filho tem deficiência: alimentos são vitalícios por lei — exoneração não é cabível."
         ]
       }
     },
@@ -2619,11 +2671,11 @@
         "Documentos do inventário": "Cartório ou PJe — buscar pelo nome do falecido"
       },
       "orientacao_cliente": [
-        "Reunir TUDO que comprove o relacionamento da mãe com o suposto pai — fotos, mensagens, cartas, declarações",
-        "Identificar parentes do pai que possam fazer DNA (filhos, irmãos, pais) — se recusarem, isso é juridicamente favorável",
-        "Se há inventário aberto: agir com urgência para reservar o quinhão antes da partilha",
-        "Anotar nome e contato de pessoas que sabiam do relacionamento e possam ser testemunhas",
-        "Se quer a herança: prazo de 10 anos da morte do pai — verificar quando ocorreu"
+        "Reunir tudo que comprove o relacionamento da mãe com o suposto pai: fotos, mensagens, cartas, e-mails.",
+        "Verificar se há exame de DNA disponível ou se será necessário requerer judicialmente.",
+        "Caso o pai se recuse ao DNA: a recusa gera presunção de paternidade (Súmula 301 STJ) — isso é favorável.",
+        "Guardar todas as conversas e mensagens com o suposto pai — ata notarial pode preservar antes do processo.",
+        "Não divulgar informações sobre a ação nas redes sociais ou para terceiros antes do ajuizamento."
       ],
       "probabilidade_base": 80,
       "fatores_que_aumentam": [
@@ -2857,7 +2909,7 @@
             "dois pais simultaneos"
           ]
         },
-        "subtema_default": "Investigação de paternidade",
+        "subtema_default": "pai vivo",
         "hipoteses": {
           "post mortem": [
             "Investigação de paternidade post mortem",
