@@ -157,6 +157,33 @@ hr { border-color: var(--border) !important; margin: 20px 0 !important; }
 </style>
 """, unsafe_allow_html=True)
 
+# ── Autenticação (acesso restrito) ────────────────────────────────────────────
+def _verificar_login():
+    if st.session_state.get("autenticado"):
+        return True
+
+    st.markdown("<div style='max-width:380px;margin:100px auto 0;text-align:center'>", unsafe_allow_html=True)
+    st.markdown("<p style='font-size:3rem;font-weight:900;letter-spacing:2px;margin:0'>⚖️ GÊNESIS</p>", unsafe_allow_html=True)
+    st.markdown("<p style='color:#8895A7;margin-bottom:24px'>Acesso restrito — Consultoria Jurídica</p>", unsafe_allow_html=True)
+
+    with st.form("login_form"):
+        senha = st.text_input("Senha de acesso", type="password")
+        entrar = st.form_submit_button("Entrar", use_container_width=True)
+
+    if entrar:
+        senha_correta = st.secrets.get("app_password", "genesis2026")
+        if senha == senha_correta:
+            st.session_state.autenticado = True
+            st.rerun()
+        else:
+            st.error("Senha incorreta.")
+
+    st.markdown("</div>", unsafe_allow_html=True)
+    return False
+
+if not _verificar_login():
+    st.stop()
+
 # ── Carrega dados ─────────────────────────────────────────────────────────────
 PASTA = Path(__file__).parent
 TEMAS_JSON = PASTA / "consulta_temas_v2.json"
